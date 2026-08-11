@@ -41,9 +41,9 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="hidden lg:inline-flex text-[11px] text-muted-foreground px-3 py-1.5 rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.9)_0%,rgba(244,245,247,.78)_100%)] shadow-[0_1px_0_rgba(255,255,255,.85)_inset]">
-              Secure operations
-            </span>
+            <a href="/api/auth/logout" className="hidden lg:inline-flex text-[11px] text-muted-foreground px-3 py-1.5 rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.9)_0%,rgba(244,245,247,.78)_100%)] shadow-[0_1px_0_rgba(255,255,255,.85)_inset] hover:text-foreground transition-colors no-underline">
+              Sign out
+            </a>
             <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-9 px-4 text-[13px] font-semibold bg-[linear-gradient(180deg,#3da2ff_0%,#0071e3_48%,#005ac1_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,113,227,.24)] hover:brightness-[1.03] transition-all no-underline">
               Request Demo
             </Link>
