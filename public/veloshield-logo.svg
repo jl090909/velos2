@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 610 140" aria-label="Veloshield logo - gunmetal vertical equilibrium arrow">
+  <defs>
+    <linearGradient id="shieldOuterG" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6e7680"/>
+      <stop offset="20%" stop-color="#4a525c"/>
+      <stop offset="45%" stop-color="#2a3038"/>
+      <stop offset="60%" stop-color="#3c434c"/>
+      <stop offset="80%" stop-color="#5a636d"/>
+      <stop offset="100%" stop-color="#7c848d"/>
+    </linearGradient>
+    <linearGradient id="shieldInnerG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5c6570"/>
+      <stop offset="25%" stop-color="#3e4650"/>
+      <stop offset="50%" stop-color="#242a30"/>
+      <stop offset="75%" stop-color="#333a42"/>
+      <stop offset="100%" stop-color="#565f68"/>
+    </linearGradient>
+    <linearGradient id="arrowGunmetal" gradientUnits="userSpaceOnUse" x1="45" y1="70" x2="95" y2="70">
+      <stop offset="0%" stop-color="#d8dde1"/>
+      <stop offset="28%" stop-color="#c0c7cc"/>
+      <stop offset="52%" stop-color="#8f98a1"/>
+      <stop offset="78%" stop-color="#c0c7cc"/>
+      <stop offset="100%" stop-color="#d8dde1"/>
+    </linearGradient>
+    <linearGradient id="textMetalG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#cfd4d8"/>
+      <stop offset="45%" stop-color="#9aa1a8"/>
+      <stop offset="55%" stop-color="#818a92"/>
+      <stop offset="100%" stop-color="#b7bec4"/>
+    </linearGradient>
+    <radialGradient id="sheenG" cx="0.35" cy="0.2" r="0.7">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.25"/>
+      <stop offset="60%" stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="610" height="140" fill="none"/>
+
+  <!-- outer shield -->
+  <path d="M66 10 C41 23 27 27 10 31 L10 67 C10 102 36 127 66 139 C96 127 122 102 122 67 L122 31 C105 27 91 23 66 10Z"
+        fill="url(#shieldOuterG)" stroke="#1c2024" stroke-width="3"/>
+
+  <!-- inner shield -->
+  <path d="M66 26 C49 35 38 38 27 41 L27 67 C27 90 44 108 66 118 C88 108 105 90 105 67 L105 41 C94 38 83 35 66 26Z"
+        fill="url(#shieldInnerG)" stroke="#5a636d" stroke-width="1.5"/>
+
+  <!-- sheen -->
+  <path d="M66 10 C41 23 27 27 10 31 L10 67 C10 102 36 127 66 139 C96 127 122 102 122 67 L122 31 C105 27 91 23 66 10Z"
+        fill="url(#sheenG)"/>
+
+  <!-- vertical equilibrium / reversible-reaction arrow -->
+  <!-- right shaft, pointing up, barb on right near top -->
+  <line x1="69" y1="98" x2="69" y2="44" stroke="url(#arrowGunmetal)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="69" y1="44" x2="78" y2="54" stroke="url(#arrowGunmetal)" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- left shaft, pointing down, barb on left near bottom -->
+  <line x1="64" y1="44" x2="64" y2="98" stroke="url(#arrowGunmetal)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="64" y1="98" x2="55" y2="88" stroke="url(#arrowGunmetal)" stroke-width="4" stroke-linecap="round"/>
+
+  <text x="142" y="60" font-family="Montserrat,Segoe UI,Arial" font-size="42" font-weight="900" letter-spacing="2" fill="url(#textMetalG)">VELO<tspan fill="#0e1114">SHIELD</tspan></text>
+  <text x="145" y="94" font-family="Montserrat,Segoe UI,Arial" font-size="14" font-weight="700" fill="#9aa1a8">OT Cybersecurity &amp; OT Intelligence Platform</text>
+</svg>

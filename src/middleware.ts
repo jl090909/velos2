@@ -5,7 +5,7 @@ export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Allow login page and assets through
-  if (pathname === '/login' || pathname.startsWith('/_next') || pathname.startsWith('/api')) {
+  if (pathname === '/login' || pathname.startsWith('/_next') || pathname.startsWith('/api') || pathname === '/veloshield-logo.svg') {
     return NextResponse.next();
   }
 
