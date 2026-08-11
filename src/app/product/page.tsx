@@ -101,7 +101,7 @@ export default function ProductPage() {
                 key={item.title}
                 type="button"
                 onClick={() => setSelected(item.side)}
-                className={`relative overflow-hidden rounded-[2rem] bg-white/70 shadow-[0_16px_40px_rgba(15,23,42,.08)] min-h-[300px] text-left transition-all duration-300 focus:outline-none ${
+                className={`relative overflow-hidden bg-white/70 shadow-[0_16px_40px_rgba(15,23,42,.08)] min-h-[300px] text-left transition-all duration-300 focus:outline-none ${
                   active ? 'ring-2 ring-primary/35 scale-[1.01]' : 'ring-1 ring-white/30'
                 }`}
                 style={{

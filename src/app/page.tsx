@@ -52,7 +52,7 @@ export default function HomePage() {
             Zero downtime.
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            An Apple-clean experience for OT security — combining passive visibility, AI-driven prioritization, and executive-ready evidence for critical operations.
+            A modern professional experience for OT security — combining passive visibility, AI-driven prioritization, and executive-ready evidence for critical operations.
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-primary text-primary-foreground shadow-md shadow-primary/20 hover:bg-primary/80 transition-colors no-underline">
@@ -73,43 +73,33 @@ export default function HomePage() {
       </section>
 
       <section className="py-10 max-w-6xl mx-auto px-6">
-        <div className="grid lg:grid-cols-3 gap-5">
-          {[
-            {
-              title: 'OT command center',
-              image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80',
-              caption: 'A premium visual anchor for the platform story.',
-            },
-            {
-              title: 'Operations and visibility',
-              image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1600&q=80',
-              caption: 'Show the calm control-room feel that Apple-style pages use so well.',
-            },
-            {
-              title: 'Trust and assurance',
-              image: 'https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80',
-              caption: 'A polished trust section with editorial spacing and clean typography.',
-            },
-          ].map((item) => (
-            <div
-              key={item.title}
-              className="group relative overflow-hidden rounded-[2rem] bg-white/70 shadow-[0_16px_40px_rgba(15,23,42,.08)] ring-1 ring-white/30 min-h-[330px]"
-              style={{
-                backgroundImage:
-                  `url(${item.image}), linear-gradient(180deg, rgba(255,255,255,.08) 0%, rgba(0,0,0,.14) 100%)`,
-                backgroundSize: 'cover, cover',
-                backgroundPosition: 'center, center',
-              }}
-            >
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.02)_0%,rgba(0,0,0,.36)_100%)]" />
-              <div className="relative flex h-full min-h-[330px] flex-col justify-end p-8 text-white">
-                <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-white/85 mb-2">Visual story</p>
-                <h2 className="text-2xl font-semibold tracking-[-.04em] mb-2">{item.title}</h2>
-                <p className="max-w-sm text-sm leading-relaxed text-white/85">{item.caption}</p>
+        <Card className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
+          <div
+            className="relative min-h-[340px] bg-cover bg-center"
+            style={{
+              backgroundImage:
+                'url(https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Data_Center_3_%28UNC%29.jpg/1920px-Data_Center_3_%28UNC%29.jpg)',
+            }}
+          >
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.08)_0%,rgba(0,0,0,.46)_100%)]" />
+            <CardContent className="relative flex min-h-[340px] flex-col justify-end p-8 md:p-10 text-white">
+              <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-white/85 mb-3">Platform overview</p>
+              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.02] max-w-3xl mb-4">
+                One platform for OT visibility, security operations, and trust.
+              </h2>
+              <p className="max-w-3xl text-sm md:text-base leading-relaxed text-white/85 mb-6">
+                Veloshield carries the clarity of modern security platforms into industrial environments — passive visibility, AI-driven prioritization, and evidence ready for every stakeholder.
+              </p>
+              <div className="flex flex-wrap gap-2.5">
+                {['Visibility', 'Security', 'AI-powered', 'Evidence-ready'].map((tag) => (
+                  <span key={tag} className="rounded-none border border-white/35 bg-white/12 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[.12em] text-white/90 backdrop-blur-sm">
+                    {tag}
+                  </span>
+                ))}
               </div>
-            </div>
-          ))}
-        </div>
+            </CardContent>
+          </div>
+        </Card>
       </section>
 
       <section className="py-8 max-w-6xl mx-auto px-6">
