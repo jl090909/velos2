@@ -58,12 +58,13 @@ export default function VeloshieldPage() {
 
       <section className="py-8 max-w-6xl mx-auto px-6">
         <Card className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
-          <div className="relative bg-[linear-gradient(180deg,rgba(255,255,255,.97)_0%,rgba(244,245,247,.94)_100%)]">
-            <img
-              src="/veloshield-appliance.svg"
-              alt="Veloshield appliance — OT sensor hardware"
-              className="w-full h-auto max-h-[420px] object-contain p-8 md:p-12"
-            />
+          <div
+            className="relative min-h-[380px] bg-cover bg-center"
+            style={{
+              backgroundImage: 'url(/veloshield-hero.png)',
+            }}
+          >
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.15)_0%,rgba(255,255,255,.05)_40%,rgba(0,0,0,.25)_100%)]" />
           </div>
         </Card>
       </section>
