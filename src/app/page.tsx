@@ -41,58 +41,37 @@ const highlights = [
 export default function HomePage() {
   return (
     <>
-      <section className="relative pt-44 pb-28 overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(255,255,255,.96),rgba(245,245,247,1)_45%,rgba(236,236,241,1)_100%)]" />
-        <div className="absolute inset-0 -z-10 opacity-80 bg-[radial-gradient(circle_at_20%_15%,rgba(0,113,227,.13),transparent_26%),radial-gradient(circle_at_80%_8%,rgba(175,189,224,.30),transparent_24%),radial-gradient(circle_at_50%_70%,rgba(255,255,255,.90),transparent_35%)]" />
-        <div className="max-w-5xl mx-auto px-6 text-center relative">
-          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary mb-6">Veloshield</p>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-[-.05em] leading-[1.02] bg-gradient-to-b from-foreground to-foreground/45 bg-clip-text text-transparent mb-6">
-            Total visibility.
-            <br />
-            Zero downtime.
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            A modern professional experience for OT security — combining passive visibility, AI-driven prioritization, and executive-ready evidence for critical operations.
-          </p>
-          <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-primary text-primary-foreground shadow-md shadow-primary/20 hover:bg-primary/80 transition-colors no-underline">
-              Request Demo
-            </Link>
-            <Link href="/product" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold border border-border bg-[linear-gradient(180deg,rgba(255,255,255,.98),rgba(245,245,247,.95))] shadow-[0_1px_0_rgba(255,255,255,.8)_inset,0_4px_12px_rgba(15,23,42,.04)] hover:bg-white hover:text-foreground transition-colors no-underline">
-              Explore Platform
-            </Link>
-          </div>
-
-          <div className="mt-10 flex flex-wrap gap-3 justify-center text-xs text-muted-foreground">
-            <span className="px-4 py-2 rounded-full border border-white/80 bg-white/80 shadow-[0_1px_0_rgba(255,255,255,.9)_inset,0_4px_12px_rgba(15,23,42,.03)]">Comprehensive visibility</span>
-            <span className="px-4 py-2 rounded-full border border-white/80 bg-white/80 shadow-[0_1px_0_rgba(255,255,255,.9)_inset,0_4px_12px_rgba(15,23,42,.03)]">Zero trust posture</span>
-            <span className="px-4 py-2 rounded-full border border-white/80 bg-white/80 shadow-[0_1px_0_rgba(255,255,255,.9)_inset,0_4px_12px_rgba(15,23,42,.03)]">AI-powered operations</span>
-            <span className="px-4 py-2 rounded-full border border-white/80 bg-white/80 shadow-[0_1px_0_rgba(255,255,255,.9)_inset,0_4px_12px_rgba(15,23,42,.03)]">Audit-ready evidence</span>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-10 max-w-6xl mx-auto px-6">
+      <section className="py-10 max-w-6xl mx-auto px-6 pt-32">
         <Card className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div
-            className="relative min-h-[340px] bg-cover bg-center"
+            className="relative min-h-[420px] md:min-h-[480px] bg-cover bg-center"
             style={{
               backgroundImage:
                 'url(https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Data_Center_3_%28UNC%29.jpg/1920px-Data_Center_3_%28UNC%29.jpg)',
             }}
           >
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.08)_0%,rgba(0,0,0,.46)_100%)]" />
-            <CardContent className="relative flex min-h-[340px] flex-col justify-end p-8 md:p-10 text-white">
-              <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-white/85 mb-3">Platform overview</p>
-              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.02] max-w-3xl mb-4">
-                One platform for OT visibility, security operations, and trust.
-              </h2>
-              <p className="max-w-3xl text-sm md:text-base leading-relaxed text-white/85 mb-6">
-                Veloshield carries the clarity of modern security platforms into industrial environments — passive visibility, AI-driven prioritization, and evidence ready for every stakeholder.
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.25)_0%,rgba(0,0,0,.52)_100%)]" />
+            <CardContent className="relative flex min-h-[420px] md:min-h-[480px] flex-col justify-end p-8 md:p-12 text-white">
+              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-white/80 mb-4">Veloshield</p>
+              <h1 className="text-4xl md:text-7xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl">
+                Total visibility.
+                <br />
+                Zero downtime.
+              </h1>
+              <p className="text-base md:text-xl text-white/80 max-w-2xl mb-8">
+                A modern professional experience for OT security — combining passive visibility, AI-driven prioritization, and executive-ready evidence for critical operations.
               </p>
-              <div className="flex flex-wrap gap-2.5">
-                {['Visibility', 'Security', 'AI-powered', 'Evidence-ready'].map((tag) => (
-                  <span key={tag} className="rounded-none border border-white/35 bg-white/12 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[.12em] text-white/90 backdrop-blur-sm">
+              <div className="flex flex-wrap gap-4">
+                <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-white text-foreground shadow-md hover:brightness-[.97] transition-colors no-underline">
+                  Request Demo
+                </Link>
+                <Link href="/product" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold border border-white/30 bg-white/15 text-white shadow-[0_1px_0_rgba(255,255,255,.15)_inset] hover:bg-white/20 transition-colors no-underline backdrop-blur-sm">
+                  Explore Platform
+                </Link>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3 text-xs text-white/70">
+                {['Comprehensive visibility', 'Zero trust posture', 'AI-powered operations', 'Audit-ready evidence'].map((tag) => (
+                  <span key={tag} className="px-4 py-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm">
                     {tag}
                   </span>
                 ))}
