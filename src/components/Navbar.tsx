@@ -18,7 +18,7 @@ export function Navbar() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="pointer-events-auto flex items-center justify-between rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.92)_0%,rgba(243,244,246,.82)_100%)] px-5 py-3 shadow-[0_18px_50px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl">
           <Link href="/" className="flex items-center gap-2 no-underline">
-            <img src="/veloshield-logo.svg" alt="Veloshield" className="h-8 w-auto" />
+            <img src="/veloshield-logo.svg" alt="Veloshield" className="h-10 w-auto" />
           </Link>
 
           <div className="hidden md:flex items-center gap-1 rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.82)_0%,rgba(244,245,247,.7)_100%)] p-1 shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
