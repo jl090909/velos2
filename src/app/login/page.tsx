@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
+import { AnimatedLogo } from '@/components/AnimatedLogo';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -39,7 +40,7 @@ export default function LoginPage() {
       <section className="min-h-[80vh] flex items-center justify-center px-6">
         <div className="w-full max-w-md">
           <div className="text-center mb-10">
-            <img src="/veloshield-logo.svg" alt="Veloshield" className="h-12 w-auto mx-auto mb-5" />
+            <AnimatedLogo className="h-12 w-auto mx-auto mb-5" />
             <p className="text-muted-foreground text-sm">Sign in to view the secure operations platform</p>
           </div>
 

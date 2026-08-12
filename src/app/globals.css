@@ -61,3 +61,29 @@ div[data-slot='card'] {
   animation: nav-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* Animated logo */
+@keyframes vs-ring-draw {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes vs-ring-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.72; }
+}
+@keyframes vs-radar {
+  to { transform: rotate(360deg); }
+}
+@keyframes vs-pop {
+  from { opacity: 0; transform: scale(0.3); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes vs-dot-pop {
+  0% { opacity: 0; transform: scale(0); }
+  65% { opacity: 1; transform: scale(1.4); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes vs-slide {
+  from { opacity: 0; transform: translateX(16px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+
