@@ -53,16 +53,11 @@ const trustThemes = [
 export default function TrustPage() {
   return (
     <>
-      <section className="pt-40 pb-16 text-center bg-gradient-to-b from-white to-background">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary mb-5">Trust Center</p>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-[-.05em] leading-[1.04] bg-gradient-to-b from-foreground to-foreground/40 bg-clip-text text-transparent mb-5">
-          Designed for control.
-          <br />
-          Built for trust.
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          A polished trust experience for OT buyers who need reliability, privacy, and evidence before deployment.
-        </p>
+      <section className="pt-28 pb-8 max-w-6xl mx-auto px-6">
+        <div className="flex items-center gap-4">
+          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary shrink-0">Trust Center</p>
+          <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
+        </div>
       </section>
 
       <section className="py-10 max-w-6xl mx-auto px-6">

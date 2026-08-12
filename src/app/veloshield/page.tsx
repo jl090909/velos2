@@ -46,14 +46,11 @@ const modules = [
 export default function VeloshieldPage() {
   return (
     <>
-      <section className="pt-40 pb-16 text-center bg-gradient-to-b from-white to-background">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary mb-5">Veloshield</p>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-[-.05em] leading-[1.04] bg-gradient-to-b from-foreground to-foreground/40 bg-clip-text text-transparent mb-5">
-          Veloshield Platform
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          A modular OT intelligence platform: sensor appliance, asset graph, cyber defense, AI intelligence and executive insights.
-        </p>
+      <section className="pt-28 pb-8 max-w-6xl mx-auto px-6">
+        <div className="flex items-center gap-4">
+          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary shrink-0">Veloshield</p>
+          <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
+        </div>
       </section>
 
       <section className="py-8 max-w-6xl mx-auto px-6">

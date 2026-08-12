@@ -80,16 +80,11 @@ export default function ProductPage() {
 
   return (
     <>
-      <section className="pt-40 pb-16 text-center bg-gradient-to-b from-white to-background">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary mb-5">Product</p>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-[-.05em] leading-[1.04] bg-gradient-to-b from-foreground to-foreground/40 bg-clip-text text-transparent mb-5">
-          Built like a platform.
-          <br />
-          Designed like Apple.
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          Veloshield combines OT visibility, AI-powered prioritization, and operational evidence into a single premium experience for industrial security teams.
-        </p>
+      <section className="pt-28 pb-8 max-w-6xl mx-auto px-6">
+        <div className="flex items-center gap-4">
+          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary shrink-0">Product</p>
+          <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
+        </div>
       </section>
 
       <section className="py-10 max-w-6xl mx-auto px-6">

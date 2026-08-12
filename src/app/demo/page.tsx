@@ -19,16 +19,11 @@ const outcomes = [
 export default function DemoPage() {
   return (
     <>
-      <section className="pt-40 pb-12 text-center bg-gradient-to-b from-white to-background">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary mb-5">Request Demo</p>
-        <h1 className="text-4xl md:text-6xl font-bold tracking-[-.05em] leading-[1.04] bg-gradient-to-b from-foreground to-foreground/40 bg-clip-text text-transparent mb-5">
-          See Veloshield.
-          <br />
-          Feel the difference.
-        </h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-          Request a walkthrough, talk through your priorities, book a site visit, or start a POC designed around your environment.
-        </p>
+      <section className="pt-28 pb-8 max-w-6xl mx-auto px-6">
+        <div className="flex items-center gap-4">
+          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary shrink-0">Request Demo</p>
+          <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
+        </div>
       </section>
 
       <section className="py-20 max-w-6xl mx-auto px-6">
