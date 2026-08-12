@@ -33,7 +33,7 @@ export function Navbar() {
   return (
     <nav className="fixed top-4 inset-x-0 z-50 pointer-events-none">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="pointer-events-auto flex items-center justify-between rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.92)_0%,rgba(243,244,246,.82)_100%)] px-5 py-2.5 shadow-[0_18px_50px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl">
+        <div className="pointer-events-auto animate-nav-enter flex items-center justify-between rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.92)_0%,rgba(243,244,246,.82)_100%)] px-5 py-2.5 shadow-[0_18px_50px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl">
           <div className="flex items-center gap-5">
             <Link href="/" className="flex items-center no-underline shrink-0">
               <img src="/veloshield-logo.svg" alt="Veloshield" className="h-10 w-auto" />
@@ -41,7 +41,7 @@ export function Navbar() {
 
             <div ref={navRef} className="hidden md:flex items-center relative">
               <span
-                className="absolute top-[3px] bottom-[3px] rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(246,247,249,.92)_100%)] shadow-[0_6px_18px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] transition-[left,width,opacity] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]"
+                className="absolute top-[3px] bottom-[3px] rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(246,247,249,.92)_100%)] shadow-[0_6px_18px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] transition-[left,width,opacity] duration-[450ms] ease-[cubic-bezier(0.34,1.56,0.64,1)]"
                 style={{ left: indicator.left, width: indicator.width, opacity: indicator.opacity }}
               />
               {links.map((l, i) => {
