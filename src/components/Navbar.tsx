@@ -15,7 +15,17 @@ export function Navbar() {
   const pathname = usePathname();
   const navRef = useRef<HTMLDivElement>(null);
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
+  const pillRef = useRef<HTMLDivElement>(null);
   const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
+
+  const replayShake = () => {
+    const el = pillRef.current;
+    if (!el) return;
+    el.classList.remove('animate-nav-enter');
+    // force a reflow so the browser restarts the CSS animation
+    void el.offsetWidth;
+    el.classList.add('animate-nav-enter');
+  };
 
   useEffect(() => {
     const idx = links.findIndex((l) => l.href === pathname);
@@ -33,7 +43,11 @@ export function Navbar() {
   return (
     <nav className="fixed top-4 inset-x-0 z-50 pointer-events-none">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="pointer-events-auto animate-nav-enter flex items-center justify-between rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.92)_0%,rgba(243,244,246,.82)_100%)] px-5 py-2.5 shadow-[0_18px_50px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl">
+        <div
+          ref={pillRef}
+          onMouseEnter={replayShake}
+          className="pointer-events-auto animate-nav-enter flex items-center justify-between rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.92)_0%,rgba(243,244,246,.82)_100%)] px-5 py-2.5 shadow-[0_18px_50px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl"
+        >
           <div className="flex items-center gap-5">
             <Link href="/" className="flex items-center no-underline shrink-0">
               <img src="/veloshield-logo.svg" alt="Veloshield" className="h-10 w-auto" />
