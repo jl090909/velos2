@@ -53,11 +53,16 @@ export function Navbar() {
                     ref={(el) => {
                       linkRefs.current[i] = el;
                     }}
-                    className={`relative z-10 px-3 py-2 text-[13px] font-medium no-underline transition-colors duration-200 ${
-                      active ? 'text-foreground' : 'text-muted-foreground hover:text-foreground'
+                    className={`group relative z-10 px-3 py-2 text-[13px] font-medium no-underline rounded-full overflow-hidden ${
+                      active ? 'text-foreground' : 'text-muted-foreground'
                     }`}
                   >
-                    {l.label}
+                    {!active && (
+                      <span className="absolute inset-0 rounded-full bg-[linear-gradient(180deg,rgba(28,32,40,.95)_0%,rgba(12,15,20,.96)_100%)] opacity-0 scale-75 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100 group-hover:scale-100" />
+                    )}
+                    <span className={`relative z-10 transition-colors duration-300 ${!active ? 'group-hover:text-white' : ''}`}>
+                      {l.label}
+                    </span>
                   </Link>
                 );
               })}
