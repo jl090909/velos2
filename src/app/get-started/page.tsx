@@ -8,6 +8,7 @@ const products = [
     full: 'Extended Detection & Response',
     tagline: 'Detect and respond across the entire OT estate.',
     desc: 'Unify detection, investigation, and response across OT and IT with passive visibility, AI-driven correlation, and automated containment — so threats are caught and stopped before they disrupt operations.',
+    image: '/veloshield-hero.png',
     bullets: ['Unified OT + IT detection', 'AI-driven threat correlation', 'Automated containment'],
     ctas: [
       { label: 'Watch a demo', href: '/demo', primary: true },
@@ -67,6 +68,11 @@ export default function GetStartedPage() {
               key={p.name}
               className="flex flex-col overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1.5 hover:shadow-[0_18px_45px_rgba(15,23,42,.10)] transition-all duration-300"
             >
+              {p.image && (
+                <div className="relative h-44 bg-cover bg-center" style={{ backgroundImage: `url(${p.image})` }}>
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.02)_0%,rgba(0,0,0,.25)_100%)]" />
+                </div>
+              )}
               <CardContent className="flex flex-1 flex-col p-8 md:p-9">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary">{p.name}</p>
