@@ -10,6 +10,7 @@ const links = [
   { href: '/veloshield', label: 'Veloshield' },
   { href: '/industries', label: 'Industries' },
   { href: '/trust', label: 'Trust' },
+  { href: '/get-started', label: 'Demo' },
 ];
 
 export function Navbar() {
