@@ -2,7 +2,7 @@
 
 export function AnimatedLogo({ className = 'h-10 w-auto' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 500 150" className={className} fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Veloshield">
+    <svg viewBox="0 0 500 150" className={className} fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Velos Shield">
       <defs>
         <linearGradient id="vs-sweep" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#FFC000" stopOpacity="0" />

@@ -57,7 +57,7 @@ export default function GetStartedPage() {
           Secure operations with best-in-class SOC products.
         </h2>
         <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-          The same XDR, SOAR, and Rapid Response capabilities the most demanding security teams rely on — refined for the clarity and calm of the Veloshield experience.
+          The same XDR, SOAR, and Rapid Response capabilities the most demanding security teams rely on — refined for the clarity and calm of the Velos Shield experience.
         </p>
       </section>
 
@@ -118,7 +118,7 @@ export default function GetStartedPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Veloshield</span>
+          <span>© 2026 Velos Shield</span>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Product</a>
             <a href="/industries" className="hover:text-foreground no-underline">Industries</a>
