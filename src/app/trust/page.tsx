@@ -129,36 +129,9 @@ export default function TrustPage() {
         </div>
       </section>
 
-      <section className="py-20 max-w-6xl mx-auto px-6">
-        <div className="grid lg:grid-cols-[1fr_.9fr] gap-8 items-center">
-          <div>
-            <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">Industry story</p>
-            <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-5">
-              Clear stories for complex environments.
-            </h2>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              Whether the audience is engineering, operations, or leadership, the message should be the same: see more, interrupt less, and protect what keeps the business moving.
-            </p>
-          </div>
-          <Card className="border border-white/65 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_20px_60px_rgba(15,23,42,.08)]">
-            <CardContent className="p-8 md:p-10">
-              <div className="rounded-none border border-border/60 bg-[linear-gradient(180deg,#ffffff,#f7f7f9)] p-6 shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
-                <p className="text-[11px] font-semibold uppercase tracking-[.18em] text-primary mb-3">Messaging themes</p>
-                <ul className="space-y-3 text-sm text-muted-foreground">
-                  <li>• Zero downtime posture for operational teams</li>
-                  <li>• Comprehensive visibility for asset and traffic understanding</li>
-                  <li>• AI-powered prioritization for the issues that matter most</li>
-                  <li>• Executive-ready evidence for trust and governance</li>
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Veloshield</span>
+          <span>© 2026 Velos Shield</span>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Product</a>
             <a href="/industries" className="hover:text-foreground no-underline">Industries</a>

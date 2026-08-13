@@ -3,7 +3,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 
 const agenda = [
-  'A guided walkthrough of the product and its Apple-like experience.',
+  'A guided walkthrough of the product.',
   'A discussion of your network, OT, and leadership priorities.',
   'A site visit or remote session to review your environment.',
   'A practical path to a POC scoped to your business goals.',
@@ -81,7 +81,7 @@ export default function DemoPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Veloshield</span>
+          <span>© 2026 Velos Shield</span>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Product</a>
             <a href="/industries" className="hover:text-foreground no-underline">Industries</a>

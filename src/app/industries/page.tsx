@@ -4,7 +4,7 @@ const industries = [
   {
     title: 'Manufacturing',
     lead: 'Secure plants without slowing the line.',
-    desc: 'A polished OT experience for production teams: clear visibility, dependency context, and evidence that supports resilient operations.',
+    desc: 'Gain continuous visibility across critical systems including SCADA, PLCs, HMIs, DCS, MES, robotics, and industrial networks. Identify vulnerabilities and threats, understand operational risk, and prioritize security actions without disrupting production.',
     stat1: 'Visibility',
     stat1d: 'across lines and cells',
     stat2: 'Priority',
@@ -14,7 +14,7 @@ const industries = [
   {
     title: 'Energy & Utilities',
     lead: 'Protect generation, distribution, and field systems.',
-    desc: 'Model the network, highlight risky access paths, and provide the confidence needed for critical infrastructure environments.',
+    desc: 'Gain continuous visibility across power generation, transmission, distribution, and water systems, including SCADA, PLCs, RTUs, DCS, substations, pumping stations, and treatment plants. Identify threats and vulnerabilities, understand operational risk, and prioritize security actions without disrupting critical services.',
     stat1: 'Control',
     stat1d: 'for remote access',
     stat2: 'Clarity',
@@ -23,23 +23,33 @@ const industries = [
   },
   {
     title: 'Airports',
-    lead: 'Turn network data into real-time airport intelligence across airside and landside operations.',
-    desc: 'Improve network security while using live device and traffic data to increase ROE, reduce operational overhead, and surface business intelligence in real time from baggage systems, check-in kiosks, security checkpoints, OT devices, and facility systems.',
+    lead: 'Protect airport operations, infrastructure, and connected systems.',
+    desc: 'Discover and monitor critical systems such as Baggage Handling, Building Management, Airfield Lighting, Passenger Processing, and Airport Operational Systems. Correlate assets, vulnerabilities, threats, and operational criticality to focus security teams on the risks that matter most.',
     stat1: 'Coverage',
     stat1d: 'for airside and landside systems',
     stat2: 'Insights',
     stat2d: 'from connected devices in real time',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Interior_of_Helsinki_Airport_Vantaa.jpg/1920px-Interior_of_Helsinki_Airport_Vantaa.jpg',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/Brussels_Airport_Runway_25_R.jpg/1920px-Brussels_Airport_Runway_25_R.jpg',
   },
   {
-    title: 'Shipping',
-    lead: 'Turn vessel, terminal, and yard data into real-time maritime intelligence.',
-    desc: 'From shipboard systems, port OT, and connected cargo devices, we can gain both NIDS-level security visibility and real-time business intelligence that helps teams speed vessel turnaround, reduce manual overhead, improve coordination, and protect uptime across ports and logistics operations.',
+    title: 'Maritime',
+    lead: 'Secure fleets, ports, and the systems that keep maritime operations moving.',
+    desc: 'Gain continuous visibility across vessels, fleets, and ports, including navigation systems, propulsion, engine monitoring, cargo management, onboard networks, and port OT. Identify threats and vulnerabilities, understand operational risk, and prioritize security actions without disrupting maritime operations.',
     stat1: 'Coverage',
     stat1d: 'for port and vessel systems',
     stat2: 'Intelligence',
     stat2d: 'from connected devices in real time',
     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Port_of_Gdynia.jpg/1920px-Port_of_Gdynia.jpg',
+  },
+  {
+    title: 'Smart cities & facilities',
+    lead: 'Secure the systems that keep smart cities and facilities running.',
+    desc: 'Gain continuous visibility across Building Management, HVAC, access control, surveillance, lighting, elevators, parking, and other connected facility systems. Identify threats and vulnerabilities, understand operational risk, and prioritize security actions without disrupting essential services.',
+    stat1: 'Visibility',
+    stat1d: 'across connected smart infrastructure',
+    stat2: 'Integrate',
+    stat2d: 'with Central Command and Control',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Lima_Peru_City_Skyline_Modern_Glass_Towers.jpg/1920px-Lima_Peru_City_Skyline_Modern_Glass_Towers.jpg',
   },
 ];
 
@@ -51,6 +61,9 @@ export default function IndustriesPage() {
           <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary shrink-0">Industries</p>
           <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
         </div>
+        <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mt-6">
+          Every industry runs differently. Our OT security platform adapts to the assets, risks, and operational realities that matter most to your business.
+        </p>
       </section>
 
       <section className="py-10 max-w-6xl mx-auto px-6">
@@ -59,20 +72,17 @@ export default function IndustriesPage() {
             className="relative min-h-[340px] bg-cover bg-center"
             style={{
               backgroundImage:
-                "url(https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Port_of_Gdynia.jpg/1920px-Port_of_Gdynia.jpg)",
+                "url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Briar_Chemicals_aerial_image_-_chemical_plant_in_Norwich_Norfolk_UK_%2816156824503%29.jpg/1920px-Briar_Chemicals_aerial_image_-_chemical_plant_in_Norwich_Norfolk_UK_%2816156824503%29.jpg)",
             }}
           >
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.08)_0%,rgba(0,0,0,.46)_100%)]" />
             <CardContent className="relative flex min-h-[340px] flex-col justify-end p-8 md:p-10 text-white">
               <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-white/85 mb-3">Sectors we cover</p>
-              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.02] max-w-3xl mb-4">
-                One platform for manufacturing, energy, airports, shipping, and every connected operation in between.
+              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.02] max-w-3xl mb-6">
+                One platform for manufacturing, energy, airports, maritime, smart cities, and every connected operation in between.
               </h2>
-              <p className="max-w-3xl text-sm md:text-base leading-relaxed text-white/85 mb-6">
-                Build stronger network security while turning device and traffic data into business intelligence, lower overhead, and real-time operational insight.
-              </p>
               <div className="flex flex-wrap gap-2.5">
-                {['Manufacturing', 'Energy & Utilities', 'Airports', 'Shipping'].map((sector) => (
+                {['Manufacturing', 'Energy & Utilities', 'Airports', 'Maritime', 'Smart cities'].map((sector) => (
                   <span key={sector} className="rounded-none border border-white/35 bg-white/12 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[.12em] text-white/90 backdrop-blur-sm">
                     {sector}
                   </span>
@@ -122,36 +132,9 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      <section className="py-20 max-w-6xl mx-auto px-6">
-        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-[1fr_.9fr] gap-8 items-center">
-          <div>
-            <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">Industry story</p>
-            <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-5">
-              Clear stories for complex environments.
-            </h2>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-              Whether the audience is engineering, operations, or leadership, the message should be the same: see more, interrupt less, and protect what keeps the business moving.
-            </p>
-          </div>
-          <Card className="border border-white/65 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_20px_60px_rgba(15,23,42,.08)]">
-            <CardContent className="p-8 md:p-10">
-              <div className="rounded-none border border-border/60 bg-[linear-gradient(180deg,#ffffff,#f7f7f9)] p-6 shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
-                <p className="text-[11px] font-semibold uppercase tracking-[.18em] text-primary mb-3">Messaging themes</p>
-                <ul className="space-y-3 text-sm text-muted-foreground">
-                  <li>• Zero downtime posture for operational teams</li>
-                  <li>• Comprehensive visibility for asset and traffic understanding</li>
-                  <li>• AI-powered prioritization for the issues that matter most</li>
-                  <li>• Executive-ready evidence for trust and governance</li>
-                </ul>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Veloshield</span>
+          <span>© 2026 Velos Shield</span>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Product</a>
             <a href="/industries" className="hover:text-foreground no-underline">Industries</a>

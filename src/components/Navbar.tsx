@@ -6,8 +6,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatedLogo } from '@/components/AnimatedLogo';
 
 const links = [
-  { href: '/product', label: 'Product' },
-  { href: '/veloshield', label: 'Veloshield' },
+  { href: '/product', label: 'Velos Shield' },
   { href: '/industries', label: 'Industries' },
   { href: '/trust', label: 'Trust' },
   { href: '/get-started', label: 'Demo' },

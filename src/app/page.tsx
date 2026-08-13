@@ -24,7 +24,7 @@ const highlights = [
   {
     label: 'Visibility',
     title: 'See the full OT estate.',
-    body: 'Inspired by the visibility-first approach behind modern network security platforms, Veloshield turns fragmented industrial networks into one understandable view.',
+    body: 'Inspired by the visibility-first approach behind modern network security platforms, Velos Shield turns fragmented industrial networks into one understandable view.',
   },
   {
     label: 'Protection',
@@ -52,25 +52,25 @@ export default function HomePage() {
           >
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.25)_0%,rgba(0,0,0,.52)_100%)]" />
             <CardContent className="relative flex min-h-[420px] md:min-h-[480px] flex-col justify-end p-8 md:p-12 text-white">
-              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-white/80 mb-4">Veloshield</p>
+              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-white/80 mb-4">Velos Shield</p>
               <h1 className="text-4xl md:text-7xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl">
                 Total visibility.
                 <br />
                 Zero downtime.
               </h1>
               <p className="text-base md:text-xl text-white/80 max-w-2xl mb-8">
-                A modern professional experience for OT security — combining passive visibility, AI-driven prioritization, and executive-ready evidence for critical operations.
+                AI-powered OT security delivering continuous passive visibility, intelligent risk prioritization, and decision-ready insights for security teams and executives.
               </p>
               <div className="flex flex-wrap gap-4">
-                <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-white text-foreground shadow-md hover:brightness-[.97] transition-colors no-underline">
-                  Request Demo
-                </Link>
                 <Link href="/product" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold border border-white/30 bg-white/15 text-white shadow-[0_1px_0_rgba(255,255,255,.15)_inset] hover:bg-white/20 transition-colors no-underline backdrop-blur-sm">
                   Explore Platform
                 </Link>
+                <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#3da2ff_0%,#0071e3_48%,#005ac1_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,113,227,.3)] hover:brightness-[1.05] transition-all no-underline">
+                  Request Demo
+                </Link>
               </div>
               <div className="mt-8 flex flex-wrap gap-3 text-xs text-white/70">
-                {['Comprehensive visibility', 'Zero trust posture', 'AI-powered operations', 'Audit-ready evidence'].map((tag) => (
+                {['Comprehensive visibility', 'Real time threat detection', 'AI-powered operations', 'Audit-ready evidence'].map((tag) => (
                   <span key={tag} className="px-4 py-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm">
                     {tag}
                   </span>
@@ -102,7 +102,7 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-semibold tracking-[-.04em]">Built for industrial security teams who need clarity.</h2>
           </div>
           <p className="hidden md:block max-w-xl text-muted-foreground text-sm leading-relaxed">
-            The language mirrors the calm, premium feel of Apple product pages while leaning on the same modern themes used by leading security vendors: visibility, AI, prevention, and evidence.
+            Get continuous OT visibility, understand real risk, and focus your team on the threats and vulnerabilities that could impact critical operations.
           </p>
         </div>
         <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
@@ -125,7 +125,7 @@ export default function HomePage() {
               One platform for OT visibility, security operations, and trust.
             </h2>
             <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mb-8">
-              Public messaging from Palo Alto Networks emphasizes unified visibility, AI-driven operations, and OT security without downtime. Veloshield carries that same clarity into industrial environments with a more refined Apple-style presentation.
+              Bring asset visibility, vulnerability management, threat detection, risk prioritization, security operations, and compliance evidence together on a single OT security platform. Reduce tool sprawl, simplify operations, and continuously understand and improve your OT security posture.
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="rounded-[1.5rem] border border-white/80 bg-white/85 p-5 shadow-[0_1px_0_rgba(255,255,255,.9)_inset,0_8px_24px_rgba(15,23,42,.05)]">
@@ -165,7 +165,7 @@ export default function HomePage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Veloshield. Secure Operations. Intelligent Decisions.</span>
+          <span>© 2026 Velos Shield. Secure Operations. Intelligent Decisions.</span>
           <div className="flex gap-5 flex-wrap">
             <Link href="/product" className="hover:text-foreground no-underline">Product</Link>
             <Link href="/industries" className="hover:text-foreground no-underline">Industries</Link>

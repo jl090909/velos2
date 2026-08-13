@@ -3,8 +3,8 @@ import { Navbar } from '@/components/Navbar';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Veloshield — Secure Operations. Intelligent Decisions.',
-  description: 'Veloshield OT security platform.',
+  title: 'Velos Shield — Secure Operations. Intelligent Decisions.',
+  description: 'Velos Shield OT security platform.',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
