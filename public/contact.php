@@ -32,7 +32,7 @@ if ($name === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
-$to      = 'lionel@pauzible.com';
+$to      = 'velosdemo@rathon.ai';
 $subject = 'Velos Shield demo request — ' . $name;
 
 $body = "New demo request (velosshield.com)\n"
