@@ -41,19 +41,18 @@ const highlights = [
 export default function HomePage() {
   return (
     <>
-      <section className="py-10 max-w-6xl mx-auto px-6 pt-32">
+      <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
         <Card className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div
-            className="relative min-h-[420px] md:min-h-[480px] bg-cover bg-center"
+            className="relative min-h-[380px] md:h-[560px] bg-cover bg-center"
             style={{
               backgroundImage:
-                'url(https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Data_Center_3_%28UNC%29.jpg/1920px-Data_Center_3_%28UNC%29.jpg)',
+                'url(/shutterstock/hero-ot.jpg)',
             }}
           >
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.25)_0%,rgba(0,0,0,.52)_100%)]" />
-            <CardContent className="relative flex min-h-[420px] md:min-h-[480px] flex-col justify-end p-8 md:p-12 text-white">
-              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-white/80 mb-4">Velos Shield</p>
-              <h1 className="text-4xl md:text-7xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl">
+            <CardContent className="relative flex min-h-[380px] md:h-[560px] flex-col justify-end p-8 md:p-12 text-white">
+              <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl">
                 Total visibility.
                 <br />
                 Zero downtime.
@@ -153,7 +152,6 @@ export default function HomePage() {
                   {['OT assets discovered', 'Risks prioritized', 'Remote access reviewed', 'Evidence ready for leadership'].map((row, idx) => (
                     <div key={row} className="flex items-center justify-between rounded-2xl border border-border/50 bg-white px-4 py-3 shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
                       <span className="text-sm text-foreground">{row}</span>
-                      <span className="text-sm font-semibold text-primary">0{idx + 1}</span>
                     </div>
                   ))}
                 </div>
@@ -165,12 +163,13 @@ export default function HomePage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Velos Shield. Secure Operations. Intelligent Decisions.</span>
+          <span>© 2026 Rathon.ai · Another product from Rathon.ai</span>
           <div className="flex gap-5 flex-wrap">
-            <Link href="/product" className="hover:text-foreground no-underline">Product</Link>
+            <Link href="/product" className="hover:text-foreground no-underline">Velos Shield</Link>
+            <Link href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</Link>
             <Link href="/industries" className="hover:text-foreground no-underline">Industries</Link>
             <Link href="/trust" className="hover:text-foreground no-underline">Trust</Link>
-            <Link href="/demo" className="hover:text-foreground no-underline">Demo</Link>
+            <Link href="/get-started" className="hover:text-foreground no-underline">Demo</Link>
           </div>
         </div>
       </footer>

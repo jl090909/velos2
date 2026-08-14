@@ -19,6 +19,7 @@ export function Navbar() {
   const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const pillRef = useRef<HTMLDivElement>(null);
   const [indicator, setIndicator] = useState({ left: 0, width: 0, opacity: 0 });
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const replayShake = () => {
     const el = pillRef.current;
@@ -42,17 +43,22 @@ export function Navbar() {
     }
   }, [pathname]);
 
+  // close the mobile menu whenever the route changes
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
   return (
     <nav className="fixed top-4 inset-x-0 z-50 pointer-events-none">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div
           ref={pillRef}
           onMouseEnter={replayShake}
-          className="pointer-events-auto animate-nav-enter flex items-center justify-between rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.92)_0%,rgba(243,244,246,.82)_100%)] px-5 py-2.5 shadow-[0_18px_50px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl"
+          className="pointer-events-auto animate-nav-enter flex items-center justify-between rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.92)_0%,rgba(243,244,246,.82)_100%)] px-6 py-3 shadow-[0_18px_50px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl"
         >
           <div className="flex items-center gap-5">
             <Link href="/" className="flex items-center no-underline shrink-0">
-              <AnimatedLogo className="h-10 w-auto" />
+              <AnimatedLogo className="h-12 w-auto" />
             </Link>
 
             <div ref={navRef} className="hidden md:flex items-center relative">
@@ -69,7 +75,7 @@ export function Navbar() {
                     ref={(el) => {
                       linkRefs.current[i] = el;
                     }}
-                    className={`group relative z-10 px-3 py-2 text-[13px] font-medium no-underline rounded-full overflow-hidden ${
+                    className={`group relative z-10 px-4 py-2 text-[17px] font-medium no-underline rounded-full overflow-hidden ${
                       active ? 'text-foreground' : 'text-muted-foreground'
                     }`}
                   >
@@ -86,14 +92,61 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <a href="/api/auth/logout" className="hidden lg:inline-flex text-[11px] text-muted-foreground px-3 py-1.5 rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.9)_0%,rgba(244,245,247,.78)_100%)] shadow-[0_1px_0_rgba(255,255,255,.85)_inset] hover:text-foreground transition-colors no-underline">
-              Sign out
-            </a>
-            <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-9 px-4 text-[13px] font-semibold bg-[linear-gradient(180deg,#3da2ff_0%,#0071e3_48%,#005ac1_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,113,227,.24)] hover:brightness-[1.03] transition-all no-underline">
+            <Link href="/demo" className="hidden md:inline-flex items-center justify-center rounded-full h-11 px-5 text-[15px] font-semibold bg-[linear-gradient(180deg,#3da2ff_0%,#0071e3_48%,#005ac1_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,113,227,.24)] hover:brightness-[1.03] transition-all no-underline">
+              Request Demo
+            </Link>
+
+            <button
+              type="button"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((v) => !v)}
+              className="md:hidden inline-flex items-center justify-center h-11 w-11 rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(246,247,249,.92)_100%)] text-foreground shadow-[0_1px_0_rgba(255,255,255,.9)_inset,0_6px_18px_rgba(15,23,42,.08)] transition-all no-underline"
+            >
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                {menuOpen ? (
+                  <>
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                  </>
+                ) : (
+                  <>
+                    <line x1="4" y1="7" x2="20" y2="7" />
+                    <line x1="4" y1="12" x2="20" y2="12" />
+                    <line x1="4" y1="17" x2="20" y2="17" />
+                  </>
+                )}
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        {menuOpen && (
+          <div className="md:hidden pointer-events-auto mt-2 rounded-3xl bg-[linear-gradient(180deg,rgba(255,255,255,.96)_0%,rgba(246,247,249,.94)_100%)] p-2 shadow-[0_24px_70px_rgba(15,23,42,.18),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl">
+            {links.map((l) => {
+              const active = pathname === l.href;
+              return (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`block px-4 py-3 rounded-2xl text-[16px] font-medium no-underline transition-colors ${
+                    active
+                      ? 'bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(246,247,249,.92)_100%)] text-foreground shadow-[0_6px_18px_rgba(15,23,42,.08)]'
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  {l.label}
+                </Link>
+              );
+            })}
+            <Link
+              href="/demo"
+              className="mt-2 flex items-center justify-center rounded-2xl h-12 px-5 text-[15px] font-semibold bg-[linear-gradient(180deg,#3da2ff_0%,#0071e3_48%,#005ac1_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,113,227,.24)] no-underline"
+            >
               Request Demo
             </Link>
           </div>
-        </div>
+        )}
       </div>
     </nav>
   );

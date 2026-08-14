@@ -9,7 +9,7 @@ const trustCards = [
     stat1d: 'no active probing',
     stat2: 'Change-safe',
     stat2d: 'clear deployment controls',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/EFTA00002725_-_Control_room_with_large_electrical_panels_a_printer_and_office_supplies_featuring_industrial_equipment_and_a_whiteboard.jpg/1600px-EFTA00002725_-_Control_room_with_large_electrical_panels_a_printer_and_office_supplies_featuring_industrial_equipment_and_a_whiteboard.jpg',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/9/92/EFTA00000441_-_Server_room_filled_with_networking_equipment_cables_and_rack-mounted_servers.jpg',
   },
   {
     title: 'Data handling',
@@ -19,7 +19,7 @@ const trustCards = [
     stat1d: 'data minimization',
     stat2: 'Retention',
     stat2d: 'customer-controlled',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Data_Center_3_%28UNC%29.jpg/1920px-Data_Center_3_%28UNC%29.jpg',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/6/60/Data_tape_storage_room%2C_NCHS.jpg',
   },
   {
     title: 'Integration',
@@ -53,34 +53,26 @@ const trustThemes = [
 export default function TrustPage() {
   return (
     <>
-      <section className="pt-28 pb-8 max-w-6xl mx-auto px-6">
-        <div className="flex items-center gap-4">
-          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary shrink-0">Trust Center</p>
-          <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
-        </div>
-      </section>
-
-      <section className="py-10 max-w-6xl mx-auto px-6">
+      <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
         <Card className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div
-            className="relative min-h-[340px] bg-cover bg-center"
+            className="relative min-h-[380px] md:h-[560px] bg-cover bg-center"
             style={{
               backgroundImage:
-                'url(https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Data_Center_3_%28UNC%29.jpg/1920px-Data_Center_3_%28UNC%29.jpg)',
+                'url(/shutterstock/trust-hero.jpg)',
             }}
           >
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.08)_0%,rgba(0,0,0,.46)_100%)]" />
-            <CardContent className="relative flex min-h-[340px] flex-col justify-end p-8 md:p-10 text-white">
-              <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-white/85 mb-3">Deployment safety</p>
-              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.02] max-w-3xl mb-4">
+            <CardContent className="relative flex min-h-[380px] md:h-[560px] flex-col justify-end p-8 md:p-12 text-white">
+              <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] max-w-3xl mb-5">
                 Built around passive-first visibility and controlled change.
-              </h2>
-              <p className="max-w-3xl text-sm md:text-base leading-relaxed text-white/85 mb-6">
+              </h1>
+              <p className="text-base md:text-xl text-white/80 max-w-2xl mb-8">
                 OT environments require reliability, change discipline, and clear operational ownership. The trust center should read like a premium product page: direct, calm, and complete.
               </p>
-              <div className="flex flex-wrap gap-2.5">
+              <div className="mt-8 flex flex-wrap gap-3 text-xs text-white/70">
                 {trustThemes.map((theme) => (
-                  <span key={theme} className="rounded-none border border-white/35 bg-white/12 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[.12em] text-white/90 backdrop-blur-sm">
+                  <span key={theme} className="px-4 py-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm">
                     {theme}
                   </span>
                 ))}
@@ -110,7 +102,6 @@ export default function TrustPage() {
                     <h2 className="text-2xl font-semibold tracking-[-.03em] mb-2">{card.title}</h2>
                     <p className="text-sm font-medium text-foreground/80">{card.lead}</p>
                   </div>
-                  <span className="text-4xl font-black text-muted/20 leading-none select-none">{String(trustCards.indexOf(card) + 1).padStart(2, '0')}</span>
                 </div>
                 <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-8 max-w-xl">{card.desc}</p>
                 <div className="grid sm:grid-cols-2 gap-4 pt-6 border-t border-border/50">
@@ -131,12 +122,13 @@ export default function TrustPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Velos Shield</span>
+          <span>© 2026 Rathon.ai · Another product from Rathon.ai</span>
           <div className="flex gap-5 flex-wrap">
-            <a href="/product" className="hover:text-foreground no-underline">Product</a>
+            <a href="/product" className="hover:text-foreground no-underline">Velos Shield</a>
+            <a href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</a>
             <a href="/industries" className="hover:text-foreground no-underline">Industries</a>
             <a href="/trust" className="hover:text-foreground no-underline">Trust</a>
-            <a href="/demo" className="hover:text-foreground no-underline">Demo</a>
+            <a href="/get-started" className="hover:text-foreground no-underline">Demo</a>
           </div>
         </div>
       </footer>

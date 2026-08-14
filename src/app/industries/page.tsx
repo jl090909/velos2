@@ -56,34 +56,26 @@ const industries = [
 export default function IndustriesPage() {
   return (
     <>
-      <section className="pt-28 pb-8 max-w-6xl mx-auto px-6">
-        <div className="flex items-center gap-4">
-          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary shrink-0">Industries</p>
-          <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
-        </div>
-        <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mt-6">
-          Every industry runs differently. Our OT security platform adapts to the assets, risks, and operational realities that matter most to your business.
-        </p>
-      </section>
-
-      <section className="py-10 max-w-6xl mx-auto px-6">
+      <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
         <Card className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div
-            className="relative min-h-[340px] bg-cover bg-center"
+            className="relative min-h-[380px] md:h-[560px] bg-cover bg-center"
             style={{
               backgroundImage:
-                "url(https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Briar_Chemicals_aerial_image_-_chemical_plant_in_Norwich_Norfolk_UK_%2816156824503%29.jpg/1920px-Briar_Chemicals_aerial_image_-_chemical_plant_in_Norwich_Norfolk_UK_%2816156824503%29.jpg)",
+                "url(/shutterstock/industries-hero.jpg)",
             }}
           >
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.08)_0%,rgba(0,0,0,.46)_100%)]" />
-            <CardContent className="relative flex min-h-[340px] flex-col justify-end p-8 md:p-10 text-white">
-              <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-white/85 mb-3">Sectors we cover</p>
-              <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.02] max-w-3xl mb-6">
-                One platform for manufacturing, energy, airports, maritime, smart cities, and every connected operation in between.
-              </h2>
-              <div className="flex flex-wrap gap-2.5">
+            <CardContent className="relative flex min-h-[380px] md:h-[560px] flex-col justify-end p-8 md:p-12 text-white">
+              <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] max-w-3xl mb-5">
+                One platform for manufacturing, energy, airports, maritime, and smart cities.
+              </h1>
+              <p className="text-base md:text-xl text-white/80 max-w-2xl mb-8">
+                Every industry runs differently. Our OT security platform adapts to the assets, risks, and operational realities that matter most to your business.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3 text-xs text-white/70">
                 {['Manufacturing', 'Energy & Utilities', 'Airports', 'Maritime', 'Smart cities'].map((sector) => (
-                  <span key={sector} className="rounded-none border border-white/35 bg-white/12 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[.12em] text-white/90 backdrop-blur-sm">
+                  <span key={sector} className="px-4 py-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm">
                     {sector}
                   </span>
                 ))}
@@ -113,7 +105,6 @@ export default function IndustriesPage() {
                     <h2 className="text-2xl font-semibold tracking-[-.03em] mb-2">{ind.title}</h2>
                     <p className="text-sm font-medium text-foreground/80">{ind.lead}</p>
                   </div>
-                  <span className="text-4xl font-black text-muted/20 leading-none select-none">0{industries.indexOf(ind) + 1}</span>
                 </div>
                 <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-8 max-w-xl">{ind.desc}</p>
                 <div className="grid sm:grid-cols-2 gap-4 pt-6 border-t border-border/50">
@@ -134,12 +125,13 @@ export default function IndustriesPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Velos Shield</span>
+          <span>© 2026 Rathon.ai · Another product from Rathon.ai</span>
           <div className="flex gap-5 flex-wrap">
-            <a href="/product" className="hover:text-foreground no-underline">Product</a>
+            <a href="/product" className="hover:text-foreground no-underline">Velos Shield</a>
+            <a href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</a>
             <a href="/industries" className="hover:text-foreground no-underline">Industries</a>
             <a href="/trust" className="hover:text-foreground no-underline">Trust</a>
-            <a href="/demo" className="hover:text-foreground no-underline">Demo</a>
+            <a href="/get-started" className="hover:text-foreground no-underline">Demo</a>
           </div>
         </div>
       </footer>

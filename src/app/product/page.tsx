@@ -76,28 +76,27 @@ const capabilities = [
 export default function VelosShieldPage() {
   return (
     <>
-      <section className="pt-28 pb-8 max-w-6xl mx-auto px-6">
-        <div className="flex items-center gap-4">
-          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-primary shrink-0">Velos Shield</p>
-          <div className="h-px flex-1 bg-gradient-to-r from-border to-transparent" />
-        </div>
-      </section>
-
-      <section className="py-8 max-w-6xl mx-auto px-6">
+      <section className="pt-20 pb-8 max-w-6xl mx-auto px-6">
         <Card className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div
-            className="relative min-h-[380px] bg-cover bg-center"
-            style={{ backgroundImage: 'url(/veloshield-hero.png)' }}
+            className="relative min-h-[380px] md:h-[560px] bg-cover bg-center"
+            style={{ backgroundImage: 'url(/multirouterslantedwider.jpg)' }}
           >
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.22)_0%,rgba(0,0,0,.5)_100%)]" />
-            <CardContent className="relative flex min-h-[380px] flex-col justify-end p-8 md:p-12 text-white">
-              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-white/80 mb-4">Velos Shield</p>
-              <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.03] mb-5 max-w-3xl">
+            <CardContent className="relative flex min-h-[380px] md:h-[560px] flex-col justify-end p-8 md:p-12 text-white">
+              <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl">
                 An industrial shield to get more from your assets.
               </h1>
-              <p className="text-base md:text-xl text-white/85 max-w-2xl">
+              <p className="text-base md:text-xl text-white/80 max-w-2xl mb-8">
                 Velos Shield unifies visibility, intelligence, and security operations across the OT environment, helping industrial teams understand risk, prioritize what matters, and act with confidence.
               </p>
+              <div className="mt-8 flex flex-wrap gap-3 text-xs text-white/70">
+                {['Passive discovery', 'Threat detection', 'Risk prioritization', 'Compliance evidence'].map((tag) => (
+                  <span key={tag} className="px-4 py-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </CardContent>
           </div>
         </Card>
@@ -123,7 +122,6 @@ export default function VelosShieldPage() {
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,.75),transparent_58%)] pointer-events-none" />
               <CardContent className="relative p-8 md:p-10">
-                <span className="absolute top-3 right-5 text-7xl font-black text-muted/10 leading-none select-none">{c.num}</span>
                 <h3 className="text-xl font-semibold mb-2 relative z-10">{c.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed relative z-10 whitespace-pre-line">{c.desc}</p>
               </CardContent>
@@ -147,7 +145,6 @@ export default function VelosShieldPage() {
                     <h3 className="text-2xl font-semibold tracking-[-.03em] mb-2">{m.title}</h3>
                     <p className="text-sm font-medium text-foreground/80">{m.lead}</p>
                   </div>
-                  <span className="text-4xl font-black text-muted/20 leading-none select-none">{m.num}</span>
                 </div>
                 <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-8 max-w-xl">{m.desc}</p>
                 <div className="grid sm:grid-cols-2 gap-4 pt-6 border-t border-border/50">
@@ -182,12 +179,13 @@ export default function VelosShieldPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Velos Shield</span>
+          <span>© 2026 Rathon.ai · Another product from Rathon.ai</span>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Velos Shield</a>
+            <a href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</a>
             <a href="/industries" className="hover:text-foreground no-underline">Industries</a>
             <a href="/trust" className="hover:text-foreground no-underline">Trust</a>
-            <a href="/demo" className="hover:text-foreground no-underline">Demo</a>
+            <a href="/get-started" className="hover:text-foreground no-underline">Demo</a>
           </div>
         </div>
       </footer>
