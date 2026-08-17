@@ -77,14 +77,12 @@ export default function DemoPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Rathon.ai · Another product from Rathon.ai</span>
+          <span>© 2026 Rathon.ai</span>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Velos Shield</a>
             <a href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</a>
-            <a href="/executives" className="hover:text-foreground no-underline">Executives</a>
             <a href="/industries" className="hover:text-foreground no-underline">Industries</a>
             <a href="/trust" className="hover:text-foreground no-underline">Trust</a>
-            <a href="/get-started" className="hover:text-foreground no-underline">Demo</a>
           </div>
         </div>
       </footer>

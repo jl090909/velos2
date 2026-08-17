@@ -206,14 +206,12 @@ export default function ExecutivesPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Rathon.ai · Another product from Rathon.ai</span>
+          <span>© 2026 Rathon.ai</span>
           <div className="flex gap-5 flex-wrap">
             <Link href="/product" className="hover:text-foreground no-underline">Velos Shield</Link>
             <Link href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</Link>
-            <Link href="/executives" className="hover:text-foreground no-underline">Executives</Link>
             <Link href="/industries" className="hover:text-foreground no-underline">Industries</Link>
             <Link href="/trust" className="hover:text-foreground no-underline">Trust</Link>
-            <Link href="/get-started" className="hover:text-foreground no-underline">Demo</Link>
           </div>
         </div>
       </footer>

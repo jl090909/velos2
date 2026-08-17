@@ -8,10 +8,8 @@ import { AnimatedLogo } from '@/components/AnimatedLogo';
 const links = [
   { href: '/product', label: 'Velos Shield' },
   { href: '/velossensor', label: 'Velos Sensor' },
-  { href: '/executives', label: 'Executives' },
   { href: '/industries', label: 'Industries' },
   { href: '/trust', label: 'Trust' },
-  { href: '/get-started', label: 'Demo' },
 ];
 
 export function Navbar() {
