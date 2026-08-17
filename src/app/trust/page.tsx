@@ -98,8 +98,8 @@ export default function TrustPage() {
               <CardContent className="p-9 md:p-10">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">Trust pillar</p>
-                    <h2 className="text-2xl font-semibold tracking-[-.03em] mb-2">{card.title}</h2>
+                    <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Trust pillar</p>
+                    <h2 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-2">{card.title}</h2>
                     <p className="text-sm font-medium text-foreground/80">{card.lead}</p>
                   </div>
                 </div>

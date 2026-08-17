@@ -19,17 +19,18 @@
 }
 
 html {
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255,255,255,.98), rgba(245,245,247,1) 42%, rgba(237,237,242,1) 100%);
+  background-color: #ffffff;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
-  background:
-    radial-gradient(circle at 20% 10%, rgba(255,255,255,.9), transparent 28%),
-    radial-gradient(circle at 80% 0%, rgba(225,232,245,.36), transparent 26%),
-    linear-gradient(180deg, #ffffff 0%, #f7f7fa 48%, #ececf1 100%);
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    url('/grid-pattern.svg');
+  background-repeat: repeat;
+  background-size: auto, 1136px 728px;
   color: hsl(var(--foreground));
 }
 
@@ -64,13 +65,6 @@ div[data-slot='card'] {
 /* Animated logo */
 @keyframes vs-ring-draw {
   to { stroke-dashoffset: 0; }
-}
-@keyframes vs-ring-glow {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.72; }
-}
-@keyframes vs-radar {
-  to { transform: rotate(360deg); }
 }
 @keyframes vs-pop {
   from { opacity: 0; transform: scale(0.3); }

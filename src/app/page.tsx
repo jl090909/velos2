@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
+import { DotGrid, Gear, RadarRing, Wordmark } from '@/components/decor';
+import { OtsCardAction } from '@/components/OtsCardAction';
 
 const pillars = [
   {
@@ -51,6 +53,7 @@ export default function HomePage() {
             }}
           >
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.25)_0%,rgba(0,0,0,.52)_100%)]" />
+            <RadarRing className="absolute -right-16 -top-16 h-[440px] w-[440px] md:h-[600px] md:w-[600px]" />
             <CardContent className="relative flex min-h-[380px] md:h-[560px] flex-col justify-end p-8 md:p-12 text-white">
               <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl">
                 Total visibility.
@@ -64,7 +67,7 @@ export default function HomePage() {
                 <Link href="/product" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold border border-white/30 bg-white/15 text-white shadow-[0_1px_0_rgba(255,255,255,.15)_inset] hover:bg-white/20 transition-colors no-underline backdrop-blur-sm">
                   Explore Platform
                 </Link>
-                <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#3da2ff_0%,#0071e3_48%,#005ac1_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,113,227,.3)] hover:brightness-[1.05] transition-all no-underline">
+                <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline">
                   Request Demo
                 </Link>
               </div>
@@ -85,8 +88,8 @@ export default function HomePage() {
           {highlights.map((item) => (
             <Card key={item.title} className="border-border/70 shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,23,42,.08)] transition-all duration-300">
               <CardContent className="p-8 md:p-10">
-                <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">{item.label}</p>
-                <h2 className="text-2xl font-semibold tracking-[-.03em] mb-3">{item.title}</h2>
+                <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{item.label}</p>
+                <h2 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">{item.title}</h2>
                 <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed max-w-lg">{item.body}</p>
               </CardContent>
             </Card>
@@ -94,21 +97,24 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="py-24 max-w-6xl mx-auto px-6">
-        <div className="flex items-end justify-between gap-6 mb-10">
+      <section className="relative overflow-hidden py-24 max-w-6xl mx-auto px-6">
+        <Wordmark text="VELOS SHIELD" />
+        <DotGrid className="right-6 top-8 h-28 w-28" />
+        <DotGrid className="left-6 bottom-8 h-28 w-28" />
+        <div className="relative flex items-end justify-between gap-6 mb-10">
           <div>
-            <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">Platform pillars</p>
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-[-.04em]">Built for industrial security teams who need clarity.</h2>
+            <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Platform pillars</p>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-[-.04em] text-[#003C64]">Built for industrial security teams who need clarity.</h2>
           </div>
           <p className="hidden md:block max-w-xl text-muted-foreground text-sm leading-relaxed">
             Get continuous OT visibility, understand real risk, and focus your team on the threats and vulnerabilities that could impact critical operations.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
+        <div className="relative grid md:grid-cols-2 xl:grid-cols-4 gap-5">
           {pillars.map((p) => (
             <Card key={p.title} className="border-border/70 shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,23,42,.08)] transition-all duration-300">
               <CardContent className="p-7">
-                <h3 className="text-lg font-semibold mb-2">{p.title}</h3>
+                <h3 className="text-lg font-semibold mb-2 text-[#003C64]">{p.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
               </CardContent>
             </Card>
@@ -116,23 +122,31 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="relative overflow-hidden py-24 max-w-6xl mx-auto px-6">
+        <Gear className="absolute right-10 top-14 h-16 w-16 opacity-25" />
+        <DotGrid className="left-6 bottom-10 h-24 w-24" />
+        <div className="relative max-w-6xl mx-auto px-6">
+          <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Inspired by modern security platforms</p>
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-5 text-[#003C64]">
+            One platform for OT visibility, security operations, and trust.
+          </h2>
+          <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
+            Bring asset visibility, vulnerability management, threat detection, risk prioritization, security operations, and compliance evidence together on a single OT security platform. Reduce tool sprawl, simplify operations, and continuously understand and improve your OT security posture.
+          </p>
+          <OtsCardAction />
+        </div>
+      </section>
+
       <section className="py-24 max-w-6xl mx-auto px-6">
-        <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-center">
+        <div className="grid lg:grid-cols-[1.1fr_.9fr] gap-8 items-center">
           <div>
-            <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">Inspired by modern security platforms</p>
-            <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-5">
-              One platform for OT visibility, security operations, and trust.
-            </h2>
-            <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl mb-8">
-              Bring asset visibility, vulnerability management, threat detection, risk prioritization, security operations, and compliance evidence together on a single OT security platform. Reduce tool sprawl, simplify operations, and continuously understand and improve your OT security posture.
-            </p>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="rounded-[1.5rem] border border-white/80 bg-white/85 p-5 shadow-[0_1px_0_rgba(255,255,255,.9)_inset,0_8px_24px_rgba(15,23,42,.05)]">
-                <div className="text-xs font-semibold uppercase tracking-[.16em] text-primary mb-2">Visibility</div>
+                <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#FF612A] mb-2">Visibility</div>
                 <div className="text-sm text-muted-foreground">Passive discovery, flow mapping, and device context across the OT estate.</div>
               </div>
               <div className="rounded-[1.5rem] border border-white/80 bg-white/85 p-5 shadow-[0_1px_0_rgba(255,255,255,.9)_inset,0_8px_24px_rgba(15,23,42,.05)]">
-                <div className="text-xs font-semibold uppercase tracking-[.16em] text-primary mb-2">Operations</div>
+                <div className="text-xs font-semibold uppercase tracking-[.16em] text-[#FF612A] mb-2">Operations</div>
                 <div className="text-sm text-muted-foreground">Prioritized findings, workflows, and evidence for security and engineering teams.</div>
               </div>
             </div>
@@ -143,13 +157,13 @@ export default function HomePage() {
               <div className="rounded-[1.75rem] border border-border/60 bg-[linear-gradient(180deg,#ffffff,#f7f7f9)] p-6 shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[.18em] text-primary">Platform view</p>
-                    <h3 className="text-xl font-semibold tracking-[-.03em] mt-1">Operational confidence</h3>
+                    <p className="text-[11px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">Platform view</p>
+                    <h3 className="text-xl font-semibold tracking-[-.03em] mt-1 text-[#003C64]">Operational confidence</h3>
                   </div>
                   <span className="text-[11px] text-muted-foreground px-3 py-1 rounded-full border border-border/60 bg-white">Live</span>
                 </div>
                 <div className="space-y-3">
-                  {['OT assets discovered', 'Risks prioritized', 'Remote access reviewed', 'Evidence ready for leadership'].map((row, idx) => (
+                  {['OT assets discovered', 'Risks prioritized', 'Remote access reviewed', 'Evidence ready for leadership'].map((row) => (
                     <div key={row} className="flex items-center justify-between rounded-2xl border border-border/50 bg-white px-4 py-3 shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
                       <span className="text-sm text-foreground">{row}</span>
                     </div>

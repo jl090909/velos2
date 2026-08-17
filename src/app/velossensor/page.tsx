@@ -79,7 +79,7 @@ export default function VelosSensorPage() {
               <div>
                 <Link
                   href="/demo"
-                  className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#3da2ff_0%,#0071e3_48%,#005ac1_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,113,227,.3)] hover:brightness-[1.03] transition-all no-underline"
+                  className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
                 >
                   Request a demo
                 </Link>
@@ -97,8 +97,8 @@ export default function VelosSensorPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">The sensor, in four parts</p>
-        <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10">
+        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">The sensor, in four parts</p>
+        <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10 text-[#003C64]">
           One sensor. Four clear responsibilities.
         </h2>
         <div className="grid md:grid-cols-2 gap-5">
@@ -110,8 +110,8 @@ export default function VelosSensorPage() {
               <CardContent className="p-9 md:p-10">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">{s.title}</p>
-                    <h3 className="text-2xl font-semibold tracking-[-.03em] mb-2">{s.lead}</h3>
+                    <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{s.title}</p>
+                    <h3 className="text-2xl font-semibold tracking-[-.03em] mb-2 text-[#003C64]">{s.lead}</h3>
                   </div>
                 </div>
                 <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-8 max-w-xl">{s.desc}</p>
@@ -132,12 +132,12 @@ export default function VelosSensorPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-8">How it works</p>
+        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-8">How it works</p>
         <div className="grid md:grid-cols-3 gap-5">
-          {steps.map((step, i) => (
+          {steps.map((step) => (
             <Card key={step.title} className="bg-white/88 shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,23,42,.08)] transition-all duration-300">
               <CardContent className="p-7">
-                <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
+                <h3 className="text-lg font-semibold mb-2 text-[#003C64]">{step.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
               </CardContent>
             </Card>

@@ -42,11 +42,6 @@ export function Navbar() {
     }
   }, [pathname]);
 
-  // close the mobile menu whenever the route changes
-  useEffect(() => {
-    setMenuOpen(false);
-  }, [pathname]);
-
   return (
     <nav className="fixed top-4 inset-x-0 z-50 pointer-events-none">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -75,13 +70,13 @@ export function Navbar() {
                       linkRefs.current[i] = el;
                     }}
                     className={`group relative z-10 px-4 py-2 text-[17px] font-medium no-underline rounded-full overflow-hidden ${
-                      active ? 'text-foreground' : 'text-muted-foreground'
+                      'text-[#003C64]'
                     }`}
                   >
                     {!active && (
-                      <span className="absolute inset-0 rounded-full bg-[linear-gradient(180deg,rgba(28,32,40,.95)_0%,rgba(12,15,20,.96)_100%)] opacity-0 scale-75 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100 group-hover:scale-100" />
+                      <span className="absolute inset-0 rounded-full bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] opacity-0 scale-75 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100 group-hover:scale-100" />
                     )}
-                    <span className={`relative z-10 transition-colors duration-300 ${!active ? 'group-hover:text-white' : ''}`}>
+                    <span className={`relative z-10 transition-colors duration-300 ${!active ? 'group-hover:text-[#FF612A]' : ''}`}>
                       {l.label}
                     </span>
                   </Link>
@@ -91,7 +86,7 @@ export function Navbar() {
           </div>
 
           <div className="flex items-center gap-2">
-            <Link href="/demo" className="hidden md:inline-flex items-center justify-center rounded-full h-11 px-5 text-[15px] font-semibold bg-[linear-gradient(180deg,#3da2ff_0%,#0071e3_48%,#005ac1_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,113,227,.24)] hover:brightness-[1.03] transition-all no-underline">
+            <Link href="/demo" className="hidden md:inline-flex items-center justify-center rounded-full h-11 px-5 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.24)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline">
               Request Demo
             </Link>
 
@@ -128,10 +123,11 @@ export function Navbar() {
                 <Link
                   key={l.href}
                   href={l.href}
+                  onClick={() => setMenuOpen(false)}
                   className={`block px-4 py-3 rounded-2xl text-[16px] font-medium no-underline transition-colors ${
                     active
-                      ? 'bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(246,247,249,.92)_100%)] text-foreground shadow-[0_6px_18px_rgba(15,23,42,.08)]'
-                      : 'text-muted-foreground hover:text-foreground'
+                      ? 'bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(246,247,249,.92)_100%)] text-[#003C64] shadow-[0_6px_18px_rgba(15,23,42,.08)]'
+                      : 'text-[#003C64]'
                   }`}
                 >
                   {l.label}
@@ -140,7 +136,8 @@ export function Navbar() {
             })}
             <Link
               href="/demo"
-              className="mt-2 flex items-center justify-center rounded-2xl h-12 px-5 text-[15px] font-semibold bg-[linear-gradient(180deg,#3da2ff_0%,#0071e3_48%,#005ac1_100%)] text-white shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,113,227,.24)] no-underline"
+              onClick={() => setMenuOpen(false)}
+              className="mt-2 flex items-center justify-center rounded-2xl h-12 px-5 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.24)] no-underline"
             >
               Request Demo
             </Link>

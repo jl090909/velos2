@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 
 const storyCards = [
@@ -103,8 +102,8 @@ export default function VelosShieldPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">Built for every role</p>
-        <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10">
+        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Built for every role</p>
+        <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10 text-[#003C64]">
           The right view for every stakeholder.
         </h2>
         <div className="grid md:grid-cols-3 gap-5">
@@ -131,8 +130,8 @@ export default function VelosShieldPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">Platform modules</p>
-        <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10">
+        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Platform modules</p>
+        <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10 text-[#003C64]">
           One platform. Four modules. Infinite operational clarity.
         </h2>
         <div className="grid md:grid-cols-2 gap-5">
@@ -141,8 +140,8 @@ export default function VelosShieldPage() {
               <CardContent className="p-9 md:p-10">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-3">Module</p>
-                    <h3 className="text-2xl font-semibold tracking-[-.03em] mb-2">{m.title}</h3>
+                    <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Module</p>
+                    <h3 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-2">{m.title}</h3>
                     <p className="text-sm font-medium text-foreground/80">{m.lead}</p>
                   </div>
                 </div>
@@ -164,12 +163,12 @@ export default function VelosShieldPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-primary mb-8">Capabilities</p>
+        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-8">Capabilities</p>
         <div className="grid md:grid-cols-4 gap-4">
           {capabilities.map((c) => (
             <Card key={c.title} className="bg-white/88 shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,23,42,.08)] transition-all duration-300">
               <CardContent className="p-6">
-                <h3 className="text-[15px] font-semibold mb-1.5">{c.title}</h3>
+                <h3 className="text-[15px] font-semibold mb-1.5 text-[#003C64]">{c.title}</h3>
                 <p className="text-[13px] text-muted-foreground leading-relaxed">{c.desc}</p>
               </CardContent>
             </Card>

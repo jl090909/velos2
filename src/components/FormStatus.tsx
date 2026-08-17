@@ -6,9 +6,9 @@ export function FormStatus() {
   const [status, setStatus] = useState<'success' | 'error' | null>(null);
 
   useEffect(() => {
-    const p = new URLSearchParams(window.location.search);
-    if (p.get('sent') === 'success') setStatus('success');
-    else if (p.get('sent') === 'error') setStatus('error');
+    const sent = new URLSearchParams(window.location.search).get('sent');
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- client-only URL param, must be read after mount to avoid an SSR hydration mismatch
+    setStatus(sent === 'success' || sent === 'error' ? sent : null);
   }, []);
 
   if (!status) return null;
