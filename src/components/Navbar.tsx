@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { AnimatedLogo } from '@/components/AnimatedLogo';
+
 
 const links = [
   { href: '/product', label: 'Velos Shield' },
@@ -52,7 +52,7 @@ export function Navbar() {
         >
           <div className="flex items-center gap-5">
             <Link href="/" className="flex items-center no-underline shrink-0">
-              <AnimatedLogo className="h-12 w-auto" />
+              <img src="/vs2final.svg" className="h-[62px] w-auto" alt="Velos Shield" />
             </Link>
 
             <div ref={navRef} className="hidden md:flex items-center relative">

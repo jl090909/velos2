@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 
 const industries = [
@@ -56,8 +57,8 @@ const industries = [
 export default function IndustriesPage() {
   return (
     <>
-      <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
-        <Card className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
+      <section className="pt-20 pb-8 max-w-6xl mx-auto px-6">
+        <div className="overflow-hidden rounded-[1.35rem] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div
             className="relative min-h-[380px] md:h-[560px] bg-cover bg-center"
             style={{
@@ -82,13 +83,56 @@ export default function IndustriesPage() {
               </div>
             </CardContent>
           </div>
-        </Card>
+        </div>
+      </section>
+
+      <section className="py-16 max-w-6xl mx-auto px-6">
+        <div className="grid md:grid-cols-[7fr_3fr] gap-10 items-center">
+          <div className="rounded-[1.35rem] overflow-hidden shadow-[0_16px_40px_rgba(15,23,42,.08)] bg-[#0d0e1c]">
+            <div className="relative w-full" style={{ aspectRatio: '2000 / 1571' }}>
+              <Image
+                src="/upscale_image_02left.webp"
+                alt="Velos Shield network topology visualization"
+                fill
+                unoptimized
+                priority
+                sizes="(max-width: 768px) 100vw, 700px"
+                className="object-contain"
+              />
+            </div>
+          </div>
+          <div>
+            <span className="inline-block text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-4">
+              Visualize
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-[-.03em] text-[#003C64] mb-5 leading-[1.1]">
+              See every asset, connection, and risk across your OT network
+            </h2>
+            <p className="text-[15px] text-muted-foreground leading-relaxed mb-6 max-w-lg">
+              Velos Shield's interactive Network Map renders your entire operational
+              topology as a force-directed graph — discover devices, expose hidden
+              connections, and highlight high-risk communication paths in real time.
+              Filter by zone, protocol, asset type, or Purdue level. Zoom, pan, and
+              click any node for full asset detail without leaving the canvas.
+            </p>
+            <div className="grid grid-cols-2 gap-4 pt-6 border-t border-border/50">
+              <div className="rounded-none border border-white/65 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.92)_100%)] p-4 shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
+                <b className="text-lg font-semibold block mb-1">Discover</b>
+                <span className="text-xs text-muted-foreground">assets across all Purdue levels</span>
+              </div>
+              <div className="rounded-none border border-white/65 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.92)_100%)] p-4 shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
+                <b className="text-lg font-semibold block mb-1">Isolate</b>
+                <span className="text-xs text-muted-foreground">threat paths before they spread</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
         <div className="grid md:grid-cols-2 gap-5">
           {industries.map((ind) => (
-            <Card key={ind.title} className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1.5 hover:shadow-[0_18px_45px_rgba(15,23,42,.10)] transition-all duration-300">
+            <div key={ind.title} className="flex flex-col overflow-hidden rounded-[1.35rem] bg-white shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1.5 hover:shadow-[0_18px_45px_rgba(15,23,42,.10)] transition-all duration-300">
               <div
                 className="relative h-44 bg-cover bg-center"
                 style={{
@@ -98,10 +142,10 @@ export default function IndustriesPage() {
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,.02)_0%,rgba(0,0,0,.35)_100%)]" />
                 <div className="absolute inset-x-0 bottom-0 h-20 bg-[linear-gradient(180deg,transparent,rgba(255,255,255,.12))]" />
               </div>
-              <CardContent className="p-9 md:p-10">
+              <div className="p-9 md:p-10">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Industry</p>
+                    <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Industry</p>
                     <h2 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-2">{ind.title}</h2>
                     <p className="text-sm font-medium text-foreground/80">{ind.lead}</p>
                   </div>
@@ -117,15 +161,15 @@ export default function IndustriesPage() {
                     <span className="text-xs text-muted-foreground">{ind.stat2d}</span>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </section>
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Rathon.ai</span>
+          <a href="https://rathon.ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline">© 2026 Rathon.ai</a>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Velos Shield</a>
             <a href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</a>

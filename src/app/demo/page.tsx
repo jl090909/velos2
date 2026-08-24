@@ -25,7 +25,7 @@ export default function DemoPage() {
           <Card className="relative overflow-hidden bg-[linear-gradient(180deg,rgba(255,255,255,.97)_0%,rgba(246,247,249,.9)_100%)] shadow-[0_24px_70px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] ring-1 ring-white/70">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,.8),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(148,163,184,.12),transparent_38%)] pointer-events-none" />
             <CardContent className="relative p-8 md:p-10 h-full flex flex-col justify-between">
-              <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-4">Let’s talk</p>
+              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-4">Let’s talk</p>
               <h2 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-6">Plan a walkthrough, site visit, or POC.</h2>
               <p className="text-sm text-muted-foreground leading-relaxed mb-6">
                 Tell us what you want to improve and we’ll shape the conversation around your operating environment, your team, and the outcomes that matter.
@@ -77,7 +77,7 @@ export default function DemoPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Rathon.ai</span>
+          <a href="https://rathon.ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline">© 2026 Rathon.ai</a>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Velos Shield</a>
             <a href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</a>

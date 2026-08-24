@@ -54,7 +54,7 @@ export default function TrustPage() {
   return (
     <>
       <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
-        <Card className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
+        <div className="overflow-hidden rounded-[1.35rem] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div
             className="relative min-h-[380px] md:h-[560px] bg-cover bg-center"
             style={{
@@ -79,7 +79,7 @@ export default function TrustPage() {
               </div>
             </CardContent>
           </div>
-        </Card>
+        </div>
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
@@ -98,7 +98,7 @@ export default function TrustPage() {
               <CardContent className="p-9 md:p-10">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Trust pillar</p>
+                    <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Trust pillar</p>
                     <h2 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-2">{card.title}</h2>
                     <p className="text-sm font-medium text-foreground/80">{card.lead}</p>
                   </div>
@@ -122,7 +122,7 @@ export default function TrustPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Rathon.ai</span>
+          <a href="https://rathon.ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline">© 2026 Rathon.ai</a>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Velos Shield</a>
             <a href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</a>

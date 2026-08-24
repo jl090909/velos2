@@ -114,14 +114,14 @@ export default function ExecutivesPage() {
 
       <section id="roles" className="py-16 max-w-6xl mx-auto px-6">
         <div className="mb-10">
-          <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">By role</p>
+          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">By role</p>
           <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.04em] text-[#003C64]">The right outcome for every leader.</h2>
         </div>
         <div className="grid md:grid-cols-2 gap-5">
           {roles.map((r) => (
             <Card key={r.id} className="border-border/70 shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,23,42,.08)] transition-all duration-300">
               <CardContent className="p-8 md:p-9">
-                <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{r.title}</p>
+                <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{r.title}</p>
                 <h3 className="text-xl font-semibold tracking-[-.02em] mb-3">{r.lead}</h3>
                 <ul className="space-y-2.5 mb-6">
                   {r.points.map((p) => (
@@ -145,7 +145,7 @@ export default function ExecutivesPage() {
           <CardContent className="p-8 md:p-10">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-6">
               <div>
-                <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Compliance &amp; regulation</p>
+                <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Compliance &amp; regulation</p>
                 <h2 className="text-2xl md:text-4xl font-semibold tracking-[-.04em] text-[#003C64]">Aligned to the frameworks your auditors ask for.</h2>
               </div>
               <Link href="/trust" className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold bg-[linear-gradient(180deg,rgba(255,255,255,.96)_0%,rgba(242,243,246,.88)_100%)] text-foreground ring-1 ring-white/80 shadow-[0_1px_0_rgba(255,255,255,.95)_inset,0_10px_24px_rgba(15,23,42,.05)] hover:brightness-[1.02] transition-all no-underline">
@@ -166,7 +166,7 @@ export default function ExecutivesPage() {
       <section className="py-16 max-w-6xl mx-auto px-6">
         <div className="grid lg:grid-cols-[1.05fr_.95fr] gap-8 items-center">
           <div>
-            <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Why Velos Shield</p>
+            <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Why Velos Shield</p>
             <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-5 text-[#003C64]">
               Passive-first security that never puts production at risk.
             </h2>
@@ -195,7 +195,7 @@ export default function ExecutivesPage() {
 
       <section className="py-16 max-w-6xl mx-auto px-6">
         <div className="text-center max-w-2xl mx-auto">
-          <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Next step</p>
+          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Next step</p>
           <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.04em] mb-5 text-[#003C64]">Start the conversation with a walkthrough.</h2>
           <p className="text-muted-foreground mb-8">A guided walkthrough, a site visit, or a POC scoped to your operational goals.</p>
           <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline">
@@ -206,7 +206,7 @@ export default function ExecutivesPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Rathon.ai</span>
+          <Link href="https://rathon.ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline">© 2026 Rathon.ai</Link>
           <div className="flex gap-5 flex-wrap">
             <Link href="/product" className="hover:text-foreground no-underline">Velos Shield</Link>
             <Link href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</Link>

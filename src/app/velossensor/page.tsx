@@ -63,7 +63,7 @@ export default function VelosSensorPage() {
   return (
     <>
       <section className="pt-20 pb-8 max-w-6xl mx-auto px-6">
-        <Card className="overflow-hidden border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
+        <div className="overflow-hidden rounded-[1.35rem] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div
             className="relative min-h-[380px] md:h-[560px] bg-cover bg-center"
             style={{ backgroundImage: 'url(/velosrouter2.jpg)' }}
@@ -93,11 +93,11 @@ export default function VelosSensorPage() {
               </div>
             </CardContent>
           </div>
-        </Card>
+        </div>
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">The sensor, in four parts</p>
+        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">The sensor, in four parts</p>
         <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10 text-[#003C64]">
           One sensor. Four clear responsibilities.
         </h2>
@@ -110,7 +110,7 @@ export default function VelosSensorPage() {
               <CardContent className="p-9 md:p-10">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div>
-                    <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{s.title}</p>
+                    <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{s.title}</p>
                     <h3 className="text-2xl font-semibold tracking-[-.03em] mb-2 text-[#003C64]">{s.lead}</h3>
                   </div>
                 </div>
@@ -132,7 +132,7 @@ export default function VelosSensorPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[11px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-8">How it works</p>
+        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-8">How it works</p>
         <div className="grid md:grid-cols-3 gap-5">
           {steps.map((step) => (
             <Card key={step.title} className="bg-white/88 shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,23,42,.08)] transition-all duration-300">
@@ -147,7 +147,7 @@ export default function VelosSensorPage() {
 
       <footer className="py-12 bg-white/50">
         <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
-          <span>© 2026 Rathon.ai</span>
+          <a href="https://rathon.ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline">© 2026 Rathon.ai</a>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Velos Shield</a>
             <a href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</a>

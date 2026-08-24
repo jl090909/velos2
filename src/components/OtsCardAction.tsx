@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 
 const items = [
@@ -35,33 +36,15 @@ const items = [
   },
 ];
 
-function Diagram() {
+function Diagram({ active }: { active: number }) {
   return (
-    <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border/60 bg-[linear-gradient(180deg,#fbfbfd,#f3f4f8)] shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
-      <div
-        className="absolute inset-0 opacity-30"
-        style={{ backgroundImage: 'radial-gradient(#003C64 1px, transparent 1.2px)', backgroundSize: '22px 22px' }}
-      />
-      <svg viewBox="0 0 400 300" className="absolute inset-0 h-full w-full" fill="none" aria-hidden>
-        <g stroke="#003C64" strokeOpacity="0.2" strokeWidth="1.5">
-          <line x1="200" y1="150" x2="70" y2="60" />
-          <line x1="200" y1="150" x2="330" y2="70" />
-          <line x1="200" y1="150" x2="60" y2="220" />
-          <line x1="200" y1="150" x2="330" y2="230" />
-          <line x1="200" y1="150" x2="200" y2="258" />
-        </g>
-        <line x1="200" y1="150" x2="330" y2="70" stroke="#FF612A" strokeOpacity="0.5" strokeWidth="2" />
-        <circle cx="70" cy="60" r="16" fill="#003C64" />
-        <circle cx="330" cy="70" r="16" fill="#003C64" />
-        <circle cx="60" cy="220" r="14" fill="#003C64" />
-        <circle cx="330" cy="230" r="14" fill="#003C64" />
-        <circle cx="200" cy="258" r="12" fill="#003C64" />
-        <circle cx="200" cy="150" r="26" fill="#FF612A" />
-        <circle cx="200" cy="150" r="34" stroke="#FF612A" strokeOpacity="0.25" strokeWidth="2" />
-        <circle cx="200" cy="150" r="44" stroke="#FF612A" strokeOpacity="0.12" strokeWidth="1.5" />
-      </svg>
-      <span className="absolute bottom-3 right-4 text-[11px] font-medium text-muted-foreground">Diagram placeholder</span>
-    </div>
+    <>
+      {[1, 2, 3, 4, 5].map((i) => (
+        <div key={i} className={`absolute inset-0 transition-all duration-800 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${active === i - 1 ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-75 translate-y-8'}`}>
+          <Image src={i === 1 ? '/nodes.png' : i === 4 ? '/d5.png' : i === 5 ? '/d1.png' : `/d${i}.png`} alt="" fill className="object-cover" unoptimized />
+        </div>
+      ))}
+    </>
   );
 }
 
@@ -93,18 +76,17 @@ export function OtsCardAction() {
         })}
       </div>
 
-      {/* Split panel: text + diagram */}
-      <div className="grid lg:grid-cols-2 gap-10 items-center rounded-[2rem] border border-border/60 bg-white/85 p-8 md:p-12 shadow-[0_1px_0_rgba(255,255,255,.9)_inset,0_20px_60px_rgba(15,23,42,.06)] backdrop-blur-sm">
-        <div>
-          <p className="text-sm font-bold text-[#FF612A] mb-2">{item.num}</p>
-          <h3 className="text-3xl md:text-4xl font-semibold tracking-[-.04em] text-[#003C64] mb-2">{item.title}</h3>
-          <p className="text-lg font-medium text-foreground mb-4">{item.subtitle}</p>
-          <p className="text-base text-muted-foreground leading-relaxed mb-6 max-w-xl">{item.body}</p>
-          <span className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#003C64] transition-colors cursor-pointer">
-            Learn more <span aria-hidden>→</span>
-          </span>
+      {/* Full-bleed diagram with text at bottom */}
+      <div className="relative min-h-[500px] lg:min-h-[600px] overflow-hidden rounded-[2rem] shadow-[0_20px_60px_rgba(15,23,42,.06)]">
+        <Diagram active={active} />
+        <div className="absolute bottom-0 inset-x-0 z-10 bg-gradient-to-t from-black via-black/80 to-transparent pt-32 pb-6 px-8 md:px-12">
+          <div className="max-w-2xl">
+            <p className="text-sm font-bold text-[#FF612A] mb-2">{item.num}</p>
+            <h3 className="text-3xl md:text-4xl font-semibold tracking-[-.04em] text-white mb-2">{item.title}</h3>
+            <p className="text-lg font-medium text-white/80 mb-4">{item.subtitle}</p>
+            <p className="text-base text-white/60 leading-relaxed mb-6">{item.body}</p>
+          </div>
         </div>
-        <Diagram />
       </div>
     </div>
   );
