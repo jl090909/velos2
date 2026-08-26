@@ -76,14 +76,20 @@ export function OtsCardAction() {
               key={it.num}
               type="button"
               onClick={() => setActive(i)}
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all no-underline cursor-pointer ${
+              className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all no-underline cursor-pointer relative overflow-hidden border ${
                 on
-                  ? 'bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] text-white shadow-[0_8px_20px_rgba(0,60,100,.25)]'
-                  : 'border border-border/70 bg-white/70 text-[#003C64] hover:bg-white'
+                  ? 'border-[#003C64] text-white shadow-[0_8px_20px_rgba(0,60,100,.25)]'
+                  : 'border-border/70 bg-white/70 text-[#003C64] hover:bg-white'
               }`}
             >
-              <span className="text-xs font-bold text-[#FF612A]">{it.num}</span>
-              {it.title}
+              <span className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${on ? 'opacity-100' : 'opacity-0'}`} style={{background: 'linear-gradient(90deg, #D6EAF8 0%, #003C64 50%, #001A33 100%)'}}></span>
+              <span className="relative z-10 text-xs font-bold text-[#FF612A]">{it.num}</span>
+              <span className="relative z-10">{it.title}</span>
+              {on && i < items.length - 1 && (
+                <span className="relative z-10 ml-1.5 inline-block animate-pulse text-white/70" style={{animation: 'arrowPulse 2s ease-in-out infinite'}}>
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                </span>
+              )}
             </button>
           );
         })}

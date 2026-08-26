@@ -89,4 +89,9 @@ div[data-slot='card'] {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes arrowPulse {
+  0%, 100% { opacity: 0.5; transform: translateX(0); }
+  50% { opacity: 1; transform: translateX(3px); }
+}
+
 
