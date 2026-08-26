@@ -67,9 +67,11 @@ export default function TrustPage() {
               <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] max-w-3xl mb-5">
                 Built around passive-first visibility and controlled change.
               </h1>
-              <p className="text-base md:text-xl text-white/80 max-w-2xl mb-8">
+              <div className="inline-block bg-white/15 backdrop-blur-md pl-12 pr-8 py-6 mb-8 -ml-4 max-w-[80%]" style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 90%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 90%, transparent 100%)' }}>
+              <p className="text-base md:text-xl text-white">
                 OT environments require reliability, change discipline, and clear operational ownership. The trust center should read like a premium product page: direct, calm, and complete.
               </p>
+              </div>
               <div className="mt-8 flex flex-wrap gap-3 text-xs text-white/70">
                 {trustThemes.map((theme) => (
                   <span key={theme} className="px-4 py-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm">
@@ -121,7 +123,7 @@ export default function TrustPage() {
       </section>
 
       <footer className="py-12 bg-white/50">
-        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
+        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-base text-muted-foreground gap-4 flex-wrap">
           <a href="https://rathon.ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline">© 2026 Rathon.ai</a>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Velos Shield</a>

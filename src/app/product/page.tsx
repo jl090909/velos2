@@ -177,7 +177,7 @@ export default function VelosShieldPage() {
       </section>
 
       <footer className="py-12 bg-white/50">
-        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
+        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-base text-muted-foreground gap-4 flex-wrap">
           <a href="https://rathon.ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline">© 2026 Rathon.ai</a>
           <div className="flex gap-5 flex-wrap">
             <a href="/product" className="hover:text-foreground no-underline">Velos Shield</a>

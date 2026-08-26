@@ -43,9 +43,11 @@ export default function HomePage() {
                 <br />
                 Zero downtime.
               </h1>
-              <p className="text-base md:text-xl text-white/80 max-w-2xl mb-8">
+              <div className="inline-block bg-white/15 backdrop-blur-md pl-12 pr-8 py-6 mb-8 -ml-4 max-w-[80%]" style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 90%, transparent 100%)', WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 5%, black 90%, transparent 100%)' }}>
+              <p className="text-base md:text-xl text-white">
                 AI-powered OT security delivering continuous passive visibility, intelligent risk prioritization, and decision-ready insights for security teams and executives.
               </p>
+              </div>
               <div className="flex flex-wrap gap-4">
                 <Link href="/product" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold border border-white/30 bg-white/15 text-white shadow-[0_1px_0_rgba(255,255,255,.15)_inset] hover:bg-white/20 transition-colors no-underline backdrop-blur-sm">
                   Explore Platform
@@ -76,7 +78,7 @@ export default function HomePage() {
         <div className="relative overflow-hidden rounded-[1.35rem] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div className="relative w-full" style={{ aspectRatio: '1600 / 687' }}>
             <Image
-              src="/upscale_image_01top.webp"
+              src="/Group7.png"
               alt="Velos Shield for business"
               fill
               unoptimized
@@ -157,7 +159,7 @@ export default function HomePage() {
       </section>
 
       <footer className="py-12 bg-white/50">
-        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-xs text-muted-foreground gap-4 flex-wrap">
+        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-base text-muted-foreground gap-4 flex-wrap">
             <Link href="https://rathon.ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline">© 2026 Rathon.ai</Link>
           <div className="flex gap-5 flex-wrap">
             <Link href="/product" className="hover:text-foreground no-underline">Velos Shield</Link>

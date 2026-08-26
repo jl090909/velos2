@@ -52,7 +52,7 @@ export function Navbar() {
         >
           <div className="flex items-center gap-5">
             <Link href="/" className="flex items-center no-underline shrink-0">
-              <img src="/vs2final.svg" className="h-[62px] w-auto" alt="Velos Shield" />
+              <img src="/NEWvsLOGO.png" className="h-[62px] w-auto" alt="Velos Shield" />
             </Link>
 
             <div ref={navRef} className="hidden md:flex items-center relative">
