@@ -10,6 +10,7 @@ const links = [
   { href: '/velossensor', label: 'Velos Sensor' },
   { href: '/industries', label: 'Industries' },
   { href: '/trust', label: 'Trust' },
+  { href: '/resources', label: 'Resources' },
 ];
 
 export function Navbar() {
