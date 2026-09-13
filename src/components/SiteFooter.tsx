@@ -15,7 +15,7 @@ export function SiteFooter() {
             <p>Email: <a href="mailto:contact@rathon.ai" className="hover:text-foreground no-underline">contact@rathon.ai</a></p>
             <p>Phone: <a href="tel:+917090004700" className="hover:text-foreground no-underline">+91 70900 04700</a></p>
             <div className="mt-3">
-              <a href="https://www.linkedin.com/company/rathon-ai/" target="_blank" rel="noreferrer" aria-label="Velos Shield on LinkedIn" className="inline-flex items-center justify-center h-9 w-9 rounded-full border border-border/70 text-muted-foreground hover:text-[#003C64] hover:border-[#003C64]/40 transition-colors">
+              <a href="https://www.linkedin.com/in/velos-shield-706349436/" target="_blank" rel="noreferrer" aria-label="Velos Shield on LinkedIn" className="inline-flex items-center justify-center h-9 w-9 rounded-full border border-border/70 text-muted-foreground hover:text-[#003C64] hover:border-[#003C64]/40 transition-colors">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.225 0z"/></svg>
               </a>
             </div>
