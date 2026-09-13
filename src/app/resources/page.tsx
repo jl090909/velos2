@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
   title: 'Resources — Velos Shield POV Whitepaper Series',
@@ -168,6 +169,7 @@ export default function ResourcesPage() {
           </CardContent>
         </Card>
       </section>
+      <SiteFooter />
     </>
   );
 }

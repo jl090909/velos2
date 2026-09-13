@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { DotGrid, Gear, RadarRing, Wordmark } from '@/components/decor';
 import { OtsCardAction } from '@/components/OtsCardAction';
 import { GisecModal } from "@/components/GisecModal";
+import { SiteFooter } from "@/components/SiteFooter";
 
 const pillars = [
   {
@@ -160,17 +161,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="py-12 bg-white/50">
-        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center text-base text-muted-foreground gap-4 flex-wrap">
-            <Link href="https://rathon.ai" target="_blank" rel="noopener noreferrer" className="hover:text-foreground no-underline">© 2026 Rathon.ai</Link>
-          <div className="flex gap-5 flex-wrap">
-            <Link href="/product" className="hover:text-foreground no-underline">Velos Shield</Link>
-            <Link href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</Link>
-            <Link href="/industries" className="hover:text-foreground no-underline">Industries</Link>
-            <Link href="/trust" className="hover:text-foreground no-underline">Trust</Link>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }

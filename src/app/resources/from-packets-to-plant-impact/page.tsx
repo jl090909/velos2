@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
   title: 'From Packets to Plant Impact — Velos Shield Resources',
@@ -157,6 +158,7 @@ export default function Paper2Page() {
           </CardContent>
         </Card>
       </section>
+      <SiteFooter />
     </>
   );
 }

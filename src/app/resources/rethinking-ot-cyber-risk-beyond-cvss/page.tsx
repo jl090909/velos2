@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
   title: 'Rethinking OT Cyber Risk Beyond CVSS — Velos Shield Resources',
@@ -144,6 +145,7 @@ export default function Paper1Page() {
           </CardContent>
         </Card>
       </section>
+      <SiteFooter />
     </>
   );
 }

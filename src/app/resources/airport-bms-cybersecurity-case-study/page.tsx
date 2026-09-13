@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
+import { SiteFooter } from "@/components/SiteFooter";
 
 export const metadata = {
   title: 'Case Study: Airport Building Management Systems — Velos Shield Resources',
@@ -210,6 +211,7 @@ export default function CaseStudyPage() {
           </CardContent>
         </Card>
       </section>
+      <SiteFooter />
     </>
   );
 }
