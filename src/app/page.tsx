@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { DotGrid, Gear, RadarRing, Wordmark } from '@/components/decor';
 import { OtsCardAction } from '@/components/OtsCardAction';
+import { GisecModal } from "@/components/GisecModal";
 
 const pillars = [
   {
@@ -26,6 +27,7 @@ const pillars = [
 export default function HomePage() {
   return (
     <>
+      <GisecModal />
       <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
         <div className="overflow-hidden rounded-[1.35rem] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div
