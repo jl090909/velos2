@@ -4,7 +4,6 @@ import { Card, CardContent } from '@/components/ui/card';
 import { DotGrid, Gear, RadarRing, Wordmark } from '@/components/decor';
 import { OtsCardAction } from '@/components/OtsCardAction';
 import { GisecModal } from "@/components/GisecModal";
-import { GisecTicker } from "@/components/GisecTicker";
 
 const pillars = [
   {
@@ -29,7 +28,6 @@ export default function HomePage() {
   return (
     <>
       <GisecModal />
-      <GisecTicker />
       <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
         <div className="overflow-hidden rounded-[1.35rem] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
           <div
