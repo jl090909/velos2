@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from "@/components/SiteFooter";
 
@@ -175,6 +176,29 @@ export default function VelosShieldPage() {
             </Card>
           ))}
         </div>
+      </section>
+
+      <section className="py-16 max-w-6xl mx-auto px-6">
+        <Card className="border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)]">
+          <CardContent className="p-9 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div className="max-w-2xl">
+              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Deployment tiers</p>
+              <h3 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">
+                Site level or organisation level.
+              </h3>
+              <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed">
+                Velos Shield 1.1 protects a single site. Velos Shield 1.5 connects every site into one consolidated
+                vulnerability posture for the whole organisation.
+              </p>
+            </div>
+            <Link
+              href="/product/org-level"
+              className="inline-flex shrink-0 items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
+            >
+              Explore 1.5 · Org-level
+            </Link>
+          </CardContent>
+        </Card>
       </section>
 
       <SiteFooter />

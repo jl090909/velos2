@@ -13,6 +13,8 @@ const links = [
   { href: '/resources', label: 'Resources' },
 ];
 
+const products = [{ href: '/product/org-level', label: 'Velos Shield 1.5 · Org-level' }];
+
 export function Navbar() {
   const pathname = usePathname();
   const navRef = useRef<HTMLDivElement>(null);
@@ -83,6 +85,30 @@ export function Navbar() {
                   </Link>
                 );
               })}
+
+              <div className="relative group">
+                <button
+                  type="button"
+                  aria-haspopup="true"
+                  className="px-4 py-2 text-[17px] font-medium rounded-full text-[#003C64] cursor-pointer bg-transparent border-0"
+                >
+                  Products <span aria-hidden className="text-[11px] align-middle">▾</span>
+                </button>
+                <div className="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 transition-all duration-200 absolute left-0 top-full mt-3 z-50 min-w-[300px] rounded-2xl bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(246,247,249,.96)_100%)] p-2 shadow-[0_24px_70px_rgba(15,23,42,.18),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl">
+                  {products.map((p) => (
+                    <Link
+                      key={p.href}
+                      href={p.href}
+                      className="block px-4 py-3 rounded-2xl text-[15px] font-medium no-underline text-[#003C64] hover:bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] hover:text-[#FF612A] transition-colors"
+                    >
+                      {p.label}
+                    </Link>
+                  ))}
+                  <span className="block px-4 py-3 rounded-2xl text-[15px] text-muted-foreground/70 cursor-default">
+                    Velos Shield 1.1 · Site-level <span className="text-[12px]">(soon)</span>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -118,6 +144,16 @@ export function Navbar() {
 
         {menuOpen && (
           <div className="md:hidden pointer-events-auto mt-2 rounded-3xl bg-[linear-gradient(180deg,rgba(255,255,255,.96)_0%,rgba(246,247,249,.94)_100%)] p-2 shadow-[0_24px_70px_rgba(15,23,42,.18),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl">
+            {products.map((p) => (
+              <Link
+                key={p.href}
+                href={p.href}
+                onClick={() => setMenuOpen(false)}
+                className="block px-4 py-3 rounded-2xl text-[16px] font-medium no-underline text-[#003C64] transition-colors"
+              >
+                {p.label}
+              </Link>
+            ))}
             {links.map((l) => {
               const active = pathname === l.href;
               return (
