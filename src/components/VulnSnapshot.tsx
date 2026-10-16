@@ -1,7 +1,16 @@
 import { SEVERITY_COLOR, SEVERITY_ORDER, type Finding, type SeverityCounts } from '@/lib/sample-data';
 import { SeverityChip } from '@/components/SeverityChip';
 
-export function VulnSnapshot({ counts, rows }: { counts: SeverityCounts; rows: Finding[] }) {
+export function VulnSnapshot({
+  counts,
+  rows,
+  showSite = true,
+}: {
+  counts: SeverityCounts;
+  rows: Finding[];
+  /** Org-level findings carry a site column; site-level findings do not. */
+  showSite?: boolean;
+}) {
   const total = SEVERITY_ORDER.reduce((a, k) => a + counts[k], 0);
 
   return (
@@ -24,12 +33,12 @@ export function VulnSnapshot({ counts, rows }: { counts: SeverityCounts; rows: F
       </div>
 
       <div className="overflow-x-auto">
-        <table className="w-full min-w-[560px] border-collapse text-sm">
+        <table className={`w-full ${showSite ? 'min-w-[560px]' : 'min-w-[480px]'} border-collapse text-sm`}>
           <thead>
             <tr className="text-left text-muted-foreground">
               <th className="font-semibold pb-3 pr-4">ID</th>
               <th className="font-semibold pb-3 pr-4">Finding</th>
-              <th className="font-semibold pb-3 pr-4">Site</th>
+              {showSite && <th className="font-semibold pb-3 pr-4">Site</th>}
               <th className="font-semibold pb-3 pr-4">Asset</th>
               <th className="font-semibold pb-3">Severity</th>
             </tr>
@@ -39,7 +48,7 @@ export function VulnSnapshot({ counts, rows }: { counts: SeverityCounts; rows: F
               <tr key={r.id} className="border-t border-border/60">
                 <td className="py-3 pr-4 font-mono text-xs text-muted-foreground">{r.id}</td>
                 <td className="py-3 pr-4 text-[#003C64]">{r.finding}</td>
-                <td className="py-3 pr-4 text-muted-foreground">{r.site}</td>
+                {showSite && <td className="py-3 pr-4 text-muted-foreground">{r.site}</td>}
                 <td className="py-3 pr-4 font-mono text-xs text-muted-foreground">{r.asset}</td>
                 <td className="py-3">
                   <SeverityChip level={r.severity} />

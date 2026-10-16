@@ -33,6 +33,7 @@ export function SiteFooter() {
         <div className="flex gap-5 flex-wrap md:justify-end items-start">
           <Link href="/product" className="hover:text-foreground no-underline">Velos Shield</Link>
           <Link href="/product/org-level" className="hover:text-foreground no-underline">Velos Shield 1.5</Link>
+          <Link href="/product/site-level" className="hover:text-foreground no-underline">Velos Shield 1.1</Link>
           <Link href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</Link>
           <Link href="/industries" className="hover:text-foreground no-underline">Industries</Link>
           <Link href="/trust" className="hover:text-foreground no-underline">Trust</Link>

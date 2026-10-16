@@ -13,7 +13,10 @@ const links = [
   { href: '/resources', label: 'Resources' },
 ];
 
-const products = [{ href: '/product/org-level', label: 'Velos Shield 1.5 · Org-level' }];
+const products = [
+  { href: '/product/org-level', label: 'Velos Shield 1.5 · Org-level' },
+  { href: '/product/site-level', label: 'Velos Shield 1.1 · Site-level' },
+];
 
 export function Navbar() {
   const pathname = usePathname();
@@ -104,9 +107,6 @@ export function Navbar() {
                       {p.label}
                     </Link>
                   ))}
-                  <span className="block px-4 py-3 rounded-2xl text-[15px] text-muted-foreground/70 cursor-default">
-                    Velos Shield 1.1 · Site-level <span className="text-[12px]">(soon)</span>
-                  </span>
                 </div>
               </div>
             </div>
