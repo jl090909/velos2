@@ -7,8 +7,6 @@ import { useEffect, useRef, useState } from 'react';
 import { normalizePath } from '@/lib/utils';
 
 const links = [
-  { href: '/product', label: 'Velos Shield' },
-  { href: '/velossensor', label: 'Velos Sensor' },
   { href: '/industries', label: 'Industries' },
   { href: '/trust', label: 'Trust' },
 ];
@@ -25,6 +23,8 @@ const resources = [
 
 const company = [
   { href: '/company/about', label: 'About' },
+  { href: '/company/events', label: 'Events' },
+  { href: '/company/media', label: 'Media' },
   { href: '/company/leadership', label: 'Leadership' },
   { href: '/company/careers', label: 'Careers' },
   { href: '/company/contact', label: 'Contact Us' },

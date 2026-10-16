@@ -142,14 +142,101 @@ const main = async () => {
   const staffSeesDraft = await findWhere('jobs', { 'where[slug][equals]': `qa-draft-job-${stamp}` }, hr.token)
   check('staff can see their own draft in the CMS', Boolean(staffSeesDraft), staffSeesDraft ? '_status=' + staffSeesDraft._status : '')
 
+  // ------------------------------------- customers / events / press (tech owns)
+  const techCustomer = await api('POST', '/api/customers/', {
+    body: {
+      _status: 'published',
+      name: `QA customer ${stamp}`,
+      sector: 'QA',
+      slug: `qa-customer-${stamp}`,
+      summary: 'Created by scripts/verify-cms.mjs.',
+    },
+    token: tech.token,
+  })
+  check(
+    'tech can add a customer',
+    techCustomer.status === 201 && Boolean(techCustomer.body?.doc?.id),
+    techCustomer.status === 201 ? `HTTP ${techCustomer.status}` : `HTTP ${techCustomer.status} ${JSON.stringify(techCustomer.body?.errors ?? techCustomer.body).slice(0, 200)}`,
+  )
+
+  const hrCustomerStatus = await statusOf('POST', '/api/customers/', {
+    body: { _status: 'published', name: 'nope', sector: 'QA', slug: `qa-hr-customer-${stamp}`, summary: 'should never exist' },
+    token: hr.token,
+  })
+  check('hr is refused when adding a customer', hrCustomerStatus === 403 || hrCustomerStatus === 401, `HTTP ${hrCustomerStatus}`)
+
+  const techEvent = await api('POST', '/api/events/', {
+    body: {
+      _status: 'published',
+      city: 'QA',
+      eventType: 'Webinar',
+      slug: `qa-event-${stamp}`,
+      startDate: new Date().toISOString(),
+      summary: 'Created by scripts/verify-cms.mjs.',
+      title: `QA event ${stamp}`,
+    },
+    token: tech.token,
+  })
+  check(
+    'tech can add an event',
+    techEvent.status === 201 && Boolean(techEvent.body?.doc?.id),
+    techEvent.status === 201 ? `HTTP ${techEvent.status}` : `HTTP ${techEvent.status} ${JSON.stringify(techEvent.body?.errors ?? techEvent.body).slice(0, 200)}`,
+  )
+
+  const hrEventStatus = await statusOf('POST', '/api/events/', {
+    body: { _status: 'published', city: 'QA', eventType: 'Webinar', slug: `qa-hr-event-${stamp}`, startDate: new Date().toISOString(), summary: 'should never exist', title: 'nope' },
+    token: hr.token,
+  })
+  check('hr is refused when adding an event', hrEventStatus === 403 || hrEventStatus === 401, `HTTP ${hrEventStatus}`)
+
+  const techMention = await api('POST', '/api/press-mentions/', {
+    body: {
+      _status: 'published',
+      headline: `QA mention ${stamp}`,
+      kind: 'News',
+      outlet: 'QA outlet',
+      publishedDate: new Date().toISOString(),
+      url: 'https://example.com/qa',
+    },
+    token: tech.token,
+  })
+  check(
+    'tech can add a press mention',
+    techMention.status === 201 && Boolean(techMention.body?.doc?.id),
+    techMention.status === 201 ? `HTTP ${techMention.status}` : `HTTP ${techMention.status} ${JSON.stringify(techMention.body?.errors ?? techMention.body).slice(0, 200)}`,
+  )
+
+  const anonCustomers = await countWhere('customers', { 'where[slug][equals]': `qa-customer-${stamp}` })
+  check('a published customer is visible to anonymous visitors', anonCustomers.total === 1, `total=${anonCustomers.total}`)
+
+  const anonEvents = await countWhere('events', { 'where[slug][equals]': `qa-event-${stamp}` })
+  check('a published event is visible to anonymous visitors', anonEvents.total === 1, `total=${anonEvents.total}`)
+
+  const draftCustomer = await api('POST', '/api/customers/', {
+    body: { _status: 'draft', name: `QA draft customer ${stamp}`, sector: 'QA', slug: `qa-draft-customer-${stamp}`, summary: 'must stay private' },
+    token: tech.token,
+  })
+  const anonDraftCustomer = await countWhere('customers', { 'where[slug][equals]': `qa-draft-customer-${stamp}` })
+  check('a draft customer stays invisible to anonymous visitors', draftCustomer.status === 201 && anonDraftCustomer.total === 0, `HTTP ${draftCustomer.status} total=${anonDraftCustomer.total}`)
+
   // -------------------------------------------------------------- cleanup
-  const deletedJob = await api('DELETE', `/api/jobs/${hrJob.body?.doc?.id}/`, { token: admin.token })
-  const deletedDraft = await api('DELETE', `/api/jobs/${draftJob.body?.doc?.id}/`, { token: admin.token })
-  const deletedArticle = await api('DELETE', `/api/knowledge-hub-articles/${techArticle.body?.doc?.id}/`, { token: admin.token })
+  const deleted = []
+  for (const [collection, id] of [
+    ['jobs', hrJob.body?.doc?.id],
+    ['jobs', draftJob.body?.doc?.id],
+    ['knowledge-hub-articles', techArticle.body?.doc?.id],
+    ['customers', techCustomer.body?.doc?.id],
+    ['customers', draftCustomer.body?.doc?.id],
+    ['events', techEvent.body?.doc?.id],
+    ['press-mentions', techMention.body?.doc?.id],
+  ]) {
+    const res = await api('DELETE', `/api/${collection}/${id}/`, { token: admin.token })
+    deleted.push(res.status)
+  }
   check(
     'admin can delete the throwaway QA records',
-    deletedJob.status === 200 && deletedDraft.status === 200 && deletedArticle.status === 200,
-    `HTTP ${deletedJob.status}/${deletedDraft.status}/${deletedArticle.status}`,
+    deleted.every((status) => status === 200),
+    `HTTP ${deleted.join('/')}`,
   )
 
   const remaining = await countWhere('jobs', { 'where[slug][equals]': `qa-hr-job-${stamp}` })

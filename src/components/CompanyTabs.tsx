@@ -6,6 +6,8 @@ import { normalizePath } from '@/lib/utils';
 
 const tabs = [
   { href: '/company/about', label: 'About' },
+  { href: '/company/events', label: 'Events' },
+  { href: '/company/media', label: 'Media' },
   { href: '/company/leadership', label: 'Leadership' },
   { href: '/company/careers', label: 'Careers' },
   { href: '/company/contact', label: 'Contact' },
@@ -17,7 +19,7 @@ export function CompanyTabs() {
   return (
     <div className="flex flex-wrap gap-2">
       {tabs.map((t) => {
-        const active = pathname === t.href;
+        const active = pathname === t.href || pathname.startsWith(`${t.href}/`);
         return (
           <Link
             key={t.href}

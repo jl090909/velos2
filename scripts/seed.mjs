@@ -295,6 +295,129 @@ const main = async () => {
     created.push(`article ${article.slug}`)
   }
 
+  // ------------------------------------------- customers / events / press (drafts)
+  // Seeded as DRAFTS on purpose: these are review stubs, not approved public claims. They show up in
+  // the CMS for the tech team to edit and publish, and stay invisible to anonymous visitors until then.
+  const draft = { _status: 'draft' }
+
+  const customers = [
+    {
+      displayOrder: 10,
+      featured: true,
+      name: 'Sample: international airport operator',
+      region: 'Middle East',
+      sector: 'Airports',
+      slug: 'sample-airport-operator',
+      summary:
+        'Draft placeholder. Replace with the approved reference: what was monitored, what became visible, and the operational outcome.',
+    },
+    {
+      displayOrder: 20,
+      name: 'Sample: process manufacturer',
+      region: 'India',
+      sector: 'Manufacturing',
+      slug: 'sample-process-manufacturer',
+      summary: 'Draft placeholder. Approved reference wording to be supplied by Velos Shield.',
+    },
+    {
+      displayOrder: 30,
+      name: 'Sample: energy utility',
+      region: 'UK',
+      sector: 'Energy',
+      slug: 'sample-energy-utility',
+      summary: 'Draft placeholder. Approved reference wording to be supplied by Velos Shield.',
+    },
+  ]
+  for (const customer of customers) {
+    const existing = await findWhere('customers', { 'where[slug][equals]': customer.slug }, adminToken)
+    if (existing) {
+      skipped.push(`customer ${customer.slug}`)
+      continue
+    }
+    await api('POST', '/api/customers/', { body: { ...customer, ...draft }, expect: 201, token: adminToken })
+    created.push(`customer ${customer.slug} (draft)`)
+  }
+
+  const events = [
+    {
+      city: 'Dubai',
+      country: 'United Arab Emirates',
+      eventType: 'Exhibition',
+      booth: 'Stand to be confirmed',
+      description: doc(
+        para('Draft placeholder for the event briefing: what the team is showing, the session times, and who to ask for at the stand.'),
+      ),
+      endDate: '2026-12-11T09:00:00.000Z',
+      registrationUrl: 'https://example.com/register',
+      slug: 'sample-exhibition-dubai',
+      startDate: '2026-12-09T09:00:00.000Z',
+      summary: 'Draft placeholder event. Replace with the confirmed event, dates and stand number.',
+      title: 'Sample: industrial security exhibition, Dubai',
+      venue: 'Exhibition centre',
+    },
+    {
+      city: 'Online',
+      country: '',
+      eventType: 'Webinar',
+      description: doc(
+        para('Draft placeholder for the webinar abstract and speaker list.'),
+        heading('Agenda'),
+        bullets(['Operational context vs scanner severity', 'Q&A']),
+      ),
+      slug: 'sample-technical-webinar',
+      startDate: '2026-11-04T14:00:00.000Z',
+      summary: 'Draft placeholder webinar. Replace with the real title, abstract and registration link.',
+      title: 'Sample: technical briefing webinar',
+      venue: 'Online',
+    },
+    {
+      city: 'Mumbai',
+      country: 'India',
+      eventType: 'Conference',
+      slug: 'sample-past-conference',
+      startDate: '2026-06-18T09:00:00.000Z',
+      summary: 'Draft placeholder for a past event, to exercise the archive table on /company/events.',
+      title: 'Sample: past OT security conference',
+      venue: 'Convention centre',
+    },
+  ]
+  for (const event of events) {
+    const existing = await findWhere('events', { 'where[slug][equals]': event.slug }, adminToken)
+    if (existing) {
+      skipped.push(`event ${event.slug}`)
+      continue
+    }
+    await api('POST', '/api/events/', { body: { ...event, ...draft }, expect: 201, token: adminToken })
+    created.push(`event ${event.slug} (draft)`)
+  }
+
+  const mentions = [
+    {
+      excerpt: 'Draft placeholder for the pull quote or summary from the piece.',
+      headline: 'Sample: coverage of OT risk prioritisation',
+      kind: 'Feature',
+      outlet: 'Sample outlet',
+      publishedDate: '2026-09-22T09:00:00.000Z',
+      url: 'https://example.com/sample-coverage',
+    },
+    {
+      headline: 'Sample: interview on passive OT monitoring',
+      kind: 'Interview',
+      outlet: 'Sample publication',
+      publishedDate: '2026-08-14T09:00:00.000Z',
+      url: 'https://example.com/sample-interview',
+    },
+  ]
+  for (const mention of mentions) {
+    const existing = await findWhere('press-mentions', { 'where[headline][equals]': mention.headline }, adminToken)
+    if (existing) {
+      skipped.push(`press mention ${mention.headline}`)
+      continue
+    }
+    await api('POST', '/api/press-mentions/', { body: { ...mention, ...draft }, expect: 201, token: adminToken })
+    created.push(`press mention (draft)`)
+  }
+
   console.log('created:')
   for (const line of created) {
     log(line)

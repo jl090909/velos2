@@ -85,6 +85,87 @@ const main = async () => {
   const removedArticle = await api('DELETE', `/api/knowledge-hub-articles/${article.body?.doc?.id}/`, { token: admin.token })
   check('admin cleans up the probe records', removedJob.status === 200 && removedArticle.status === 200, `HTTP ${removedJob.status}/${removedArticle.status}`)
 
+  // ------------------------------------- customers / events / press on the site
+  // Regression cover for the Local API bypass: server-side readers must not render drafts even
+  // though they query with the payload instance rather than over REST.
+  const customerName = `Publish probe customer ${stamp}`
+  const eventTitle = `Publish probe event ${stamp}`
+  const mentionHeadline = `Publish probe mention ${stamp}`
+
+  const created = {}
+  created.customer = await api('POST', '/api/customers/', {
+    body: { _status: 'draft', name: customerName, sector: 'QA', slug: `publish-probe-customer-${stamp}`, summary: 'Temporary record.' },
+    token: tech.token,
+  })
+  created.event = await api('POST', '/api/events/', {
+    body: {
+      _status: 'draft',
+      city: 'QA',
+      eventType: 'Webinar',
+      slug: `publish-probe-event-${stamp}`,
+      startDate: new Date(Date.now() + 7 * 86400000).toISOString(),
+      summary: 'Temporary record.',
+      title: eventTitle,
+    },
+    token: tech.token,
+  })
+  created.mention = await api('POST', '/api/press-mentions/', {
+    body: {
+      _status: 'draft',
+      headline: mentionHeadline,
+      kind: 'News',
+      outlet: 'QA outlet',
+      publishedDate: new Date().toISOString(),
+      url: 'https://example.com/qa',
+    },
+    token: tech.token,
+  })
+  check(
+    'tech can draft a customer, an event and a press mention',
+    created.customer.status === 201 && created.event.status === 201 && created.mention.status === 201,
+    `HTTP ${created.customer.status}/${created.event.status}/${created.mention.status}`,
+  )
+
+  for (const [label, url, needle] of [
+    ['customer', `${base}/customers/`, customerName],
+    ['event', `${base}/company/events/`, eventTitle],
+    ['press mention', `${base}/company/media/`, mentionHeadline],
+  ]) {
+    const leaked = await waitForText(url, needle, { attempts: 1 })
+    check(`a draft ${label} is NOT rendered on the public page`, !leaked.ok, leaked.ok ? 'LEAKED' : 'not present')
+  }
+
+  const ids = {
+    customer: created.customer.body?.doc?.id,
+    event: created.event.body?.doc?.id,
+    mention: created.mention.body?.doc?.id,
+  }
+  await api('PATCH', `/api/customers/${ids.customer}/`, { body: { _status: 'published' }, token: tech.token })
+  await api('PATCH', `/api/events/${ids.event}/`, { body: { _status: 'published' }, token: tech.token })
+  await api('PATCH', `/api/press-mentions/${ids.mention}/`, { body: { _status: 'published' }, token: tech.token })
+
+  for (const [label, url, needle] of [
+    ['customer on /customers', `${base}/customers/`, customerName],
+    ['event on /company/events', `${base}/company/events/`, eventTitle],
+    ['press mention on /company/media', `${base}/company/media/`, mentionHeadline],
+  ]) {
+    const shown = await waitForText(url, needle)
+    check(`the published ${label} appears without a redeploy`, shown.ok, `after ${shown.attempts} fetch(es)`)
+  }
+
+  await api('DELETE', `/api/customers/${ids.customer}/`, { token: admin.token })
+  await api('DELETE', `/api/events/${ids.event}/`, { token: admin.token })
+  await api('DELETE', `/api/press-mentions/${ids.mention}/`, { token: admin.token })
+
+  for (const [label, url, needle] of [
+    ['customer', `${base}/customers/`, customerName],
+    ['event', `${base}/company/events/`, eventTitle],
+    ['press mention', `${base}/company/media/`, mentionHeadline],
+  ]) {
+    const gone = await waitForText(url, needle, { expect: false })
+    check(`the deleted ${label} leaves the page`, gone.ok, `after ${gone.attempts} fetch(es)`)
+  }
+
   // --------------------------------------------------------------- report
   const failed = results.filter((row) => !row.pass)
   console.log('')

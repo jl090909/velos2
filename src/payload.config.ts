@@ -5,9 +5,12 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
+import { Customers } from './collections/Customers'
+import { Events } from './collections/Events'
 import { Jobs } from './collections/Jobs'
 import { KnowledgeHubArticles } from './collections/KnowledgeHubArticles'
 import { Media } from './collections/Media'
+import { PressMentions } from './collections/PressMentions'
 import { Users } from './collections/Users'
 import { Whitepapers } from './collections/Whitepapers'
 
@@ -29,7 +32,16 @@ export default buildConfig({
       titleSuffix: ' - Velos Shield CMS',
     },
   },
-  collections: [Users, Media, Jobs, Whitepapers, KnowledgeHubArticles],
+  collections: [
+    Users,
+    Media,
+    Jobs,
+    Whitepapers,
+    KnowledgeHubArticles,
+    Customers,
+    Events,
+    PressMentions,
+  ],
   cors: [serverURL],
   csrf: [serverURL],
   db: postgresAdapter({

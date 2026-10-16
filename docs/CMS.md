@@ -13,12 +13,24 @@ a whitepaper or a Knowledge Hub article.
 | Job openings               | `jobs`                    | admin, hr             | `/company/careers`, `/company/careers/<slug>`  |
 | Whitepapers & case studies | `whitepapers`             | admin, tech           | `/resources`                                   |
 | Knowledge Hub articles     | `knowledge-hub-articles`  | admin, tech           | `/resources/knowledge-hub`, `.../<slug>`       |
-| Media (images + PDFs)      | `media`                   | admin, hr, tech       | referenced by the collections above            |
+| Customers                  | `customers`               | admin, tech           | `/customers`                                   |
+| Events                     | `events`                  | admin, tech           | `/company/events`, `/company/events/<slug>`    |
+| Press & media mentions     | `press-mentions`          | admin, tech           | `/company/media`                               |
+| Uploads (images + PDFs)    | `media`                   | admin, hr, tech       | referenced by the collections above            |
 | Staff accounts             | `users`                   | admin                 | CMS login only                                 |
 
 Roles: `admin` (everything, including deleting and staff accounts), `hr` (Careers), `tech`
 (Resources), `editor` (read only). Role separation is enforced server side and covered by
 `npm run verify:cms`.
+
+Navigation (as of the Company/Resources restructure):
+
+    Industries | Trust | Products (dropdown) | Resources (dropdown) | Customers | Partners | Company (dropdown)
+
+* Company dropdown order: About, Events, Media, Leadership, Careers, Contact Us.
+* Resources dropdown: White Papers & Case Studies, Knowledge Hub.
+* `/product` and `/velossensor` are intentionally NOT in the navigation - they remain live pages reachable by
+  URL only. Re-adding either means editing the `links` array in `src/components/Navbar.tsx`.
 
 Publishing rules:
 
@@ -65,6 +77,38 @@ Knowledge Hub article from Tech appears on `/resources/knowledge-hub`.
 
 Both suites create throwaway records and delete them again, so they are safe to run against a
 staging environment.
+
+## Draft leakage - the trap that matters most
+
+Payload's **Local API bypasses access control by default**. A server-side `payload.find()` therefore returns
+drafts even when the same query over REST correctly returns published documents only, and the leak shows up on
+the rendered page rather than in any API test:
+
+* every reader in `src/lib/cms.ts` passes `overrideAccess: false` **and** an explicit published filter
+* `npm run verify:publish` covers this: it creates drafts, asserts they do NOT appear on
+  `/customers`, `/company/events` and `/company/media`, then publishes them, asserts they appear, and deletes them
+
+Any new reader added to `src/lib/cms.ts` must copy that pattern.
+
+## Applying schema changes to the production database
+
+Production Postgres (Neon) does not auto-push the schema. Adding collections means a schema change, and the
+safe procedure is additive:
+
+```bash
+# 1. push locally first: run `npm run dev` once so the dev database gains the new tables
+# 2. refresh the committed schema: dump the local database (docker exec ... pg_dump --schema-only)
+# 3. back up production before touching it
+docker run --rm postgres:18-alpine pg_dump --dbname "$PROD_URL" > /root/velos-neon-backup-$(date +%s).sql
+# 4. diff schema to schema and apply only what is missing (new types, sequences, tables, indexes,
+#    constraints) plus ALTER TABLE ADD COLUMN for shared tables such as payload_locked_documents_rels
+#    which gains one column per collection
+```
+
+Notes learned the hard way: a pg16 `pg_dump` refuses a pg18 server ("server version mismatch"), so use a
+version-matched client container; and object ordering matters - types, then sequences, then tables, then new
+columns, then indexes, then constraints, or the foreign keys reference columns that do not exist yet. The
+schema move is additive: no data is dropped and a full data backup is taken first.
 
 ## Known environment constraints
 
