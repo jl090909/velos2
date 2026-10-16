@@ -68,7 +68,10 @@ export default buildConfig({
      * limit that applies to Vercel Functions - whitepaper PDFs are routinely larger than that.
      */
     vercelBlobStorage({
-      addRandomSuffix: true,
+      // addRandomSuffix must stay false: with it on, the adapter renames the stored object but the
+      // document's `url` is still generated from the original filename, so every uploaded file 404s
+      // (the bytes are in the store under a different key). Verified by scripts/verify-uploads.mjs.
+      addRandomSuffix: false,
       alwaysInsertFields: true,
       clientUploads: {
         access: ({ req }) => hasRoleReq(req, 'admin', 'hr', 'tech'),

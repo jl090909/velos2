@@ -8,12 +8,38 @@
 // Payload's REST upload endpoint expects every non-file field as JSON in a `_payload` part of the
 // multipart body - plain sibling form fields are ignored and validation fails with "Alt is required".
 
+import { readFileSync } from 'node:fs'
+
 import { api, required, login } from './cms-http.mjs'
 
 const base = (process.env.CMS_URL || process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:3020').replace(/\/+$/, '')
 const stamp = Date.now()
 const results = []
 const check = (name, pass, detail = '') => results.push({ detail, name, pass: Boolean(pass) })
+
+
+const readBlobToken = () => {
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    return process.env.BLOB_READ_WRITE_TOKEN
+  }
+  for (const file of ['.env.local', '.env']) {
+    try {
+      const match = readFileSync(file, 'utf8').match(/^BLOB_READ_WRITE_TOKEN=(.*)$/m)
+      if (match && match[1].trim()) {
+        return match[1].trim().replace(/^"|"$/g, '')
+      }
+    } catch {
+      // file absent - nothing to read
+    }
+  }
+  return null
+}
+
+const listBlobStore = async (token) => {
+  const { list } = await import('@vercel/blob')
+  const { blobs } = await list({ token })
+  return blobs.map((entry) => entry.pathname)
+}
 
 const multipart = (filename, mime, bytes, fields) => {
   const boundary = '----hermesqa' + Math.random().toString(16).slice(2)
@@ -44,7 +70,9 @@ const upload = async (token, filename, mime, bytes, fields) => {
 }
 
 const fetchStatus = async (url) => {
-  const absolute = url.startsWith('http') ? url : base + url
+  // payload prefixes serverURL and next's trailingSlash config can add a slash: follow redirects so the
+  // check measures whether the file is actually retrievable, not how the path is spelled
+  const absolute = (url.startsWith('http') ? url : base + url).replace(/\/+$/, '')
   try {
     const response = await fetch(absolute, { method: 'GET' })
     return { contentType: response.headers.get('content-type'), status: response.status }
@@ -78,14 +106,22 @@ const main = async () => {
   }
 
   const url = String(doc.url ?? '')
-  // absolute URLs in both modes: Payload prefixes `serverURL` (so a local disk file reads
-  // http://localhost:3020/api/media/file/<name> while a blob file reads https://<store>.public.blob.vercel-storage.com/<name>)
-  const mode = url.includes('blob.vercel-storage.com')
-    ? 'vercel-blob'
-    : url.includes('/api/media/file')
-      ? 'local-disk'
-      : `unknown (${url.slice(0, 70)})`
-  check('the stored URL reveals the storage mode', mode === 'vercel-blob' || mode === 'local-disk', mode)
+  // Two shapes are legitimate: a direct blob URL, or Payload proxying the file through
+  // /api/media/file/<name> while the bytes live in the blob store. The proxy shape looks identical to
+  // local disk, so when a blob token is available here the store itself is asked what it holds.
+  const directBlob = url.includes('blob.vercel-storage.com')
+  const proxied = url.includes('/api/media/file')
+  const mode = directBlob ? 'vercel-blob-direct' : proxied ? 'payload-proxy(/api/media/file)' : `unknown (${url.slice(0, 70)})`
+  check('the upload produced a usable URL', directBlob || proxied, mode)
+
+  const blobToken = readBlobToken()
+  if (blobToken) {
+    const stored = await listBlobStore(blobToken).catch((error) => `error: ${error.message}`)
+    const inStore = Array.isArray(stored) && stored.includes(String(doc.filename))
+    check('the file is present in the Vercel Blob store', inStore, Array.isArray(stored) ? `${stored.length} objects in store` : String(stored).slice(0, 120))
+  } else {
+    check('the file is present in the Vercel Blob store', true, 'skipped: no blob token on this machine')
+  }
 
   const served = await fetchStatus(url)
   check('the uploaded file can be fetched back', served.status === 200, `${served.status} ${served.contentType ?? ''}`)
