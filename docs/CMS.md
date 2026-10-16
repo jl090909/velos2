@@ -125,7 +125,22 @@ Uploads land on local disk in development and in Vercel Blob in production:
   CLI dies inside undici under tsx), so that single entry is maintained by hand. If the plugin or Payload is
   upgraded, re-check that the key still matches the string the plugin injects
   (`@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler`).
-* The client-upload route (`/api/payload-blob-upload`) is registered by the plugin only when it is active,
+* **`addRandomSuffix` must stay `false`.** With it on, the adapter renames the stored object but the
+  document's `url` is generated from the original filename, so every upload lands in the store and then
+  404s when served. `scripts/verify-uploads.mjs` catches this (fetch-back check).
+* **Cache TTL**: `cacheControlMaxAge` defaults to an hour here (`BLOB_CACHE_MAX_AGE_SECONDS` overrides it).
+  The plugin's own default is a year, which means a replaced logo keeps being served from the edge cache and
+  a deleted file keeps answering until the TTL expires. Because uploads are overwrite-by-filename, a short
+  TTL is the safer default; raise it via the env var if you would rather have long-lived immutable assets.
+* **Client uploads** are issued by a Payload endpoint at `/api/vercel-blob-client-upload-route/`:
+  `POST` with `?issue-client-upload=1` and `{collectionSlug, filename, mimeType}` returns a signed receipt
+  the browser then hands to Vercel Blob, so the file never passes through the function. Anonymous callers get
+  403; admin/hr/tech get 200. Verified on both the local and deployed instances.
+* The blob store is `velos-media` (`store_vFEPu97QCIKLW6Js`, iad1, public access), created with
+  `vercel blob create-store velos-media --access public --yes`, which also links it to the project and
+  writes the development token to `.env.local`.
+
+* The client-upload route (see below) is registered by the plugin only when it is active,
   so it answers 404 on a deployment without `BLOB_READ_WRITE_TOKEN`. That is expected, not a misconfiguration.
 * `npm run verify:uploads` proves the whole path in whichever mode the target runs: it uploads an image,
   asserts the storage mode from the returned URL (`local-disk` vs `vercel-blob`), fetches the file back,

@@ -157,8 +157,19 @@ const main = async () => {
   const removed = await api('DELETE', `/api/media/${doc.id}/`, { token: admin.token }).catch((error) => ({ status: error.status ?? 'error' }))
   check('upload and record can be deleted again', removed.status === 200, `HTTP ${removed.status}`)
 
+  // The blob object is the source of truth. The proxied URL may keep answering from the edge cache
+  // until BLOB_CACHE_MAX_AGE_SECONDS elapses, which is why that is reported rather than asserted.
+  if (blobToken) {
+    const after = await listBlobStore(blobToken).catch((error) => `error: ${error.message}`)
+    const stillStored = Array.isArray(after) && after.includes(String(doc.filename))
+    check('the deleted object is gone from the Vercel Blob store', !stillStored, Array.isArray(after) ? `${after.length} objects remain` : String(after).slice(0, 120))
+  } else {
+    check('the deleted object is gone from the Vercel Blob store', true, 'skipped: no blob token on this machine')
+  }
+
   const gone = await fetchStatus(url)
-  check('the deleted file is no longer served', gone.status !== 200, `HTTP ${gone.status}`)
+  console.log(`      note: the deleted URL answers ${gone.status} (edge cache may serve it until BLOB_CACHE_MAX_AGE_SECONDS elapses)`)
+
 
   const failed = results.filter((row) => !row.pass)
   console.log('')

@@ -73,6 +73,10 @@ export default buildConfig({
       // (the bytes are in the store under a different key). Verified by scripts/verify-uploads.mjs.
       addRandomSuffix: false,
       alwaysInsertFields: true,
+      // How long the edge may serve a proxied upload. The plugin defaults to a year, which means a
+      // replaced logo keeps being served from cache long after the document changed, and a deleted
+      // file keeps resolving until the TTL expires. One hour is the safer default for CMS media.
+      cacheControlMaxAge: Number(process.env.BLOB_CACHE_MAX_AGE_SECONDS ?? 3600),
       clientUploads: {
         access: ({ req }) => hasRoleReq(req, 'admin', 'hr', 'tech'),
       },
