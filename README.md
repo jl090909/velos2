@@ -1,5 +1,11 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Content management
+
+Careers, whitepapers and the Knowledge Hub are managed in Payload CMS at `/admin`. Setup,
+collections, access control, verification commands and the production checklist are documented in
+[docs/CMS.md](docs/CMS.md).
+
 ## Getting Started
 
 First, run the development server:

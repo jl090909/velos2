@@ -11,12 +11,16 @@ const links = [
   { href: '/velossensor', label: 'Velos Sensor' },
   { href: '/industries', label: 'Industries' },
   { href: '/trust', label: 'Trust' },
-  { href: '/resources', label: 'Resources' },
 ];
 
 const products = [
   { href: '/product/org-level', label: 'Velos Shield 1.5 · Org-level' },
   { href: '/product/site-level', label: 'Velos Shield 1.1 · Site-level' },
+];
+
+const resources = [
+  { href: '/resources', label: 'White Papers & Case Studies' },
+  { href: '/resources/knowledge-hub', label: 'Knowledge Hub' },
 ];
 
 const company = [
@@ -139,6 +143,12 @@ export function Navbar() {
 
               <NavDropdown label="Products" items={products} active={pathname.startsWith('/product')} />
 
+              <NavDropdown
+                label="Resources"
+                items={resources}
+                active={pathname.startsWith('/resources')}
+              />
+
               <Link
                 href="/customers"
                 className="group relative z-10 px-4 py-2 text-[17px] font-medium no-underline rounded-full overflow-hidden text-[#003C64]"
@@ -195,7 +205,7 @@ export function Navbar() {
 
         {menuOpen && (
           <div className="md:hidden pointer-events-auto mt-2 rounded-3xl bg-[linear-gradient(180deg,rgba(255,255,255,.96)_0%,rgba(246,247,249,.94)_100%)] p-2 shadow-[0_24px_70px_rgba(15,23,42,.18),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl">
-            {[...products, ...company].map((p) => (
+            {[...products, ...resources, ...company].map((p) => (
               <Link
                 key={p.href}
                 href={p.href}
