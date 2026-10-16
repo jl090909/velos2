@@ -110,6 +110,26 @@ version-matched client container; and object ordering matters - types, then sequ
 columns, then indexes, then constraints, or the foreign keys reference columns that do not exist yet. The
 schema move is additive: no data is dropped and a full data backup is taken first.
 
+## Upload storage
+
+Uploads land on local disk in development and in Vercel Blob in production:
+
+* `vercelBlobStorage` is registered with `token: process.env.BLOB_READ_WRITE_TOKEN`. The plugin documents
+  that it disables itself when the token is missing, so local development keeps writing to `/media` and needs
+  no cloud credentials - the same collection schema is used in both cases because
+  `alwaysInsertFields: true` is set.
+* `clientUploads` is enabled with an admin/hr/tech access rule, so the browser sends files straight to the
+  blob store and whitepaper PDFs are not capped by the 4.5MB Vercel Function request limit.
+* Client uploads need `VercelBlobClientUploadHandler` in Payload's import map
+  (`src/app/(payload)/admin/importMap.js`). `payload generate:importmap` cannot run in this workspace (the
+  CLI dies inside undici under tsx), so that single entry is maintained by hand. If the plugin or Payload is
+  upgraded, re-check that the key still matches the string the plugin injects
+  (`@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler`).
+* Uploading through the REST API needs the other fields as JSON in a `_payload` part of the multipart body;
+  plain sibling form fields are ignored and validation fails with "Alt is required".
+* The store itself is created in the Vercel dashboard (Storage -> Create Database -> Blob). Vercel's API is
+  read-only for stores, so this step cannot be automated from CI or a script.
+
 ## Known environment constraints
 
 * **The Payload CLI / tsx scripts do not run in this workspace.** `payload run`,

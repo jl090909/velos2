@@ -1,9 +1,12 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
+import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
+
+import { hasRoleReq } from './access'
 
 import { Customers } from './collections/Customers'
 import { Events } from './collections/Events'
@@ -52,6 +55,28 @@ export default buildConfig({
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL,
+  plugins: [
+    /**
+     * Object storage for uploads.
+     *
+     * Vercel's filesystem is ephemeral, so uploads must live in a blob store in production. The plugin
+     * disables itself when the token is absent (its documented behaviour), which means local development
+     * keeps writing to /media and needs no cloud credentials. `alwaysInsertFields` keeps the collection
+     * schema identical in both environments so the database does not drift.
+     *
+     * `clientUploads` sends files straight from the browser to the blob store, bypassing the 4.5MB request
+     * limit that applies to Vercel Functions - whitepaper PDFs are routinely larger than that.
+     */
+    vercelBlobStorage({
+      addRandomSuffix: true,
+      alwaysInsertFields: true,
+      clientUploads: {
+        access: ({ req }) => hasRoleReq(req, 'admin', 'hr', 'tech'),
+      },
+      collections: { media: true },
+      token: process.env.BLOB_READ_WRITE_TOKEN,
+    }),
+  ],
   sharp,
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
