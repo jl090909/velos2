@@ -22,10 +22,31 @@ function clean(v: unknown): string {
   return String(v ?? '').replace(/[<>\r\n]+/g, ' ').trim().slice(0, 2000);
 }
 
+/** Only same-site pages may be used as the post-submit redirect target. */
+const RETURN_TARGETS: Record<string, string> = {
+  demo: '/demo',
+  contact: '/company/contact',
+  partner: '/partners',
+};
+
+type FormKind = keyof typeof RETURN_TARGETS;
+
+const isFormKind = (value: string): value is FormKind => Object.hasOwn(RETURN_TARGETS, value);
+
 export async function POST(req: NextRequest) {
   const form = await req.formData().catch(() => null);
-  const rawNext = String(form?.get('next') ?? '');
-  const target = rawNext === '/company/contact' ? '/company/contact' : '/demo';
+
+  const declaredKind = clean(form?.get('formType'));
+  const nextRaw = clean(form?.get('next'));
+  const kind: FormKind = isFormKind(declaredKind)
+    ? declaredKind
+    : nextRaw === '/company/contact'
+      ? 'contact'
+      : nextRaw === '/partners'
+        ? 'partner'
+        : 'demo';
+  const target = RETURN_TARGETS[kind];
+
   const fail = () => NextResponse.redirect(new URL(`${target}/?sent=error`, req.url), 303);
   const ok = () => NextResponse.redirect(new URL(`${target}/?sent=success`, req.url), 303);
 
@@ -36,13 +57,58 @@ export async function POST(req: NextRequest) {
 
   const name = clean(form.get('name'));
   const email = clean(form.get('email'));
-  const org = clean(form.get('organization'));
-  const role = clean(form.get('role'));
-  const industry = clean(form.get('industry'));
-  const sites = clean(form.get('sites'));
-  const goal = clean(form.get('goal'));
 
-  if (name === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail();
+  const fields: Array<[string, string]> = [];
+  let subject = '';
+
+  if (kind === 'partner') {
+    const company = clean(form.get('company'));
+    const orgType = clean(form.get('orgType'));
+    const industries = clean(form.get('industries'));
+    const otExperience = clean(form.get('otExperience'));
+    const regions = clean(form.get('regions'));
+    const website = clean(form.get('companyWebsite'));
+    const message = clean(form.get('message'));
+    const consent = String(form.get('consent') ?? '') !== '';
+
+    if (name === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || company === '' || !consent) return fail();
+
+    subject = `Velos Shield partnership enquiry — ${company.slice(0, 100)}`;
+    fields.push(
+      ['Enquiry type', 'OT partnership'],
+      ['Name', name],
+      ['Work email', email],
+      ['Company', company],
+      ['Website', website],
+      ['Organisation type', orgType],
+      ['Industries served', industries],
+      ['OT experience', otExperience],
+      ['Regions covered', regions],
+      ['What they want to do', message],
+      ['Consent to be contacted', consent ? 'yes' : 'no'],
+    );
+  } else {
+    const org = clean(form.get('organization'));
+    const role = clean(form.get('role'));
+    const industry = clean(form.get('industry'));
+    const sites = clean(form.get('sites'));
+    const goal = clean(form.get('goal'));
+
+    if (name === '' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail();
+
+    subject = kind === 'contact'
+      ? `Velos Shield contact message — ${name.slice(0, 120)}`
+      : `Velos Shield demo request — ${name.slice(0, 120)}`;
+    fields.push(
+      ['Name', name],
+      ['Email', email],
+      ['Organization', org],
+      ['Role', role],
+      ['Industry', industry],
+      ['OT sites', sites],
+      ['Goal', goal],
+    );
+  }
 
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
   if (rateLimited(ip)) return fail();
@@ -57,18 +123,13 @@ export async function POST(req: NextRequest) {
     return fail();
   }
 
-  const body = [
-    'New demo request (velosshield.com)',
-    '================================',
-    '',
-    `Name:         ${name}`,
-    `Email:        ${email}`,
-    `Organization: ${org}`,
-    `Role:         ${role}`,
-    `Industry:     ${industry}`,
-    `OT sites:     ${sites}`,
-    `Goal:         ${goal}`,
-  ].join('\n');
+  const heading = kind === 'partner'
+    ? 'New partnership enquiry (velosshield.com)'
+    : kind === 'contact'
+      ? 'New contact message (velosshield.com)'
+      : 'New demo request (velosshield.com)';
+
+  const body = [heading, '================================', '', ...fields.map(([label, value]) => `${(label + ':').padEnd(26)}${value}`)].join('\n');
 
   try {
     const ses = new SESClient({ region, credentials: { accessKeyId: keyId, secretAccessKey: secret } });
@@ -78,7 +139,7 @@ export async function POST(req: NextRequest) {
         Destination: { ToAddresses: [to] },
         ReplyToAddresses: [email],
         Message: {
-          Subject: { Data: `Velos Shield demo request — ${name.slice(0, 120)}`, Charset: 'UTF-8' },
+          Subject: { Data: subject, Charset: 'UTF-8' },
           Body: { Text: { Data: body, Charset: 'UTF-8' } },
         },
       })
