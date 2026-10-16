@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict G7asKScdBTg6yEr9TfhbHFffh7J2KVfN3q70kua8SWlDRTFWy2yS2jvYTAefSgd
+\restrict 6Yw199HQkRgB0F4z0wb9BK3NrSfiGE4bvKZJbAgwgA5ygG5dIR8Qpv0KmkYYJ9n
 
 -- Dumped from database version 16.15
 -- Dumped by pg_dump version 16.15
@@ -997,7 +997,9 @@ CREATE TABLE public.media (
     sizes_hero_height numeric,
     sizes_hero_mime_type character varying,
     sizes_hero_filesize numeric,
-    sizes_hero_filename character varying
+    sizes_hero_filename character varying,
+    prefix character varying DEFAULT ''::character varying,
+    _objectkey character varying
 );
 
 
@@ -3041,5 +3043,5 @@ ALTER TABLE ONLY public.whitepapers
 -- PostgreSQL database dump complete
 --
 
-\unrestrict G7asKScdBTg6yEr9TfhbHFffh7J2KVfN3q70kua8SWlDRTFWy2yS2jvYTAefSgd
+\unrestrict 6Yw199HQkRgB0F4z0wb9BK3NrSfiGE4bvKZJbAgwgA5ygG5dIR8Qpv0KmkYYJ9n
 
