@@ -12,8 +12,9 @@
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "seed": "node scripts/seed.mjs",
     "verify:cms": "node scripts/verify-cms.mjs",
-    "verify:all": "node scripts/verify-cms.mjs && node scripts/verify-publish.mjs",
-    "verify:publish": "node scripts/verify-publish.mjs"
+    "verify:all": "node scripts/verify-cms.mjs && node scripts/verify-publish.mjs && node scripts/verify-uploads.mjs",
+    "verify:publish": "node scripts/verify-publish.mjs",
+    "verify:uploads": "node scripts/verify-uploads.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-ses": "^3.1131.0",

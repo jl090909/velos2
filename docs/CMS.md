@@ -125,6 +125,12 @@ Uploads land on local disk in development and in Vercel Blob in production:
   CLI dies inside undici under tsx), so that single entry is maintained by hand. If the plugin or Payload is
   upgraded, re-check that the key still matches the string the plugin injects
   (`@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler`).
+* The client-upload route (`/api/payload-blob-upload`) is registered by the plugin only when it is active,
+  so it answers 404 on a deployment without `BLOB_READ_WRITE_TOKEN`. That is expected, not a misconfiguration.
+* `npm run verify:uploads` proves the whole path in whichever mode the target runs: it uploads an image,
+  asserts the storage mode from the returned URL (`local-disk` vs `vercel-blob`), fetches the file back,
+  attaches it as a customer logo, checks it renders on `/customers`, then deletes everything. Expect it to
+  fail with a 500 upload on a Vercel deployment until the Blob store exists.
 * Uploading through the REST API needs the other fields as JSON in a `_payload` part of the multipart body;
   plain sibling form fields are ignored and validation fails with "Alt is required".
 * The store itself is created in the Vercel dashboard (Storage -> Create Database -> Blob). Vercel's API is
