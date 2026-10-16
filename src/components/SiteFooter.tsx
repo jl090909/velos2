@@ -36,8 +36,11 @@ export function SiteFooter() {
           <Link href="/product/site-level" className="hover:text-foreground no-underline">Velos Shield 1.1</Link>
           <Link href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</Link>
           <Link href="/industries" className="hover:text-foreground no-underline">Industries</Link>
+          <Link href="/customers" className="hover:text-foreground no-underline">Customers</Link>
+          <Link href="/partners" className="hover:text-foreground no-underline">Partners</Link>
           <Link href="/trust" className="hover:text-foreground no-underline">Trust</Link>
           <Link href="/resources" className="hover:text-foreground no-underline">Resources</Link>
+          <Link href="/company/about" className="hover:text-foreground no-underline">Company</Link>
         </div>
       </div>
     </footer>

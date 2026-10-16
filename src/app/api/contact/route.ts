@@ -23,15 +23,13 @@ function clean(v: unknown): string {
 }
 
 export async function POST(req: NextRequest) {
-  const fail = () => NextResponse.redirect(new URL('/demo/?sent=error', req.url), 303);
-  const ok = () => NextResponse.redirect(new URL('/demo/?sent=success', req.url), 303);
+  const form = await req.formData().catch(() => null);
+  const rawNext = String(form?.get('next') ?? '');
+  const target = rawNext === '/company/contact' ? '/company/contact' : '/demo';
+  const fail = () => NextResponse.redirect(new URL(`${target}/?sent=error`, req.url), 303);
+  const ok = () => NextResponse.redirect(new URL(`${target}/?sent=success`, req.url), 303);
 
-  let form: FormData;
-  try {
-    form = await req.formData();
-  } catch {
-    return fail();
-  }
+  if (!form) return fail();
 
   // Honeypot: pretend success for bots
   if (String(form.get('website') ?? '').trim() !== '') return ok();
