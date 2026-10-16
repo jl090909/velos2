@@ -112,7 +112,7 @@ export default function IndustriesPage() {
               See every asset, connection, and risk across your OT network
             </h2>
             <p className="text-[15px] text-muted-foreground leading-relaxed mb-6 max-w-lg">
-              Velos Shield's interactive Network Map renders your entire operational
+              Velos Shield&apos;s interactive Network Map renders your entire operational
               topology as a force-directed graph — discover devices, expose hidden
               connections, and highlight high-risk communication paths in real time.
               Filter by zone, protocol, asset type, or Purdue level. Zoom, pan, and
