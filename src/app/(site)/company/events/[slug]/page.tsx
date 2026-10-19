@@ -61,6 +61,22 @@ export default async function EventPage({ params }: Props) {
         <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-3xl">{event.summary}</p>
       </section>
 
+      {event.coverImage ? (
+        <section className="max-w-6xl mx-auto px-6">
+          <figure className="overflow-hidden rounded-[1.6rem] border border-white/55">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              alt={event.coverImage.alt || event.title}
+              className="w-full object-cover"
+              height={event.coverImage.height}
+              src={event.coverImage.url}
+              width={event.coverImage.width}
+            />
+          </figure>
+          {event.coverCaption ? <figcaption className="mt-2 text-sm text-muted-foreground">{event.coverCaption}</figcaption> : null}
+        </section>
+      ) : null}
+
       <section className="pb-12 max-w-6xl mx-auto px-6 grid lg:grid-cols-[1fr_320px] gap-10">
         <article className="min-w-0">
           {event.description ? (

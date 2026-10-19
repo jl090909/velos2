@@ -64,7 +64,7 @@ export default async function CompanyEventsPage() {
         <div className="space-y-14">
           {next ? (
             <EditorialHero
-              aside={<DateBlock iso={next.startDate} />}
+              aside={next.coverImage ? undefined : <DateBlock iso={next.startDate} />}
               badge={next.eventType}
               cta={
                 next.description
@@ -74,6 +74,16 @@ export default async function CompanyEventsPage() {
                     : undefined
               }
               eyebrow={place(next) || 'Velos Shield'}
+              image={
+                next.coverImage
+                  ? {
+                      alt: next.coverImage.alt || next.title,
+                      height: next.coverImage.height,
+                      src: next.coverImage.url,
+                      width: next.coverImage.width,
+                    }
+                  : undefined
+              }
               meta={
                 <>
                   <span>{dateRange(next.startDate, next.endDate)}</span>
@@ -106,8 +116,18 @@ export default async function CompanyEventsPage() {
                       </div>
                     }
                     href={event.description ? `/company/events/${event.slug}/` : undefined}
+                    image={
+                      event.coverImage
+                        ? {
+                            alt: event.coverImage.alt || event.title,
+                            height: event.coverImage.height,
+                            src: event.coverImage.url,
+                            width: event.coverImage.width,
+                          }
+                        : undefined
+                    }
                     key={event.id}
-                    media={<DateBlock iso={event.startDate} />}
+                    media={event.coverImage ? undefined : <DateBlock iso={event.startDate} />}
                     meta={dateRange(event.startDate, event.endDate)}
                     summary={place(event) ? `${place(event)}${event.booth ? ` - ${event.booth}` : ''}. ${event.summary}` : event.summary}
                     title={event.title}

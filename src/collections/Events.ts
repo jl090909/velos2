@@ -79,6 +79,20 @@ export const Events: CollectionConfig = {
       admin: { description: 'One or two lines shown on the card.' },
     },
     {
+      name: 'coverImage',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description:
+          'Optional cover photo for this event. Without one, the card and the hero show the event date instead. Alt text comes from the media record.',
+      },
+    },
+    {
+      name: 'coverImageCaption',
+      type: 'text',
+      admin: { description: 'Optional caption shown under the cover photo on the event page.' },
+    },
+    {
       name: 'description',
       type: 'richText',
       admin: { description: 'Optional detail shown on the event page: agenda, talk abstract, stand details.' },

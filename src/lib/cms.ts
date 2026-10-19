@@ -367,6 +367,8 @@ export type EventItem = {
   booth?: string
   city: string
   country: string
+  coverCaption?: string
+  coverImage: MediaRef | null
   description: RichTextData | null
   endDate?: string
   eventType: string
@@ -418,6 +420,8 @@ const toEvent = (raw: unknown): EventItem => {
     booth: optional(doc.booth),
     city: str(doc.city),
     country: str(doc.country),
+    coverCaption: optional(doc.coverImageCaption),
+    coverImage: mediaRef(doc.coverImage),
     description: richText(doc.description),
     endDate: optional(doc.endDate),
     eventType: str(doc.eventType, "Conference"),
@@ -483,7 +487,8 @@ export const getEvents = async (): Promise<CmsResult<EventItem[]>> => {
     const { docs } = await payload.find({
       overrideAccess: false,
       collection: 'events',
-      depth: 0,
+      // depth 1 populates the cover image relation; the card and hero read its url and alt.
+      depth: 1,
       limit: 200,
       sort: 'startDate',
       where: publishedOnly(),
@@ -506,7 +511,7 @@ export const getEventBySlug = async (slug: string): Promise<CmsResult<EventItem 
     const { docs } = await payload.find({
       overrideAccess: false,
       collection: 'events',
-      depth: 0,
+      depth: 1,
       limit: 1,
       where: { ...publishedOnly(), slug: { equals: slug } },
     })
