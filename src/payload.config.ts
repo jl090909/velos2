@@ -1,6 +1,6 @@
 import { postgresAdapter } from '@payloadcms/db-postgres'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
-import { lexicalEditor } from '@payloadcms/richtext-lexical'
+import { BlocksFeature, FixedToolbarFeature, lexicalEditor, UploadFeature } from '@payloadcms/richtext-lexical'
 import path from 'path'
 import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
@@ -13,9 +13,13 @@ import { Events } from './collections/Events'
 import { Jobs } from './collections/Jobs'
 import { KnowledgeHubArticles } from './collections/KnowledgeHubArticles'
 import { Media } from './collections/Media'
+import { NewsroomArticles } from './collections/NewsroomArticles'
 import { PressMentions } from './collections/PressMentions'
 import { Users } from './collections/Users'
 import { Whitepapers } from './collections/Whitepapers'
+
+import { videoEmbedBlock } from './lib/newsroom-video'
+import { publishDueNewsroomTask } from './tasks/newsroom-publish-due'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -34,10 +38,26 @@ export default buildConfig({
     meta: {
       titleSuffix: ' - Velos Shield CMS',
     },
+    /**
+     * The Newsroom desk: /admin/newsroom/ lists every story (drafts included) with its category,
+     * derived status, dates and the edit / preview / publish / unpublish actions. Registered as a
+     * custom view so the URL the spec names is the URL the team uses.
+     */
+    components: {
+      views: {
+        newsroom: {
+          Component: '/components/admin/NewsroomDashboard#NewsroomDashboard',
+          exact: true,
+          meta: { title: 'Newsroom' },
+          path: '/newsroom',
+        },
+      },
+    },
   },
   collections: [
     Users,
     Media,
+    NewsroomArticles,
     Jobs,
     Whitepapers,
     KnowledgeHubArticles,
@@ -52,7 +72,46 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URL || '',
     },
   }),
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    /**
+     * The newsroom body needs more than paragraphs: an editor must be able to drop in inline images
+     * (uploaded to the same `media` collection, alt text included) and an embedded video without a
+     * developer. Both are DATA - nothing is rendered as raw HTML (see src/lib/newsroom-video.ts).
+     */
+    features: ({ defaultFeatures }) => [
+      ...defaultFeatures,
+      FixedToolbarFeature(),
+      UploadFeature({ enabledCollections: ['media'] }),
+      BlocksFeature({ blocks: [videoEmbedBlock] }),
+    ],
+  }),
+  /**
+   * Scheduled publication (spec Phase 4.6) reuses Payload's job queue rather than adding a scheduler:
+   * the task in src/tasks/newsroom-publish-due.ts runs on a one-minute cron and publishes any draft
+   * whose `publishAt` has arrived. `autoRun` wakes the queue in-process (skipped during `next build`
+   * by Payload itself); a serverless deployment ticks it from the platform instead - docs/NEWSROOM.md.
+   */
+  jobs: {
+    /**
+     * The queue endpoint is the tick a serverless platform calls, and that call carries no session.
+     * Payload's default is "any logged-in user", which is too loose for an endpoint a cron hits:
+     * accept a Bearer PAYLOAD_CRON_SECRET when one is configured, otherwise require an admin/tech
+     * session. Nothing here widens access to article content - the publisher only publishes stories
+     * that are already due and already marked for scheduling.
+     */
+    access: {
+      run: ({ req }) => {
+        const secret = process.env.PAYLOAD_CRON_SECRET
+        const bearer = req.headers?.get?.('authorization')
+        if (secret && bearer === `Bearer ${secret}`) {
+          return true
+        }
+        return hasRoleReq(req, 'admin', 'tech')
+      },
+    },
+    autoRun: [{ cron: '* * * * *', limit: 10, queue: 'default' }],
+    tasks: [publishDueNewsroomTask],
+  },
   secret: process.env.PAYLOAD_SECRET || '',
   serverURL,
   plugins: [
