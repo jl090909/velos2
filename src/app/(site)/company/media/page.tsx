@@ -7,9 +7,8 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { NewsroomCard, NewsroomRow } from '@/components/newsroom/NewsroomCard'
 import { NewsroomFilters } from '@/components/newsroom/NewsroomFilters'
 import { NewsroomHero } from '@/components/newsroom/NewsroomHero'
-import { getPressMentions } from '@/lib/cms'
 import { getNewsroomArticles, type NewsroomArticle } from '@/lib/newsroom'
-import { NEWSROOM_CATEGORIES, categoryFromSlug, categorySlug, formatNewsroomDate, type NewsroomCategory } from '@/lib/newsroom-meta'
+import { NEWSROOM_CATEGORIES, categoryFromSlug, categorySlug, type NewsroomCategory } from '@/lib/newsroom-meta'
 
 /**
  * The Newsroom - /company/media/.
@@ -18,9 +17,11 @@ import { NEWSROOM_CATEGORIES, categoryFromSlug, categorySlug, formatNewsroomDate
  * filter and the search rendered as URLs so the whole page stays server-rendered and shareable.
  *
  * Drafts cannot reach this page: getNewsroomArticles filters `_status = published` AND
- * `publishAt <= now` with access control ON (see src/lib/newsroom.ts). The existing press coverage
- * records are preserved underneath the Press Coverage band, so no previously published content was
- * removed by this redesign.
+ * `publishAt <= now` with access control ON (see src/lib/newsroom.ts).
+ *
+ * There is deliberately no "Coverage elsewhere" block on this page: the stories themselves are the
+ * page. The `press-mentions` collection and its reader are untouched, so external coverage can be
+ * brought back here (or surfaced elsewhere) without re-authoring anything.
  */
 
 export const revalidate = 300
@@ -89,10 +90,7 @@ export default async function CompanyNewsroomPage({ searchParams }: Props) {
   const activeQuery = (queryParam ?? '').trim()
   const filtered = Boolean(activeCategory) || activeQuery.length > 0
 
-  const [{ data: articles, error }, { data: mentions }] = await Promise.all([
-    getNewsroomArticles({ category: activeCategory, q: activeQuery }),
-    getPressMentions(),
-  ])
+  const { data: articles, error } = await getNewsroomArticles({ category: activeCategory, q: activeQuery })
 
   const hero = articles.find((article) => article.featured) ?? articles[0] ?? null
   const rest = hero ? articles.filter((article) => String(article.id) !== String(hero.id)) : articles
@@ -154,66 +152,7 @@ export default async function CompanyNewsroomPage({ searchParams }: Props) {
               />
             ))}
 
-            {mentions.length > 0 ? (
-              <section className="border-t border-border/60 pt-12">
-                <div className="mb-7">
-                  <h2 className="text-[24px] font-bold tracking-[-.04em] text-[#003C64] md:text-[30px]">Coverage elsewhere</h2>
-                  <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-                    Interviews, features and awards published by other outlets.
-                  </p>
-                </div>
-                <div className="grid gap-5 md:grid-cols-2">
-                  {mentions.map((mention) => (
-                    <Card
-                      key={String(mention.id)}
-                      className="border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)]"
-                    >
-                      <CardContent className="flex h-full flex-col p-7">
-                        <div className="mb-4 flex items-center gap-3">
-                          {mention.logo ? (
-                            /* eslint-disable-next-line @next/next/no-img-element */
-                            <img
-                              alt={mention.logo.alt || mention.outlet}
-                              className="max-h-8 w-auto object-contain"
-                              src={mention.logo.url}
-                            />
-                          ) : (
-                            <span className="rounded-full bg-[#003C64]/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.14em] text-[#003C64]">
-                              {mention.kind}
-                            </span>
-                          )}
-                          <span className="text-[11px] text-muted-foreground">
-                            {mention.outlet}
-                            {mention.publishedDate ? ` - ${formatNewsroomDate(mention.publishedDate)}` : ''}
-                          </span>
-                        </div>
-                        <h3 className="mb-3 text-xl font-semibold tracking-[-.03em] text-[#003C64]">
-                          <a
-                            className="text-[#003C64] no-underline transition-colors hover:text-[#FF612A]"
-                            href={mention.url}
-                            rel="noreferrer"
-                            target="_blank"
-                          >
-                            {mention.headline}
-                          </a>
-                        </h3>
-                        {mention.excerpt ? (
-                          <p className="mb-6 text-sm leading-relaxed text-muted-foreground">{mention.excerpt}</p>
-                        ) : null}
-                        <a
-                          className="mt-auto pt-6 text-sm font-medium text-[#003C64] no-underline transition-colors hover:text-[#FF612A]"
-                          href={mention.url}
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          Read the coverage
-                        </a>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </section>
-            ) : null}
+
           </div>
         )}
       </section>
