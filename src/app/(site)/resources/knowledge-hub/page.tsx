@@ -1,10 +1,19 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 
-import { Card, CardContent } from '@/components/ui/card'
 import { SiteFooter } from '@/components/SiteFooter'
-import { getKnowledgeArticles } from '@/lib/cms'
+import { cardGrid, Chip, EditorialCard, EditorialHero, Eyebrow, SectionHeader, Surface } from '@/components/site/editorial'
+import { getKnowledgeArticles, type KnowledgeArticle } from '@/lib/cms'
 import { formatDate } from '@/lib/format'
+import { categorySlug } from '@/lib/newsroom-meta'
+
+/**
+ * Knowledge Hub - the engineering/research article feed.
+ *
+ * Same editorial kit as the Media page: eyebrow, featured hero, category filter + search, card grid.
+ * The filter and search run over the already-fetched published list, so they add no CMS read and no
+ * new API: a chip is a URL, which keeps the page server-rendered and shareable.
+ */
 
 export const revalidate = 300
 
@@ -14,98 +23,170 @@ export const metadata: Metadata = {
   title: 'Knowledge Hub - Velos Shield',
 }
 
-export default async function KnowledgeHubPage() {
+type Props = {
+  searchParams: Promise<{ category?: string; q?: string }>
+}
+
+const href = (article: KnowledgeArticle): string => `/resources/knowledge-hub/${article.slug}/`
+
+const listHref = (category: null | string, query: string): string => {
+  const params = new URLSearchParams()
+  if (category) {
+    params.set('category', categorySlug(category))
+  }
+  if (query.trim().length > 0) {
+    params.set('q', query.trim())
+  }
+  const search = params.toString()
+  return search.length > 0 ? `/resources/knowledge-hub/?${search}` : '/resources/knowledge-hub/'
+}
+
+const matches = (article: KnowledgeArticle, term: string): boolean => {
+  const haystack = [article.title, article.excerpt, article.authorName, article.category, ...article.tags].join(' ').toLowerCase()
+  return haystack.includes(term)
+}
+
+export default async function KnowledgeHubPage({ searchParams }: Props) {
+  const { category: categoryParam, q: queryParam } = await searchParams
+  const query = (queryParam ?? '').trim()
+
   const { data: articles, error } = await getKnowledgeArticles()
+
+  const categories = [...new Set(articles.map((article) => article.category))]
+  const activeCategory = categoryParam ? categories.find((category) => categorySlug(category) === categoryParam) ?? null : null
+
+  const filtered = articles.filter(
+    (article) => (!activeCategory || article.category === activeCategory) && (query.length === 0 || matches(article, query.toLowerCase())),
+  )
+  const isFiltered = Boolean(activeCategory) || query.length > 0
+
+  const hero = articles[0] ?? null
+  const rest = isFiltered ? filtered : hero ? articles.filter((article) => article.id !== hero.id) : filtered
 
   return (
     <>
-      <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">
-          Resources - Knowledge Hub
-        </p>
-        <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl text-[#003C64]">
-          Notes from the plant floor.
-        </h1>
-        <p className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-2xl">
-          Working notes from the OT security engineering and research teams: what we found, how we verified it, and what
-          it means for the people running the process.
-        </p>
-        <div className="mt-7 flex flex-wrap gap-3">
-          <Link
-            href="/resources"
-            className="inline-flex items-center justify-center rounded-full h-11 px-6 text-sm font-medium border border-border/70 no-underline text-muted-foreground hover:text-[#003C64] hover:border-[#003C64]/40 transition-colors"
-          >
-            Whitepapers &amp; case studies
-          </Link>
-          <Link
-            href="/demo"
-            className="inline-flex items-center justify-center rounded-full h-11 px-6 text-sm font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
-          >
-            Request a demo
-          </Link>
-        </div>
+      <section className="mx-auto max-w-6xl px-6 pt-20 pb-8">
+        <Eyebrow>Knowledge Hub</Eyebrow>
       </section>
 
-      <section className="py-10 max-w-6xl mx-auto px-6 pb-24">
-        {articles.length > 0 ? (
-          <div className="grid md:grid-cols-2 gap-5">
-            {articles.map((article) => (
-              <Card
-                key={article.id}
-                className="overflow-hidden flex flex-col hover:-translate-y-1.5 hover:shadow-[0_18px_45px_rgba(15,23,42,.10)] transition-all duration-300"
-              >
-                <CardContent className="p-9 md:p-10 flex flex-col flex-1">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="text-[11px] font-semibold tracking-[.14em] uppercase px-3 py-1 rounded-full bg-[#FF612A]/10 text-[#FF612A]">
-                      {article.category}
-                    </span>
-                    {article.readingTime ? (
-                      <span className="text-[11px] text-muted-foreground">{article.readingTime}</span>
-                    ) : null}
-                  </div>
-                  <h2 className="text-2xl font-semibold tracking-[-.03em] mb-3 text-[#003C64]">
-                    <Link href={`/resources/knowledge-hub/${article.slug}/`} className="no-underline text-[#003C64] hover:text-[#FF612A] transition-colors">
-                      {article.title}
-                    </Link>
-                  </h2>
-                  <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-6">{article.excerpt}</p>
-                  {article.tags.length > 0 ? (
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {article.tags.map((tag) => (
-                        <span key={tag} className="text-xs px-3 py-1.5 rounded-full border border-border/60 bg-white text-muted-foreground">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  ) : null}
-                  <div className="mt-auto pt-6 border-t border-border/50 flex flex-wrap items-center justify-between gap-3">
-                    <p className="text-xs text-muted-foreground">
-                      {article.authorName}
-                      {article.authorRole ? ` - ${article.authorRole}` : ''}
-                      {article.publishedDate ? ` - ${formatDate(article.publishedDate)}` : ''}
-                    </p>
-                    <Link
-                      href={`/resources/knowledge-hub/${article.slug}/`}
-                      className="inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-medium border border-border/70 no-underline text-muted-foreground hover:text-[#003C64] hover:border-[#003C64]/40 transition-colors"
-                    >
-                      Read article
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+      <section className="mx-auto max-w-6xl px-6 pb-24">
+        {articles.length === 0 ? (
+          <Surface className="p-8 md:p-10">
+            <p className="font-medium text-[#003C64]">The Knowledge Hub is being set up.</p>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {error
+                ? 'The article feed is temporarily unavailable. Please try again shortly.'
+                : 'Articles from the engineering and research teams will appear here.'}
+            </p>
+          </Surface>
         ) : (
-          <Card className="border-border/70">
-            <CardContent className="p-8 md:p-10">
-              <p className="text-[#003C64] font-medium">The Knowledge Hub is being set up.</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {error
-                  ? 'The article feed is temporarily unavailable. Please try again shortly.'
-                  : 'Articles from the engineering and research teams will appear here.'}
-              </p>
-            </CardContent>
-          </Card>
+          <div className="space-y-12">
+            {hero && !isFiltered ? (
+              <EditorialHero
+                badge="Latest"
+                cta={{ href: href(hero), label: 'Read the note' }}
+                eyebrow={hero.category}
+                image={{
+                  alt: hero.heroImage?.alt || hero.title,
+                  height: hero.heroImage?.height,
+                  src: hero.heroImage?.url ?? null,
+                  width: hero.heroImage?.width,
+                }}
+                meta={
+                  <>
+                    <span>{hero.authorName}</span>
+                    {hero.readingTime ? <span>{hero.readingTime}</span> : null}
+                    {hero.publishedDate ? <span>{formatDate(hero.publishedDate)}</span> : null}
+                  </>
+                }
+                summary={hero.excerpt}
+                title={hero.title}
+              />
+            ) : null}
+
+            <Surface className="p-5">
+              <div className="flex flex-wrap items-center gap-2">
+                <Chip active={!activeCategory} href={listHref(null, query)}>
+                  All
+                </Chip>
+                {categories.map((category) => (
+                  <Chip active={activeCategory === category} href={listHref(category, query)} key={category}>
+                    {category}
+                  </Chip>
+                ))}
+              </div>
+
+              <form action="/resources/knowledge-hub/" className="mt-4 flex flex-wrap items-center gap-3" method="get" role="search">
+                {activeCategory ? <input name="category" type="hidden" value={categorySlug(activeCategory)} /> : null}
+                <label className="sr-only" htmlFor="knowledge-search">
+                  Search the Knowledge Hub
+                </label>
+                <input
+                  className="h-11 min-w-[220px] flex-1 rounded-full border border-border/70 bg-white px-5 text-sm text-[#003C64] outline-none transition-colors placeholder:text-muted-foreground focus:border-[#003C64]/50"
+                  defaultValue={query}
+                  id="knowledge-search"
+                  name="q"
+                  placeholder="Search notes, topics, authors"
+                  type="search"
+                />
+                <button
+                  className="inline-flex h-11 items-center justify-center rounded-full bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] px-6 text-sm font-semibold text-[#FF612A] transition-all hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#002640]"
+                  type="submit"
+                >
+                  Search
+                </button>
+                {isFiltered ? (
+                  <>
+                    <Link className="text-sm text-muted-foreground no-underline hover:text-[#003C64]" href="/resources/knowledge-hub/">
+                      Clear
+                    </Link>
+                    <span className="text-sm text-muted-foreground">
+                      {filtered.length} {filtered.length === 1 ? 'note' : 'notes'}
+                    </span>
+                  </>
+                ) : null}
+              </form>
+            </Surface>
+
+            {rest.length === 0 ? (
+              <Surface className="p-8 md:p-10">
+                <p className="font-medium text-[#003C64]">{isFiltered ? 'No notes match that filter.' : 'No notes are published yet.'}</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {isFiltered ? 'Try another category, or clear the search.' : 'Notes appear here as they are published.'}
+                </p>
+              </Surface>
+            ) : (
+              <section className="border-t border-border/60 pt-12">
+                <SectionHeader title={activeCategory ?? (query.length > 0 ? 'Search results' : 'Latest notes')} />
+                <div className={cardGrid}>
+                  {rest.map((article) => (
+                    <EditorialCard
+                      eyebrow={article.category}
+                      footer={
+                        <p className="text-xs text-muted-foreground">
+                          {article.authorName}
+                          {article.authorRole ? ` - ${article.authorRole}` : ''}
+                          {article.readingTime ? ` - ${article.readingTime}` : ''}
+                        </p>
+                      }
+                      href={href(article)}
+                      image={{
+                        alt: article.heroImage?.alt || article.title,
+                        height: article.heroImage?.height,
+                        src: article.heroImage?.url ?? null,
+                        width: article.heroImage?.width,
+                      }}
+                      key={article.id}
+                      meta={article.publishedDate ? formatDate(article.publishedDate) : undefined}
+                      placeholder="Knowledge Hub"
+                      summary={article.excerpt}
+                      title={article.title}
+                    />
+                  ))}
+                </div>
+              </section>
+            )}
+          </div>
         )}
       </section>
 
