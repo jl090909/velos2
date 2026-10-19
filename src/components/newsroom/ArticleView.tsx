@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { CompanyTabs } from '@/components/CompanyTabs'
 import { SiteFooter } from '@/components/SiteFooter'
-import { ArticleBody } from '@/components/newsroom/ArticleBody'
+import { RichBody } from '@/components/site/RichBody'
 import { NewsroomCard } from '@/components/newsroom/NewsroomCard'
 import type { NewsroomArticle } from '@/lib/newsroom'
 import { categorySlug, formatNewsroomDate } from '@/lib/newsroom-meta'
@@ -106,7 +106,7 @@ export function ArticleView({
       <section className="mx-auto max-w-6xl px-6 py-12">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_300px]">
           <article className="min-w-0">
-            <ArticleBody body={article.body} />
+            <RichBody body={article.body} />
 
             {article.tags.length > 0 ? (
               <div className="mt-10 flex flex-wrap gap-2">

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { SiteFooter } from '@/components/SiteFooter'
@@ -55,7 +56,14 @@ export default async function CustomersPage() {
                       ) : null}
                     </p>
                   ) : null}
-                  {customer.websiteUrl ? (
+                  {customer.caseStudy ? (
+                    <Link
+                      href={`/customers/${customer.slug}/`}
+                      className="mt-auto pt-6 text-sm font-medium text-[#003C64] no-underline hover:text-[#FF612A] transition-colors"
+                    >
+                      Read the case study
+                    </Link>
+                  ) : customer.websiteUrl ? (
                     <a
                       href={customer.websiteUrl}
                       target="_blank"

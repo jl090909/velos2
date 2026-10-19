@@ -3,14 +3,17 @@ import type { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react'
 
 import type { RichTextData } from '@/lib/cms'
 
-import { NewsroomVideo } from './NewsroomVideo'
+import { NewsroomVideo } from '@/components/newsroom/NewsroomVideo'
 
 /**
- * The article body.
+ * Long-form body, shared by every surface that renders CMS rich text.
  *
  * Headings, paragraphs, lists, links, quotations, inline images and uploads come from Payload's own
  * default converters. The one addition is the `videoEmbed` block, which is rendered through the
  * shared URL validator - an editor can embed YouTube/Vimeo/a video file and nothing else.
+ *
+ * Named for what it renders rather than where it started: a newsroom article and a customer case
+ * study are both just a body, and two copies of this would drift.
  */
 
 type VideoEmbedFields = { caption?: string; title?: string; url?: string }
@@ -38,7 +41,7 @@ const BODY_CLASS = [
   '[&_strong]:font-semibold [&_strong]:text-[#003C64] [&_ul]:mb-6 [&_ul]:list-disc [&_ul]:pl-5',
 ].join(' ')
 
-export function ArticleBody({ body, className }: { body: RichTextData | null; className?: string }) {
+export function RichBody({ body, className }: { body: RichTextData | null; className?: string }) {
   if (!body) {
     return null
   }

@@ -352,6 +352,7 @@ export const getKnowledgeArticleBySlug = async (
 }
 
 export type CustomerCard = {
+  caseStudy: RichTextData | null
   displayOrder: number
   featured: boolean
   id: number | string
@@ -404,6 +405,7 @@ const num = (value: unknown, fallback = 0): number => (typeof value === "number"
 const toCustomer = (raw: unknown): CustomerCard => {
   const doc = isRecord(raw) ? raw : {}
   return {
+    caseStudy: richText(doc.caseStudy),
     displayOrder: num(doc.displayOrder, 100),
     featured: doc.featured === true,
     id: str(doc.id, "unknown"),
@@ -481,6 +483,28 @@ export const getCustomers = async (): Promise<CmsResult<CustomerCard[]>> => {
   } catch (error) {
     console.error('[cms] getCustomers failed:', reason(error))
     return { data: [], error: reason(error) }
+  }
+}
+
+export const getCustomerBySlug = async (slug: string): Promise<CmsResult<CustomerCard | null>> => {
+  const problem = configProblem()
+  if (problem) {
+    return { data: null, error: problem }
+  }
+
+  try {
+    const payload = await client()
+    const { docs } = await payload.find({
+      overrideAccess: false,
+      collection: 'customers',
+      depth: 1,
+      limit: 1,
+      where: { ...publishedOnly(), slug: { equals: slug } },
+    })
+    return { data: docs.length > 0 ? toCustomer(docs[0] as unknown) : null, error: null }
+  } catch (error) {
+    console.error('[cms] getCustomerBySlug failed:', reason(error))
+    return { data: null, error: reason(error) }
   }
 }
 

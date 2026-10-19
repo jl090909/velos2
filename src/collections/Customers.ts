@@ -61,6 +61,14 @@ export const Customers: CollectionConfig = {
       admin: { description: 'One or two lines on what the deployment achieved.' },
     },
     {
+      name: 'caseStudy',
+      type: 'richText',
+      admin: {
+        description:
+          'Optional long-form case study. When present, the card links to /customers/<slug>/ which renders this body in full; when empty, the card stays a summary card.',
+      },
+    },
+    {
       name: 'quote',
       type: 'textarea',
       maxLength: 400,
