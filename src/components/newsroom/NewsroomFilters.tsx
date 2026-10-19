@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { NEWSROOM_CATEGORIES, categorySlug } from '@/lib/newsroom-meta'
+import { NEWSROOM_FILTER_CATEGORIES, categorySlug } from '@/lib/newsroom-meta'
 
 /**
  * Category filtering + article search.
@@ -46,7 +46,7 @@ export function NewsroomFilters({
         >
           All
         </Link>
-        {NEWSROOM_CATEGORIES.map((category) => {
+        {NEWSROOM_FILTER_CATEGORIES.map((category) => {
           const active = activeCategory === category
           return (
             <Link

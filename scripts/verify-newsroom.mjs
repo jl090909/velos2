@@ -434,11 +434,16 @@ const main = async () => {
     '',
   )
   check('the Newsroom declares responsive breakpoints', newsroom.html.includes('sm:grid-cols-2') && newsroom.html.includes('lg:grid-cols-3'), '')
+  // The filter bar offers a deliberate subset: Product News and Research & Insights still render as
+  // BANDS (from the data) but are not offered as chips, so their hrefs must not appear in the page
+  // unless something else starts linking them - which should be a conscious decision, hence the check.
+  const filterSlugs = ['latest-news', 'company-announcements', 'press-coverage', 'events-and-media']
+  const withheldSlugs = ['product-news', 'research-and-insights']
   check(
-    'the Newsroom exposes every category filter and a working search form',
-    ['latest-news', 'product-news', 'research-and-insights', 'company-announcements', 'press-coverage', 'events-and-media'].every(
-      (filter) => newsroom.html.includes(`/company/media/?category=${filter}`),
-    ) && /<form[^>]+action="\/company\/media\/"/.test(newsroom.html),
+    'the Newsroom offers the agreed category filters and a working search form',
+    filterSlugs.every((filter) => newsroom.html.includes(`/company/media/?category=${filter}`)) &&
+      withheldSlugs.every((filter) => !newsroom.html.includes(`/company/media/?category=${filter}`)) &&
+      /<form[^>]+action="\/company\/media\/"/.test(newsroom.html),
     '',
   )
 

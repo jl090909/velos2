@@ -27,6 +27,18 @@ export const NEWSROOM_CATEGORIES = [
 
 export type NewsroomCategory = (typeof NEWSROOM_CATEGORIES)[number]
 
+/**
+ * Categories offered in the Newsroom's FILTER BAR.
+ *
+ * Deliberately narrower than the vocabulary above: the page still renders a Product News band and a
+ * Research & Insights band (both come from the data), but those two are not offered as filters - a
+ * product/design decision, not a data one. Their filtered URLs keep working if they are reached
+ * directly; only the chips are withheld.
+ */
+export const NEWSROOM_FILTER_CATEGORIES: readonly NewsroomCategory[] = NEWSROOM_CATEGORIES.filter(
+  (category) => category !== 'Product News' && category !== 'Research & Insights',
+)
+
 export type NewsroomStatus = 'draft' | 'published' | 'scheduled'
 
 export const isNewsroomCategory = (value: unknown): value is NewsroomCategory =>
