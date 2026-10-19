@@ -16,6 +16,12 @@ import { NEWSROOM_CATEGORIES } from '../lib/newsroom-meta'
  *
  * Roles: admin + tech write the newsroom. HR owns Careers and is deliberately not granted it;
  * `editor` stays read-only, exactly as it is for the other content collections.
+ *
+ * LAYOUT: the edit screen shows EVERY editable field at once - no collapsible sections, nothing
+ * hidden behind a click. The whole article reads top to bottom in the main column, and the
+ * always-visible sidebar carries the four publishing controls (slug, featured, publication date,
+ * auto-publish). Fields are deliberately NOT nested inside a layout group with `position: 'sidebar'`,
+ * which would render the group header empty while its inputs sat in the sidebar.
  */
 export const NewsroomArticles: CollectionConfig = {
   slug: 'newsroom-articles',
@@ -45,8 +51,18 @@ export const NewsroomArticles: CollectionConfig = {
       type: 'text',
       required: true,
       index: true,
+      admin: { description: 'The headline. Also the default slug and SEO title.' },
     },
     slugField(),
+    {
+      name: 'featured',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        description: 'Featured stories lead the Newsroom: the newest one becomes the hero.',
+        position: 'sidebar',
+      },
+    },
     {
       name: 'summary',
       type: 'textarea',
@@ -55,26 +71,12 @@ export const NewsroomArticles: CollectionConfig = {
       admin: { description: 'Standfirst shown on cards, in search results and as the default meta description.' },
     },
     {
-      type: 'row',
-      fields: [
-        {
-          name: 'category',
-          type: 'select',
-          required: true,
-          defaultValue: 'Latest News',
-          index: true,
-          options: [...NEWSROOM_CATEGORIES],
-        },
-        {
-          name: 'featured',
-          type: 'checkbox',
-          defaultValue: false,
-          admin: {
-            description: 'Featured stories lead the Newsroom: the newest one becomes the hero.',
-            position: 'sidebar',
-          },
-        },
-      ],
+      name: 'category',
+      type: 'select',
+      required: true,
+      defaultValue: 'Latest News',
+      index: true,
+      options: [...NEWSROOM_CATEGORIES],
     },
     {
       name: 'coverImage',
@@ -85,6 +87,7 @@ export const NewsroomArticles: CollectionConfig = {
     {
       name: 'coverImageCaption',
       type: 'text',
+      admin: { description: 'Optional caption shown under the cover image on the article page.' },
     },
     {
       name: 'body',
@@ -93,59 +96,50 @@ export const NewsroomArticles: CollectionConfig = {
       admin: { description: 'Headings, paragraphs, lists, links, quotations, inline images and video embeds.' },
     },
     {
-      type: 'collapsible',
-      label: 'Byline',
+      type: 'row',
       fields: [
-        {
-          type: 'row',
-          fields: [
-            { name: 'authorName', type: 'text', required: true, admin: { description: 'Shown as the article byline.' } },
-            { name: 'authorRole', type: 'text' },
-          ],
-        },
+        { name: 'authorName', type: 'text', required: true, admin: { description: 'Shown as the article byline.' } },
+        { name: 'authorRole', type: 'text' },
       ],
     },
     {
-      type: 'collapsible',
-      label: 'Publication',
-      fields: [
-        {
-          name: 'publishAt',
-          type: 'date',
-          required: true,
-          defaultValue: () => new Date().toISOString(),
-          index: true,
-          admin: {
-            description: 'Publication date shown on the site.',
-            position: 'sidebar',
-          },
-        },
-        {
-          name: 'schedulePublication',
-          type: 'checkbox',
-          defaultValue: false,
-          index: true,
-          label: 'Publish automatically at the date above',
-          admin: {
-            description:
-              'Off by default. While it is off, a saved draft stays a draft no matter what date it carries - Publish is what makes it public. Switch it on to let the queue publish a draft at the publication date.',
-            position: 'sidebar',
-          },
-        },
-        {
-          name: 'readingTime',
-          type: 'text',
-          admin: { description: 'Optional, e.g. "6 min read".' },
-        },
-      ],
+      name: 'publishAt',
+      type: 'date',
+      required: true,
+      defaultValue: () => new Date().toISOString(),
+      index: true,
+      admin: {
+        description: 'Publication date shown on the site.',
+        position: 'sidebar',
+      },
     },
     {
-      type: 'collapsible',
-      label: 'SEO',
-      fields: [
-        { name: 'seoTitle', type: 'text', admin: { description: 'Defaults to the headline.' } },
-        { name: 'seoDescription', type: 'textarea', maxLength: 320, admin: { description: 'Defaults to the standfirst.' } },
-      ],
+      name: 'schedulePublication',
+      type: 'checkbox',
+      defaultValue: false,
+      index: true,
+      label: 'Publish automatically at the date above',
+      admin: {
+        description:
+          'Off by default. While it is off, a saved draft stays a draft no matter what date it carries - Publish is what makes it public. Switch it on to let the queue publish a draft at the publication date.',
+        position: 'sidebar',
+      },
+    },
+    {
+      name: 'readingTime',
+      type: 'text',
+      admin: { description: 'Optional, e.g. "6 min read".' },
+    },
+    {
+      name: 'seoTitle',
+      type: 'text',
+      admin: { description: 'Defaults to the headline.' },
+    },
+    {
+      name: 'seoDescription',
+      type: 'textarea',
+      maxLength: 320,
+      admin: { description: 'Defaults to the standfirst.' },
     },
     {
       name: 'tags',
