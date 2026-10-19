@@ -14,7 +14,7 @@ function Cover({ article, className }: { article: NewsroomArticle; className: st
   if (!article.coverImage) {
     return (
       <div className={`${className} flex items-center justify-center bg-[linear-gradient(135deg,#003C64_0%,#0f5c8f_55%,#FF612A_160%)]`}>
-        <span className="text-[11px] font-semibold uppercase tracking-[.22em] text-white/75">Newsroom</span>
+        <span className="text-[11px] font-semibold uppercase tracking-[.22em] text-white/75">Media</span>
       </div>
     )
   }

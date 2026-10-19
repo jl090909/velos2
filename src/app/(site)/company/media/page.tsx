@@ -27,8 +27,8 @@ export const revalidate = 300
 
 export const metadata: Metadata = {
   description:
-    'The Velos Shield Newsroom: product news, research and insights, company announcements, press coverage and events in OT cyber security.',
-  title: 'Newsroom - Velos Shield',
+    'Velos Shield media: product news, research and insights, company announcements, press coverage and events in OT cyber security.',
+  title: 'Media - Velos Shield',
 }
 
 type Props = {
@@ -100,16 +100,9 @@ export default async function CompanyNewsroomPage({ searchParams }: Props) {
 
   return (
     <>
-      <section className="mx-auto max-w-6xl px-6 pt-20 pb-10">
+      <section className="mx-auto max-w-6xl px-6 pt-20 pb-8">
         <CompanyTabs />
-        <p className="mt-10 mb-3 text-[13px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">Newsroom</p>
-        <h1 className="mb-5 max-w-3xl text-3xl font-bold leading-[1.02] tracking-[-.05em] text-[#003C64] md:text-6xl">
-          Newsroom.
-        </h1>
-        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-          Product news, research and field insight, company announcements, press coverage and the events we
-          will be at. Every story is published by the team from the CMS - no code, no deploy.
-        </p>
+        <p className="mt-10 text-[13px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">Media</p>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">
@@ -119,11 +112,11 @@ export default async function CompanyNewsroomPage({ searchParams }: Props) {
           <Card className="mt-10 border-border/70">
             <CardContent className="p-8 md:p-10">
               <p className="font-medium text-[#003C64]">
-                {filtered ? 'No stories match that filter.' : 'The Newsroom has no published stories yet.'}
+                {filtered ? 'No stories match that filter.' : 'No stories are published yet.'}
               </p>
               <p className="mt-2 text-sm text-muted-foreground">
                 {error
-                  ? 'The Newsroom feed is temporarily unavailable. Please try again shortly.'
+                  ? 'The media feed is temporarily unavailable. Please try again shortly.'
                   : filtered
                     ? 'Try another category, or clear the search to see every story.'
                     : 'Product news, research and company announcements appear here as they are published.'}
