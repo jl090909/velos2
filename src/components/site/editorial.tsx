@@ -143,6 +143,8 @@ export function DateBlock({ iso }: { iso: string }) {
 export type EditorialCardProps = {
   /** Optional badge row above the title (kind, event type, category...). */
   badges?: ReactNode
+  /** Optional caption shown under the image. */
+  caption?: string
   /** Short kicker line above the title. */
   eyebrow?: string
   footer?: ReactNode
@@ -160,6 +162,7 @@ export type EditorialCardProps = {
 
 export function EditorialCard({
   badges,
+  caption,
   eyebrow,
   footer,
   href,
@@ -204,6 +207,8 @@ export function EditorialCard({
           />
         )
       ) : null}
+
+      {caption ? <p className="mt-2 text-[11px] leading-snug text-muted-foreground">{caption}</p> : null}
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {badges}
@@ -260,6 +265,7 @@ export function EditorialRow({
 export function EditorialHero({
   aside,
   badge,
+  caption,
   cta,
   eyebrow,
   image,
@@ -270,6 +276,8 @@ export function EditorialHero({
   /** Replaces the image column entirely (e.g. a date block for an event). */
   aside?: ReactNode
   badge?: string
+  /** Optional caption shown over the foot of the image. */
+  caption?: string
   cta?: { href: string; label: string }
   eyebrow?: string
   image?: { alt: string; height?: number; src?: string | null; width?: number } | null
@@ -306,14 +314,21 @@ export function EditorialHero({
           {aside ? (
             <div className="flex h-full w-full items-center justify-center p-8 md:p-12">{aside}</div>
           ) : image?.src ? (
-            /* eslint-disable-next-line @next/next/no-img-element */
-            <img
-              alt={image.alt}
-              className="h-full w-full object-cover"
-              height={image.height}
-              src={image.src}
-              width={image.width}
-            />
+            <div className="relative h-full w-full">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                alt={image.alt}
+                className="h-full w-full object-cover"
+                height={image.height}
+                src={image.src}
+                width={image.width}
+              />
+              {caption ? (
+                <p className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(0,38,64,0)_0%,rgba(0,38,64,.82)_100%)] px-6 pt-10 pb-4 text-[11px] leading-snug text-white/85">
+                  {caption}
+                </p>
+              ) : null}
+            </div>
           ) : (
             <div className="flex h-full w-full items-end justify-end bg-[linear-gradient(135deg,rgba(255,97,42,.35)_0%,rgba(0,60,100,0)_60%)] p-8">
               <span className="text-[11px] font-semibold uppercase tracking-[.22em] text-white/50">{image?.alt ?? 'Velos Shield'}</span>

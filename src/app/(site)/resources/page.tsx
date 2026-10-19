@@ -35,6 +35,17 @@ const KIND_ORDER = ['Whitepaper', 'Case Study', 'Brochure']
 
 const link = (paper: WhitepaperCard): null | string => paper.readOnlinePath ?? paper.downloadUrl ?? null
 
+/** The cover the CMS carries, or a titled placeholder when none is set (the kit renders `placeholder`). */
+const paperImage = (paper: WhitepaperCard) =>
+  paper.coverImage
+    ? {
+        alt: paper.coverImage.alt || paper.title,
+        height: paper.coverImage.height,
+        src: paper.coverImage.url,
+        width: paper.coverImage.width,
+      }
+    : { alt: paper.kind }
+
 function PaperActions({ paper }: { paper: WhitepaperCard }) {
   const external = !paper.readOnlinePath && Boolean(paper.downloadUrl)
   return (
@@ -66,6 +77,7 @@ function PaperActions({ paper }: { paper: WhitepaperCard }) {
 function PaperCard({ paper }: { paper: WhitepaperCard }) {
   return (
     <EditorialCard
+      caption={paper.coverCaption}
       eyebrow={paper.kind}
       footer={
         <>
@@ -82,7 +94,7 @@ function PaperCard({ paper }: { paper: WhitepaperCard }) {
         </>
       }
       href={paper.readOnlinePath ?? undefined}
-      image={{ alt: paper.kind }}
+      image={paperImage(paper)}
       meta={paper.readTime || undefined}
       placeholder={paper.kind}
       summary={paper.subtitle ? `${paper.subtitle}. ${paper.summary}` : paper.summary}
@@ -121,9 +133,10 @@ export default async function ResourcesPage() {
             {featured ? (
               <EditorialHero
                 badge={featured.kind}
+                caption={featured.coverCaption}
                 cta={link(featured) ? { href: link(featured) as string, label: 'Read the paper' } : undefined}
                 eyebrow={featured.series || 'Velos Shield library'}
-                image={{ alt: 'Velos Shield resources', src: '/shutterstock/industries-hero.jpg' }}
+                image={paperImage(featured).src ? paperImage(featured) : { alt: 'Velos Shield resources', src: '/shutterstock/industries-hero.jpg' }}
                 meta={
                   <>
                     {featured.readTime ? <span>{featured.readTime}</span> : null}

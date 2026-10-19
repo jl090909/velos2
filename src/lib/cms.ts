@@ -33,6 +33,8 @@ export type JobOpening = {
 }
 
 export type WhitepaperCard = {
+  coverCaption?: string
+  coverImage: MediaRef | null
   downloadUrl: string
   id: number | string
   keyPoints: string[]
@@ -195,6 +197,8 @@ const toWhitepaper = (raw: unknown): WhitepaperCard => {
   const downloadUrl = uploaded?.url ?? str(doc.pdfPath)
   const readOnlinePath = optional(doc.readOnlinePath)
   return {
+    coverCaption: optional(doc.coverImageCaption),
+    coverImage: mediaRef(doc.coverImage),
     downloadUrl,
     id: str(doc.id, 'unknown'),
     keyPoints: listOf(doc.keyPoints, 'point'),
@@ -383,6 +387,8 @@ export type EventItem = {
 }
 
 export type PressMention = {
+  coverCaption?: string
+  coverImage: MediaRef | null
   excerpt?: string
   headline: string
   id: number | string
@@ -439,6 +445,8 @@ const toEvent = (raw: unknown): EventItem => {
 const toPressMention = (raw: unknown): PressMention => {
   const doc = isRecord(raw) ? raw : {}
   return {
+    coverCaption: optional(doc.coverImageCaption),
+    coverImage: mediaRef(doc.coverImage),
     excerpt: optional(doc.excerpt),
     headline: str(doc.headline),
     id: str(doc.id, "unknown"),

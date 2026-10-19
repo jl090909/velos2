@@ -63,7 +63,21 @@ export const PressMentions: CollectionConfig = {
       name: 'logo',
       type: 'upload',
       relationTo: 'media',
-      admin: { description: 'Optional outlet logo.' },
+      admin: { description: 'Optional outlet logo. Shown as a mark on the mention.' },
+    },
+    {
+      name: 'coverImage',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description:
+          'Optional cover image for this mention - the piece itself, or the announcement art. Alt text comes from the media record.',
+      },
+    },
+    {
+      name: 'coverImageCaption',
+      type: 'text',
+      admin: { description: 'Optional caption shown under the cover image.' },
     },
   ],
   hooks: revalidateOnChange({ paths: ['/company/media'] }),

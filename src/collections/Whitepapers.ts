@@ -58,6 +58,23 @@ export const Whitepapers: CollectionConfig = {
       admin: { description: 'Card description on /resources.' },
     },
     {
+      name: 'coverImage',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        description:
+          'Optional cover image for this paper. Without one, the card and the hero show a titled placeholder block. Alt text comes from the media record.',
+      },
+    },
+    {
+      name: 'coverImageCaption',
+      type: 'text',
+      admin: {
+        description:
+          'Optional caption: shown over the foot of the image on the featured hero, and under the image on a card.',
+      },
+    },
+    {
       name: 'keyPoints',
       type: 'array',
       labels: { singular: 'Key point', plural: 'Key points' },
