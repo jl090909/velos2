@@ -110,20 +110,6 @@ export default async function CompanyNewsroomPage({ searchParams }: Props) {
           Product news, research and field insight, company announcements, press coverage and the events we
           will be at. Every story is published by the team from the CMS - no code, no deploy.
         </p>
-        <div className="mt-7 flex flex-wrap gap-3">
-          <Link
-            className="inline-flex h-11 items-center justify-center rounded-full bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] px-6 text-sm font-semibold text-[#FF612A] no-underline transition-all hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#002640]"
-            href="/company/contact"
-          >
-            Press enquiries
-          </Link>
-          <Link
-            className="inline-flex h-11 items-center justify-center rounded-full border border-border/70 px-6 text-sm font-medium text-muted-foreground no-underline transition-colors hover:border-[#003C64]/40 hover:text-[#003C64]"
-            href="/resources/knowledge-hub"
-          >
-            Knowledge Hub
-          </Link>
-        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">
