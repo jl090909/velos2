@@ -65,7 +65,7 @@ const STORIES = [
   {
     authorName: 'Velos Shield Newsroom',
     category: 'Latest News',
-    cover: ['hero-ot.jpg', 'OT security teams under one roof: what changed at Velos Shield this quarter'],
+    cover: ['shutterstock/hero-ot.jpg', 'OT security teams under one roof: what changed at Velos Shield this quarter'],
     featured: true,
     publishAt: days(2),
     slug: 'velos-shield-newsroom-launch',
@@ -82,7 +82,11 @@ const STORIES = [
         'Company Announcements, Press Coverage and Events & Media',
       ]),
       quote('If it needs a deployment to publish, it will not get published. The Newsroom is content, not code.'),
-      para(['Coverage from other outlets stays on the page as well, under ' , link('Coverage elsewhere', '/company/media/'), '.']),
+      para([
+        text('Coverage from other outlets stays on the page as well, under '),
+        link('Coverage elsewhere', '/company/media/'),
+        text('.'),
+      ]),
     ),
   },
   {
@@ -109,7 +113,7 @@ const STORIES = [
   {
     authorName: 'Field Research',
     category: 'Research & Insights',
-    cover: ['industries-hero.jpg', 'Industrial control room'],
+    cover: ['shutterstock/industries-hero.jpg', 'Industrial control room'],
     publishAt: days(21),
     slug: 'discovering-legacy-plcs-without-touching-the-line',
     summary:
@@ -134,7 +138,11 @@ const STORIES = [
     body: doc(
       para('We work with consultancies and integrators who already hold the operator relationship.'),
       bullets(['A delivered engagement to point at, not a slide deck', 'Region-local delivery and support', 'Joint scoping before any commercial commitment']),
-      para(['Partnership enquiries go through the ', link('partners page', '/partners/'), '.']),
+      para([
+        text('Partnership enquiries go through the '),
+        link('partners page', '/partners/'),
+        text('.'),
+      ]),
     ),
   },
   {
@@ -142,9 +150,12 @@ const STORIES = [
     category: 'Press Coverage',
     publishAt: days(40),
     summary: 'A round-up of interviews and analyst notes on OT visibility, from the last quarter.',
+    slug: 'where-we-appeared-this-quarter',
     title: 'Where we appeared this quarter',
-    body: doc(para('Interviews, features and analyst notes from the last quarter, collected in one place.') +
-      para('Coverage that was written by another outlet is linked from the Newsroom rather than reproduced here.')),
+    body: doc(
+      para('Interviews, features and analyst notes from the last quarter, collected in one place.'),
+      para('Coverage that was written by another outlet is linked from the Newsroom rather than reproduced here.'),
+    ),
   },
   {
     authorName: 'Velos Shield Events',
@@ -173,9 +184,10 @@ const findMedia = async (token, filename) => {
 
 const uploadAsset = async (token, filename, alt) => {
   const bytes = Buffer.from(await (await fetch(`${base}/${filename}`)).arrayBuffer())
+  const mime = /\.png$/i.test(filename) ? 'image/png' : /\.jpe?g$/i.test(filename) ? 'image/jpeg' : 'image/webp'
   const boundary = '----newsroomseed' + Math.random().toString(16).slice(2)
   const head = Buffer.from(
-    `--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="${filename}"\r\nContent-Type: image/png\r\n\r\n`,
+    `--${boundary}\r\nContent-Disposition: form-data; name="file"; filename="${filename}"\r\nContent-Type: ${mime}\r\n\r\n`,
   )
   const tail = Buffer.from(
     `\r\n--${boundary}\r\nContent-Disposition: form-data; name="_payload"\r\n\r\n${JSON.stringify({ alt })}\r\n--${boundary}--\r\n`,
