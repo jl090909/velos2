@@ -35,7 +35,16 @@ const STATIC_ROUTES = [
   '/velossensor/',
 ]
 
-export const revalidate = 300
+/**
+ * The sitemap is rendered per request rather than prerendered.
+ *
+ * A sitemap is fetched by crawlers, not by users, so one extra query per request costs nothing - and
+ * it removes an ISR window in which a freshly published story is missing from the sitemap (measured:
+ * the prerendered copy could be served stale for up to its revalidate window). Rendering on demand
+ * means the file always reflects the database, and drafts are excluded by the reader below, not by a
+ * cache expiry.
+ */
+export const dynamic = 'force-dynamic'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { data: articles } = await getNewsroomArticles({ limit: 500 })
