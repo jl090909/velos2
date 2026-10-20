@@ -4,13 +4,69 @@ import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 
 import { SiteFooter } from '@/components/SiteFooter'
-import { getKnowledgeArticleBySlug } from '@/lib/cms'
+import { ImageAccordion } from '@/components/site/ImageAccordion'
+import { getKnowledgeArticleBySlug, type RichTextData } from '@/lib/cms'
 import { formatDate } from '@/lib/format'
 
 export const revalidate = 300
 
 type Props = {
   params: Promise<{ slug: string }>
+}
+
+type LexicalNode = {
+  children?: { text?: string }[]
+  tag?: string
+  type?: string
+}
+
+type LexicalBody = {
+  root?: {
+    children?: LexicalNode[]
+    [key: string]: unknown
+  }
+}
+
+const BODY_CLASS = [
+  'text-[16px] leading-relaxed text-muted-foreground',
+  '[&_a]:text-[#003C64] [&_a]:underline',
+  '[&_blockquote]:border-l-2 [&_blockquote]:border-[#FF612A]/40 [&_blockquote]:pl-5 [&_blockquote]:italic',
+  '[&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-[#003C64] [&_h3]:mt-8 [&_h3]:mb-2',
+  '[&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-[#003C64] [&_h4]:mt-6 [&_h4]:mb-2',
+  '[&_img]:my-6 [&_img]:rounded-[1.15rem]',
+  '[&_li]:mb-1.5 [&_p]:mb-5 [&_strong]:text-[#003C64]',
+  '[&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-6 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-6',
+].join(' ')
+
+const nodeText = (node: LexicalNode): string =>
+  (node.children ?? [])
+    .map((child) => (typeof child?.text === 'string' ? child.text : ''))
+    .join('')
+    .trim()
+
+/**
+ * Splits the CMS body at its h2 headings.
+ *
+ * Anything before the first h2 is the lede and renders as normal prose; each h2 becomes an accordion
+ * row with everything up to the next h2 in its tray. A body without h2 headings stays a plain article,
+ * so an author who has not used headings does not lose the page to an empty accordion.
+ */
+const splitBody = (body: unknown): { lead: LexicalNode[]; sections: { nodes: LexicalNode[]; title: string }[] } => {
+  const children = ((body as LexicalBody | null)?.root?.children ?? []) as LexicalNode[]
+  const lead: LexicalNode[] = []
+  const sections: { nodes: LexicalNode[]; title: string }[] = []
+
+  for (const node of children) {
+    if (node?.type === 'heading' && node?.tag === 'h2') {
+      sections.push({ nodes: [], title: nodeText(node) || 'Section' })
+    } else if (sections.length === 0) {
+      lead.push(node)
+    } else {
+      sections[sections.length - 1].nodes.push(node)
+    }
+  }
+
+  return { lead, sections }
 }
 
 export const generateMetadata = async ({ params }: Props): Promise<Metadata> => {
@@ -33,21 +89,26 @@ export default async function KnowledgeArticlePage({ params }: Props) {
     notFound()
   }
 
+  const body = article.body as unknown as LexicalBody | null
+  const { lead, sections } = splitBody(article.body)
+  const sectionData = (nodes: LexicalNode[]): RichTextData =>
+    ({ root: { ...(body?.root ?? {}), children: nodes } }) as unknown as RichTextData
+
   return (
     <>
-      <article className="pt-20 pb-10 max-w-3xl mx-auto px-6">
+      <article className="mx-auto max-w-3xl px-6 pt-20 pb-10">
         <Link
+          className="text-[13px] font-semibold uppercase tracking-[.14em] text-muted-foreground no-underline transition-colors hover:text-[#003C64]"
           href="/resources/knowledge-hub"
-          className="text-[13px] font-semibold tracking-[.14em] uppercase text-muted-foreground no-underline hover:text-[#003C64] transition-colors"
         >
           Knowledge Hub
         </Link>
-        <h1 className="text-3xl md:text-5xl font-bold tracking-[-.05em] leading-[1.06] mt-6 mb-5 text-[#003C64]">
+        <h1 className="mt-6 mb-5 text-3xl font-bold leading-[1.06] tracking-[-.05em] text-[#003C64] md:text-5xl">
           {article.title}
         </h1>
-        <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-6">{article.excerpt}</p>
-        <div className="flex flex-wrap items-center gap-3 pb-8 border-b border-border/50">
-          <span className="text-[11px] font-semibold tracking-[.14em] uppercase px-3 py-1 rounded-full bg-[#FF612A]/10 text-[#FF612A]">
+        <p className="mb-6 text-base leading-relaxed text-muted-foreground md:text-lg">{article.excerpt}</p>
+        <div className="flex flex-wrap items-center gap-3 border-b border-border/50 pb-8">
+          <span className="rounded-full bg-[#FF612A]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.14em] text-[#FF612A]">
             {article.category}
           </span>
           <span className="text-xs text-muted-foreground">
@@ -59,42 +120,57 @@ export default async function KnowledgeArticlePage({ params }: Props) {
         </div>
 
         {article.heroImage ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
           <img
             alt={article.heroImage.alt || article.title}
-            className="w-full rounded-[1.35rem] mt-8 shadow-[0_16px_40px_rgba(15,23,42,.08)]"
+            className="mt-8 w-full rounded-[1.35rem] shadow-[0_16px_40px_rgba(15,23,42,.08)]"
             src={article.heroImage.url}
           />
         ) : null}
 
-        <div className="mt-10">
-          {article.body ? (
-            <RichText
-              className="text-[16px] leading-relaxed text-muted-foreground [&_a]:text-[#003C64] [&_a]:underline [&_blockquote]:border-l-2 [&_blockquote]:border-[#FF612A]/40 [&_blockquote]:pl-5 [&_blockquote]:italic [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-[-.03em] [&_h2]:text-[#003C64] [&_h2]:mt-10 [&_h2]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-[#003C64] [&_h3]:mt-8 [&_h3]:mb-2 [&_li]:mb-1.5 [&_p]:mb-5 [&_strong]:text-[#003C64] [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-6"
-              data={article.body}
-            />
-          ) : null}
-        </div>
+        {article.body ? (
+          <div className="mt-10">
+            {lead.length > 0 ? (
+              <RichText className={`${BODY_CLASS} text-[18px] md:text-[19px]`} data={sectionData(lead)} />
+            ) : null}
+
+            {sections.length > 0 ? (
+              <div className="mt-10">
+                <p className="mb-4 text-[11px] font-semibold uppercase tracking-[.18em] text-muted-foreground">In this note</p>
+                <ImageAccordion
+                  items={sections.map((section, index) => ({
+                    content: <RichText className={BODY_CLASS} data={sectionData(section.nodes)} />,
+                    id: `section-${index}`,
+                    title: section.title,
+                  }))}
+                />
+              </div>
+            ) : (
+              <RichText className={BODY_CLASS} data={article.body} />
+            )}
+          </div>
+        ) : null}
 
         {article.tags.length > 0 ? (
           <div className="mt-12 flex flex-wrap gap-2">
             {article.tags.map((tag) => (
-              <span key={tag} className="text-xs px-3 py-1.5 rounded-full border border-border/60 bg-white text-muted-foreground">
+              <span className="rounded-full border border-border/60 bg-white px-3 py-1.5 text-xs text-muted-foreground" key={tag}>
                 {tag}
               </span>
             ))}
           </div>
         ) : null}
 
-        <div className="mt-12 pt-8 border-t border-border/50 flex flex-wrap gap-3">
+        <div className="mt-12 flex flex-wrap gap-3 border-t border-border/50 pt-8">
           <Link
+            className="inline-flex h-11 items-center justify-center rounded-full border border-border/70 px-6 text-sm font-medium text-muted-foreground no-underline transition-colors hover:border-[#003C64]/40 hover:text-[#003C64]"
             href="/resources/knowledge-hub"
-            className="inline-flex items-center justify-center rounded-full h-11 px-6 text-sm font-medium border border-border/70 no-underline text-muted-foreground hover:text-[#003C64] hover:border-[#003C64]/40 transition-colors"
           >
             All articles
           </Link>
           <Link
+            className="inline-flex h-11 items-center justify-center rounded-full bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] px-6 text-sm font-semibold text-[#FF612A] no-underline transition-all hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64]"
             href="/demo"
-            className="inline-flex items-center justify-center rounded-full h-11 px-6 text-sm font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
           >
             Request a demo
           </Link>
