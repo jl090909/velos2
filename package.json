@@ -12,6 +12,8 @@
     "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
     "seed": "node scripts/seed.mjs",
     "migrate:case-studies": "node scripts/migrate-case-studies.mjs",
+    "copy:newsroom": "node scripts/copy-newsroom.mjs",
+    "copy:events-press": "node scripts/copy-events-press.mjs",
     "verify:cms": "node scripts/verify-cms.mjs",
     "verify:case-studies": "node scripts/verify-case-studies.mjs",
     "verify:all": "node scripts/verify-cms.mjs && node scripts/verify-publish.mjs && node scripts/verify-uploads.mjs && node scripts/verify-newsroom.mjs",
