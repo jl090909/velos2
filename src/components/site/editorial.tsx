@@ -52,7 +52,7 @@ export function Surface({
 }) {
   return (
     <div
-      className={`rounded-[1.35rem] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)]${className ? ` ${className}` : ''}`}
+      className={`rounded-[1.35rem] border border-white/60 bg-[linear-gradient(180deg,rgba(255,255,255,.86)_0%,rgba(250,250,252,.78)_100%)] shadow-[0_1px_2px_rgba(15,23,42,.04),0_18px_44px_rgba(15,23,42,.06)]${className ? ` ${className}` : ''}`}
     >
       {children}
     </div>
@@ -84,7 +84,7 @@ export function SectionHeader({
 
 export function Band({ children, title, viewAllHref, count }: { children: ReactNode; title: string; viewAllHref?: string; count?: number }) {
   return (
-    <section className="border-t border-border/60 pt-12">
+    <section className="section-seam pt-12">
       <SectionHeader count={count} title={title} viewAllHref={viewAllHref} />
       {children}
     </section>

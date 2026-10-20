@@ -36,7 +36,7 @@ export default function HomePage() {
                 'url(/shutterstock/hero-ot.jpg)',
             }}
           >
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.25)_0%,rgba(0,0,0,.52)_100%)]" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.32)_0%,rgba(0,0,0,.68)_100%)]" />
             <RadarRing className="absolute -right-16 -top-16 h-[440px] w-[440px] md:h-[600px] md:w-[600px]" />
             <CardContent className="relative flex min-h-[380px] md:h-[560px] flex-col justify-end p-8 md:p-12 text-white">
               <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl">

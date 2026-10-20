@@ -30,7 +30,7 @@ const company = [
 ];
 
 const panelClass =
-  'invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 transition-all duration-200 absolute left-0 top-full mt-3 z-50 min-w-[300px] rounded-2xl bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(246,247,249,.96)_100%)] p-2 shadow-[0_24px_70px_rgba(15,23,42,.18),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl';
+  'invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 transition-all duration-200 absolute left-0 top-full mt-3 z-50 min-w-[300px] rounded-2xl bg-[rgba(250,250,252,.82)] p-2 shadow-[0_24px_70px_rgba(15,23,42,.18),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl backdrop-saturate-150';
 
 const itemClass =
   'block px-4 py-3 rounded-2xl text-[15px] font-medium no-underline text-[#003C64] hover:bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] hover:text-[#FF612A] transition-colors';
@@ -41,7 +41,7 @@ function NavDropdown({ label, items, active }: { label: string; items: { href: s
       <button
         type="button"
         aria-haspopup="true"
-        className="px-4 py-2 text-[17px] font-medium rounded-full cursor-pointer bg-transparent border-0"
+        className="px-3 py-2 text-[15px] font-medium rounded-full cursor-pointer bg-transparent border-0"
         style={{ color: active ? '#FF612A' : '#003C64' }}
       >
         {label} <span aria-hidden className="text-[11px] align-middle">▾</span>
@@ -99,14 +99,14 @@ export function Navbar() {
         <div
           ref={pillRef}
           onMouseEnter={replayShake}
-          className="pointer-events-auto animate-nav-enter flex items-center justify-between rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.92)_0%,rgba(243,244,246,.82)_100%)] px-6 py-3 shadow-[0_18px_50px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] backdrop-blur-2xl"
+          className="pointer-events-auto animate-nav-enter glass-nav flex items-center justify-between rounded-full px-5 py-2.5"
         >
-          <div className="flex items-center gap-5 min-w-0">
+          <div className="flex items-center gap-4 min-w-0">
             <Link href="/" className="flex items-center no-underline shrink-0">
-              <img src="/NEWvsLOGO.png" className="h-[62px] w-auto" alt="Velos Shield" />
+              <img src="/NEWvsLOGO.png" className="h-[52px] w-auto" alt="Velos Shield" />
             </Link>
 
-            <div ref={navRef} className="hidden md:flex flex-wrap items-center gap-y-1 relative">
+            <div ref={navRef} className="hidden md:flex flex-nowrap items-center relative">
               <span
                 className="absolute rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(246,247,249,.92)_100%)] shadow-[0_6px_18px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] transition-[left,top,width,height,opacity] duration-[450ms] ease-[cubic-bezier(0.34,1.56,0.64,1)]"
                 style={{
@@ -126,7 +126,7 @@ export function Navbar() {
                     ref={(el) => {
                       linkRefs.current[i] = el;
                     }}
-                    className={`group relative z-10 px-4 py-2 text-[17px] font-medium no-underline rounded-full overflow-hidden ${
+                    className={`group relative z-10 px-3 py-2 text-[15px] font-medium no-underline rounded-full overflow-hidden ${
                       'text-[#003C64]'
                     }`}
                   >
@@ -150,7 +150,7 @@ export function Navbar() {
 
               <Link
                 href="/customers"
-                className="group relative z-10 px-4 py-2 text-[17px] font-medium no-underline rounded-full overflow-hidden text-[#003C64]"
+                className="group relative z-10 px-3 py-2 text-[15px] font-medium no-underline rounded-full overflow-hidden text-[#003C64]"
               >
                 {pathname !== '/customers' && (
                   <span className="absolute inset-0 rounded-full bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] opacity-0 scale-75 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100 group-hover:scale-100" />
@@ -160,7 +160,7 @@ export function Navbar() {
 
               <Link
                 href="/partners"
-                className="group relative z-10 px-4 py-2 text-[17px] font-medium no-underline rounded-full overflow-hidden text-[#003C64]"
+                className="group relative z-10 px-3 py-2 text-[15px] font-medium no-underline rounded-full overflow-hidden text-[#003C64]"
               >
                 {pathname !== '/partners' && (
                   <span className="absolute inset-0 rounded-full bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] opacity-0 scale-75 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100 group-hover:scale-100" />
