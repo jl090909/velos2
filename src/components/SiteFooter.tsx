@@ -30,17 +30,18 @@ export function SiteFooter() {
             <p><a href="/velosshield-brochure.pdf" className="hover:text-foreground no-underline">Platform Brochure</a></p>
           </div>
         </div>
-        <div className="flex gap-5 flex-wrap md:justify-end items-start">
-          <Link href="/product" className="hover:text-foreground no-underline">Velos Shield</Link>
-          <Link href="/product/org-level" className="hover:text-foreground no-underline">Velos Shield 1.5</Link>
-          <Link href="/product/site-level" className="hover:text-foreground no-underline">Velos Shield 1.1</Link>
-          <Link href="/velossensor" className="hover:text-foreground no-underline">Velos Sensor</Link>
-          <Link href="/industries" className="hover:text-foreground no-underline">Industries</Link>
-          <Link href="/customers" className="hover:text-foreground no-underline">Customers</Link>
-          <Link href="/partners" className="hover:text-foreground no-underline">Partners</Link>
-          <Link href="/trust" className="hover:text-foreground no-underline">Trust</Link>
-          <Link href="/resources" className="hover:text-foreground no-underline">Resources</Link>
-          <Link href="/company/about" className="hover:text-foreground no-underline">Company</Link>
+        <div>
+          {/* A vertical list under a heading, matching the Resources column: with the four product
+              links gone, the old horizontal wrap left a ragged row and a gap. */}
+          <p className="text-[11px] font-semibold uppercase tracking-[.18em] text-[#FF612A] mb-3">Explore</p>
+          <div className="space-y-2">
+            <p><Link href="/industries" className="hover:text-foreground no-underline">Industries</Link></p>
+            <p><Link href="/customers" className="hover:text-foreground no-underline">Customers</Link></p>
+            <p><Link href="/partners" className="hover:text-foreground no-underline">Partners</Link></p>
+            <p><Link href="/trust" className="hover:text-foreground no-underline">Trust</Link></p>
+            <p><Link href="/resources" className="hover:text-foreground no-underline">Resources</Link></p>
+            <p><Link href="/company/about" className="hover:text-foreground no-underline">Company</Link></p>
+          </div>
         </div>
       </div>
     </footer>
