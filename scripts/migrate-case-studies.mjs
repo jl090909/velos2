@@ -23,6 +23,13 @@ const ADMIN_EMAIL = process.env.SEED_ADMIN_EMAIL || required('SEED_ADMIN_EMAIL')
 const ADMIN_PASSWORD = required('SEED_ADMIN_PASSWORD')
 const FORCE = process.argv.includes('--force')
 
+/**
+ * When the stories were authored somewhere other than the target - a dev database, say - name that
+ * CMS in SOURCE_CMS_URL: the customer bodies are read there and written here. Left unset, the target
+ * is also the source, which is the normal in-place case.
+ */
+const SOURCE = (process.env.SOURCE_CMS_URL || '').replace(/\/+$/, '')
+
 // ------------------------------------------------------------------ helpers
 const FIND = async (collection, slug, token) => {
   const { body } = await api('GET', `/api/${collection}/?where[slug][equals]=${encodeURIComponent(slug)}&limit=1&depth=0`, { token })
@@ -68,10 +75,38 @@ const assertPublic = async (path, needle) => {
 // ------------------------------------------------------------------ run
 const { token } = await login(ADMIN_EMAIL, ADMIN_PASSWORD)
 
+/** Reads customer records from the source CMS (or the target when no source is named). */
+const readCustomers = async () => {
+  if (!SOURCE) {
+    const { body } = await api('GET', '/api/customers/?limit=100&depth=0', { token })
+    return body?.docs ?? []
+  }
+  const session = await fetch(`${SOURCE}/api/users/login/`, {
+    body: JSON.stringify({ email: ADMIN_EMAIL, password: ADMIN_PASSWORD }),
+    headers: { 'Content-Type': 'application/json' },
+    method: 'POST',
+  })
+  const auth = await session.json()
+  if (!auth?.token) {
+    throw new Error(`source login failed at ${SOURCE} (HTTP ${session.status})`)
+  }
+  const response = await fetch(`${SOURCE}/api/customers/?limit=100&depth=0`, {
+    headers: { Authorization: `JWT ${auth.token}` },
+  })
+  const body = await response.json()
+  if (!response.ok) {
+    throw new Error(`source customer read failed at ${SOURCE} (HTTP ${response.status})`)
+  }
+  return body?.docs ?? []
+}
+
 console.log('\n1. Customer case studies -> Whitepapers & case studies')
-const { body: customerBody } = await api('GET', '/api/customers/?limit=100&depth=0', { token })
-const customers = customerBody?.docs ?? []
+if (SOURCE) {
+  console.log(`  (bodies read from ${SOURCE})`)
+}
+const customers = await readCustomers()
 let moved = 0
+const linkedSlugs = []
 
 for (const customer of customers) {
   if (!customer.caseStudy) {
@@ -97,15 +132,21 @@ for (const customer of customers) {
     `case study "${customer.name}"`,
   )
 
-  if (String(customer.caseStudyDoc ?? '') !== String(record.id)) {
-    await api('PATCH', `/api/customers/${customer.id}/`, {
+  // link on the TARGET by slug: ids differ between a dev database and production
+  const targetCustomer = await FIND('customers', customer.slug, token)
+  if (!targetCustomer) {
+    console.log(`  no customer "${customer.slug}" on the target - story created, card link left alone`)
+  } else if (String(targetCustomer.caseStudyDoc ?? '') !== String(record.id)) {
+    await api('PATCH', `/api/customers/${targetCustomer.id}/`, {
       body: { caseStudyDoc: record.id },
       expect: 200,
       token,
     })
     console.log(`  linked   customer ${customer.slug} -> whitepaper ${record.id}`)
+    linkedSlugs.push(customer.slug)
   } else {
     console.log(`  linked   customer ${customer.slug} already points at ${record.id}`)
+    linkedSlugs.push(customer.slug)
   }
   moved += 1
 }
@@ -130,10 +171,9 @@ await upsert(
 
 console.log(`\n3. Public pages`)
 const checks = [
-  ['/resources/heathrow-airport/', 'Heathrow'],
-  ['/resources/maersk/', 'Maersk'],
+  ...customers.filter((customer) => customer.caseStudy).map((customer) => [`/resources/${customer.slug}/`, customer.name.split(/\s+/)[0]]),
+  ...linkedSlugs.map((slug) => [`/customers/${slug}/`, 'All resources']),
   ['/resources/airport-bms-cybersecurity-case-study/', 'Building Management Systems'],
-  ['/customers/heathrow-airport/', 'Heathrow'],
 ]
 const results = []
 for (const [path, needle] of checks) {
