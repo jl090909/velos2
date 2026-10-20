@@ -342,6 +342,86 @@ export function EditorialHero({
 
 /* ------------------------------------------------------------------ buttons */
 
+/** Arrow badge used by the overlay cards - Monzo's link hint, drawn at 36x36. */
+export function OverlayArrow({ className = '' }: { className?: string }) {
+  return (
+    <svg aria-hidden="true" className={className} fill="none" height="36" viewBox="0 0 36 36" width="36" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="16.5" cy="16.5" r="15.5" stroke="#F2F8F3" strokeWidth="2" />
+      <path
+        d="M7.916 17.726h13.698L15.63 23.71a1.236 1.236 0 0 0 0 1.742c.478.478 1.25.478 1.729 0l8.081-8.082a1.221 1.221 0 0 0 0-1.73l-8.069-8.093a1.221 1.221 0 0 0-1.73 0 1.221 1.221 0 0 0 0 1.73l5.973 5.996H7.916c-.675 0-1.226.552-1.226 1.226s.551 1.227 1.226 1.227Z"
+        fill="#F2F8F3"
+      />
+    </svg>
+  )
+}
+
+/**
+ * Photo-led card with the text laid over the image - the Monzo "ImageCard" treatment.
+ *
+ * Their construction, kept: a 24px / 32px radius, the image and the content stacked in one grid cell,
+ * a scrim that blurs and darkens only the foot of the photo (see .card-scrim), the copy bottom-left and
+ * the circular arrow pinned top-right. Falls back to the brand gradient when a record has no image, so
+ * the grid never shows a hole.
+ */
+export function OverlayCard({
+  eyebrow,
+  footer,
+  href,
+  image,
+  meta,
+  placeholder = 'Knowledge Hub',
+  summary,
+  title,
+}: {
+  eyebrow?: string
+  footer?: ReactNode
+  href: string
+  image?: { alt: string; height?: number; src?: string | null; width?: number }
+  meta?: string
+  placeholder?: string
+  summary?: string
+  title: string
+}) {
+  return (
+    <article className="group relative isolate overflow-hidden rounded-[24px] bg-[#011546] shadow-[0_18px_44px_rgba(15,23,42,.10)] md:rounded-[32px]">
+      <Link className="block no-underline" href={href}>
+        <div className="relative aspect-[4/5] w-full overflow-hidden">
+          {image?.src ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img
+              alt={image.alt}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-[700ms] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.04]"
+              height={image.height}
+              src={image.src}
+              width={image.width}
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(135deg,#003C64_0%,#0f5c8f_55%,#FF612A_160%)]">
+              <span className="text-[11px] font-semibold uppercase tracking-[.22em] text-white/70">{placeholder}</span>
+            </div>
+          )}
+
+          <div className="card-scrim" />
+
+          <div className="relative flex h-full flex-col justify-end p-6 pt-16 text-white">
+            <div className="flex flex-wrap items-center gap-2 text-[11.5px] font-semibold uppercase tracking-[.14em] text-white/80">
+              {eyebrow ? <span>{eyebrow}</span> : null}
+              {meta ? <span className="font-normal normal-case tracking-normal text-white/70">{meta}</span> : null}
+            </div>
+            <h3 className="mt-3 text-[21px] font-bold leading-[1.16] tracking-[-.035em] text-white md:text-[24px]">{title}</h3>
+            {summary ? <p className="mt-3 line-clamp-2 text-[13.5px] leading-relaxed text-white/80">{summary}</p> : null}
+            {footer ? <div className="mt-4 truncate text-[11.5px] text-white/75">{footer}</div> : null}
+          </div>
+
+          <span className="absolute right-6 top-6 z-[2] inline-flex rounded-full bg-[#011546]/25 p-1 backdrop-blur-[2px] transition-transform duration-300 ease-out group-hover:translate-x-1">
+            <OverlayArrow />
+          </span>
+        </div>
+      </Link>
+    </article>
+  )
+}
+
 export const buttonPrimary =
   'inline-flex h-11 items-center justify-center rounded-full bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] px-6 text-sm font-semibold text-[#FF612A] no-underline transition-all hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#002640]'
 

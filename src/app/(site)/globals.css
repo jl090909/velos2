@@ -170,6 +170,29 @@ body {
   }
 }
 
+/* Monzo-style image card scrim.
+ *
+ * Their card stacks an image and a content layer in one CSS grid, with a blurred gradient over the
+ * foot: a linear-gradient to rgba(1,21,70,.55) plus backdrop-filter blur(50px) masked so the blur only
+ * lands on the lower 70% of the photo. The top of the image stays crisp, the title stays legible.
+ * Values are taken from their ImageCard rules rather than approximated.
+ */
+.card-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(1, 21, 70, 0) 16%, rgba(1, 21, 70, 0.66) 100%);
+}
+
+@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .card-scrim {
+    -webkit-backdrop-filter: blur(50px);
+    backdrop-filter: blur(50px);
+    -webkit-mask-image: linear-gradient(180deg, transparent 22%, #000 58%);
+    mask-image: linear-gradient(180deg, transparent 22%, #000 58%);
+  }
+}
+
 /* A hairline that fades at both ends - the soft seam between bands instead of a hard rule. */
 .section-seam {
   position: relative;

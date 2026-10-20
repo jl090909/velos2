@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { SiteFooter } from '@/components/SiteFooter'
-import { cardGrid, Chip, EditorialCard, EditorialHero, Eyebrow, SectionHeader, Surface } from '@/components/site/editorial'
+import { cardGrid, Chip, EditorialHero, Eyebrow, OverlayCard, SectionHeader, Surface } from '@/components/site/editorial'
 import { getKnowledgeArticles, type KnowledgeArticle } from '@/lib/cms'
 import { formatDate } from '@/lib/format'
 import { categorySlug } from '@/lib/newsroom-meta'
@@ -160,14 +160,13 @@ export default async function KnowledgeHubPage({ searchParams }: Props) {
                 <SectionHeader title={activeCategory ?? (query.length > 0 ? 'Search results' : 'Latest notes')} />
                 <div className={cardGrid}>
                   {rest.map((article) => (
-                    <EditorialCard
+                    <OverlayCard
                       eyebrow={article.category}
                       footer={
-                        <p className="text-xs text-muted-foreground">
+                        <>
                           {article.authorName}
-                          {article.authorRole ? ` - ${article.authorRole}` : ''}
-                          {article.readingTime ? ` - ${article.readingTime}` : ''}
-                        </p>
+                          {article.readingTime ? ` \u00b7 ${article.readingTime}` : ''}
+                        </>
                       }
                       href={href(article)}
                       image={{
