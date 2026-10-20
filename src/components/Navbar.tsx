@@ -2,14 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 import { normalizePath } from '@/lib/utils';
-
-const links = [
-  { href: '/industries', label: 'Industries' },
-  { href: '/trust', label: 'Trust' },
-];
 
 const products = [
   { href: '/product/org-level', label: 'Velos Shield 1.5 · Org-level' },
@@ -60,9 +55,7 @@ function NavDropdown({ label, items, active }: { label: string; items: { href: s
 export function Navbar() {
   const pathname = normalizePath(usePathname());
   const navRef = useRef<HTMLDivElement>(null);
-  const linkRefs = useRef<(HTMLAnchorElement | null)[]>([]);
   const pillRef = useRef<HTMLDivElement>(null);
-  const [indicator, setIndicator] = useState({ left: 0, top: 0, width: 0, height: 0, opacity: 0 });
   const [menuOpen, setMenuOpen] = useState(false);
 
   const replayShake = () => {
@@ -74,25 +67,6 @@ export function Navbar() {
     el.classList.add('animate-nav-enter');
   };
 
-  useEffect(() => {
-    const idx = links.findIndex((l) => l.href === pathname);
-    const el = linkRefs.current[idx];
-    const nav = navRef.current;
-    if (el && nav) {
-      const navRect = nav.getBoundingClientRect();
-      const rect = el.getBoundingClientRect();
-      setIndicator({
-        left: rect.left - navRect.left,
-        top: rect.top - navRect.top,
-        width: rect.width,
-        height: rect.height,
-        opacity: 1,
-      });
-    } else {
-      setIndicator((s) => ({ ...s, opacity: 0 }));
-    }
-  }, [pathname]);
-
   return (
     <nav className="fixed top-4 inset-x-0 z-50 pointer-events-none">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
@@ -101,44 +75,13 @@ export function Navbar() {
           onMouseEnter={replayShake}
           className="pointer-events-auto animate-nav-enter glass-nav flex items-center justify-between rounded-full px-5 py-2.5"
         >
-          <div className="flex items-center gap-4 min-w-0">
-            <Link href="/" className="flex items-center no-underline shrink-0">
-              <img src="/NEWvsLOGO.png" className="h-[52px] w-auto" alt="Velos Shield" />
-            </Link>
+          <Link href="/" className="flex items-center no-underline shrink-0">
+            <img src="/NEWvsLOGO.png" className="h-[52px] w-auto" alt="Velos Shield" />
+          </Link>
 
-            <div ref={navRef} className="hidden md:flex flex-nowrap items-center relative">
-              <span
-                className="absolute rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(246,247,249,.92)_100%)] shadow-[0_6px_18px_rgba(15,23,42,.08),0_1px_0_rgba(255,255,255,.9)_inset] transition-[left,top,width,height,opacity] duration-[450ms] ease-[cubic-bezier(0.34,1.56,0.64,1)]"
-                style={{
-                  left: indicator.left,
-                  top: indicator.top,
-                  width: indicator.width,
-                  height: indicator.height,
-                  opacity: indicator.opacity,
-                }}
-              />
-              {links.map((l, i) => {
-                const active = pathname === l.href;
-                return (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    ref={(el) => {
-                      linkRefs.current[i] = el;
-                    }}
-                    className={`group relative z-10 px-3 py-2 text-[15px] font-medium no-underline rounded-full overflow-hidden ${
-                      'text-[#003C64]'
-                    }`}
-                  >
-                    {!active && (
-                      <span className="absolute inset-0 rounded-full bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] opacity-0 scale-75 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:opacity-100 group-hover:scale-100" />
-                    )}
-                    <span className={`relative z-10 transition-colors duration-300 ${!active ? 'group-hover:text-[#FF612A]' : ''}`}>
-                      {l.label}
-                    </span>
-                  </Link>
-                );
-              })}
+          {/* The links are the middle of three groups, so the pill stays balanced now that Industries
+              and Trust are gone: logo left, menu centred, call to action right. */}
+          <div ref={navRef} className="hidden md:flex flex-1 flex-nowrap items-center justify-center">
 
               <NavDropdown label="Products" items={products} active={pathname.startsWith('/product')} />
 
@@ -168,8 +111,7 @@ export function Navbar() {
                 <span className={`relative z-10 transition-colors duration-300 ${pathname !== '/partners' ? 'group-hover:text-[#FF612A]' : ''}`}>Partners</span>
               </Link>
 
-              <NavDropdown label="Company" items={company} active={pathname.startsWith('/company')} />
-            </div>
+            <NavDropdown label="Company" items={company} active={pathname.startsWith('/company')} />
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
@@ -214,7 +156,7 @@ export function Navbar() {
                 {p.label}
               </Link>
             ))}
-            {[...links, { href: '/customers', label: 'Customers' }, { href: '/partners', label: 'Partners' }].map((l) => {
+            {[{ href: '/customers', label: 'Customers' }, { href: '/partners', label: 'Partners' }].map((l) => {
               const active = pathname === l.href;
               return (
                 <Link
