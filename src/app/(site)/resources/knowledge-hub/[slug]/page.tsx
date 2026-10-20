@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import type { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react'
 
 import { SiteFooter } from '@/components/SiteFooter'
 import { ImageAccordion } from '@/components/site/ImageAccordion'
@@ -33,10 +34,57 @@ const BODY_CLASS = [
   '[&_blockquote]:border-l-2 [&_blockquote]:border-[#FF612A]/40 [&_blockquote]:pl-5 [&_blockquote]:italic',
   '[&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-[#003C64] [&_h3]:mt-8 [&_h3]:mb-2',
   '[&_h4]:text-lg [&_h4]:font-semibold [&_h4]:text-[#003C64] [&_h4]:mt-6 [&_h4]:mb-2',
-  '[&_img]:my-6 [&_img]:rounded-[1.15rem]',
+  '[&_img]:mt-6 [&_img]:mb-1 [&_img]:w-full [&_img]:rounded-[1.15rem]',
   '[&_li]:mb-1.5 [&_p]:mb-5 [&_strong]:text-[#003C64]',
   '[&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-6 [&_ol]:list-decimal [&_ol]:pl-5 [&_ol]:mb-6',
 ].join(' ')
+
+type UploadNode = {
+  fields?: { caption?: string } | null
+  value?: {
+    alt?: string
+    height?: number
+    sizes?: { hero?: { height?: number; url?: string; width?: number } }
+    url?: string
+    width?: number
+  } | null
+}
+
+/**
+ * Upload nodes render as a figure with the caption an editor typed on that node, not just the file.
+ *
+ * Payload's default upload converter emits the image alone, which loses the one line that ties a photo
+ * to the argument next to it - and in an accordion tray that context is the difference between an
+ * illustration and decoration. The hero size (1600x900) is preferred over the original.
+ */
+const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
+  ...defaultConverters,
+  upload: ({ node }) => {
+    const upload = node as unknown as UploadNode
+    const media = upload.value
+    const url = media?.sizes?.hero?.url ?? media?.url
+    if (!url) {
+      return null
+    }
+    const src = url.startsWith('/') ? url : url.replace(/^https?:\/\/[^/]+/, '')
+    return (
+      <figure className="my-6">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt={media?.alt ?? ''}
+          className="w-full rounded-[1.15rem]"
+          height={media?.sizes?.hero?.height ?? media?.height}
+          loading="lazy"
+          src={src}
+          width={media?.sizes?.hero?.width ?? media?.width}
+        />
+        {upload.fields?.caption ? (
+          <figcaption className="mt-1.5 text-[13px] leading-relaxed text-[#5A6472]">{upload.fields.caption}</figcaption>
+        ) : null}
+      </figure>
+    )
+  },
+})
 
 const nodeText = (node: LexicalNode): string =>
   (node.children ?? [])
@@ -131,7 +179,7 @@ export default async function KnowledgeArticlePage({ params }: Props) {
         {article.body ? (
           <div className="mt-10">
             {lead.length > 0 ? (
-              <RichText className={`${BODY_CLASS} text-[18px] md:text-[19px]`} data={sectionData(lead)} />
+              <RichText className={`${BODY_CLASS} text-[18px] md:text-[19px]`} converters={converters} data={sectionData(lead)} />
             ) : null}
 
             {sections.length > 0 ? (
@@ -139,14 +187,14 @@ export default async function KnowledgeArticlePage({ params }: Props) {
                 <p className="mb-4 text-[11px] font-semibold uppercase tracking-[.18em] text-muted-foreground">In this note</p>
                 <ImageAccordion
                   items={sections.map((section, index) => ({
-                    content: <RichText className={BODY_CLASS} data={sectionData(section.nodes)} />,
+                    content: <RichText className={BODY_CLASS} converters={converters} data={sectionData(section.nodes)} />,
                     id: `section-${index}`,
                     title: section.title,
                   }))}
                 />
               </div>
             ) : (
-              <RichText className={BODY_CLASS} data={article.body} />
+              <RichText className={BODY_CLASS} converters={converters} data={article.body} />
             )}
           </div>
         ) : null}

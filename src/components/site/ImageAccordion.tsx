@@ -78,7 +78,7 @@ export function ImageAccordion({ items, defaultOpen = 0 }: { items: AccordionIte
             >
               <div className="overflow-hidden">
                 <div
-                  className={`pt-1 pb-10 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+                  className={`pt-1 pb-8 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
                 >
                   {item.content}
                 </div>
