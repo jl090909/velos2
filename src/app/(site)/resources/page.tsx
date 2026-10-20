@@ -118,7 +118,7 @@ export default async function ResourcesPage() {
         <Eyebrow>Resources</Eyebrow>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 pb-14">
+      <section className="mx-auto max-w-6xl px-6 pb-24">
         {papers.length === 0 ? (
           <Surface className="p-8 md:p-10">
             <p className="font-medium text-[#003C64]">Resources are being updated.</p>
@@ -162,37 +162,6 @@ export default async function ResourcesPage() {
             ))}
           </div>
         )}
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-14">
-        <Surface className="flex flex-col justify-between gap-6 p-8 md:flex-row md:items-center md:p-10">
-          <div>
-            <Eyebrow className="mb-2">Knowledge Hub</Eyebrow>
-            <h2 className="mb-2 text-2xl font-semibold tracking-[-.03em] text-[#003C64]">Technical notes from the field</h2>
-            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              Short, practical articles from the OT security engineering and research teams: protocol behaviour,
-              deployment evidence, detection design and the operational reasoning behind them.
-            </p>
-          </div>
-          <Link className={`${buttonPrimary} shrink-0 px-8`} href="/resources/knowledge-hub/">
-            Open the Knowledge Hub
-          </Link>
-        </Surface>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 pb-24">
-        <Surface className="flex flex-col justify-between gap-6 p-8 md:flex-row md:items-center md:p-10">
-          <div>
-            <Eyebrow className="mb-2">A position, not a product claim</Eyebrow>
-            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground">
-              These papers describe our perspective on how OT monitoring should evolve. They intentionally do not
-              present every idea as an already-shipped capability.
-            </p>
-          </div>
-          <Link className={`${buttonPrimary} shrink-0 px-8`} href="/demo">
-            Continue the conversation
-          </Link>
-        </Surface>
       </section>
 
       <SiteFooter />
