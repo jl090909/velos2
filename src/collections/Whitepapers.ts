@@ -14,7 +14,8 @@ export const Whitepapers: CollectionConfig = {
     useAsTitle: 'title',
     group: 'Resources',
     defaultColumns: ['title', 'kind', 'publishedDate', '_status'],
-    description: 'Drives the cards at /resources. Upload the PDF, then paste the public file path.',
+    description:
+      'Every whitepaper, case study and brochure in the library. A record with a Body also gets its own page at /resources/<slug>/; a record without one stays a card that links to its PDF.',
   },
   access: {
     create: hasRole('admin', 'tech'),
@@ -56,6 +57,42 @@ export const Whitepapers: CollectionConfig = {
       type: 'textarea',
       required: true,
       admin: { description: 'Card description on /resources.' },
+    },
+    {
+      name: 'body',
+      type: 'richText',
+      admin: {
+        description:
+          'The full text of the case study or paper. Filling this in gives the record its own page at /resources/<slug>/ and turns the card into a "Read online" link. Leave it empty for a PDF-only entry.',
+      },
+    },
+    {
+      type: 'row',
+      fields: [
+        {
+          name: 'sector',
+          type: 'text',
+          admin: { description: 'Optional, case studies only. Shown in the At a glance box, e.g. Airports, Maritime.' },
+        },
+        {
+          name: 'region',
+          type: 'text',
+          admin: { description: 'Optional, case studies only. e.g. United Kingdom, Middle East.' },
+        },
+      ],
+    },
+    {
+      name: 'quote',
+      type: 'textarea',
+      maxLength: 400,
+      admin: { description: 'Optional pull quote shown beside the body. Leave empty to render the page without one.' },
+    },
+    {
+      type: 'row',
+      fields: [
+        { name: 'quoteAuthor', type: 'text', admin: { description: 'Name or role to attribute the quote to.' } },
+        { name: 'quoteRole', type: 'text' },
+      ],
     },
     {
       name: 'coverImage',
@@ -104,7 +141,7 @@ export const Whitepapers: CollectionConfig = {
       type: 'text',
       admin: {
         description:
-          'Optional in-site URL for the HTML edition, e.g. /resources/rethinking-ot-cyber-risk-beyond-cvss. Blank means the card links straight to the PDF.',
+          'Optional. Only needed when the HTML edition lives somewhere other than /resources/<slug>/. Leave blank and a record with a Body links to its own page; a record without one links straight to the PDF.',
       },
     },
     {
@@ -121,7 +158,7 @@ export const Whitepapers: CollectionConfig = {
       admin: { position: 'sidebar', description: 'Reserved for future homepage use.' },
     },
   ],
-  hooks: revalidateOnChange({ paths: ['/resources'] }),
+  hooks: revalidateOnChange({ paths: ['/resources', '/sitemap.xml'], slugPrefixes: ['/resources/'] }),
   versions: {
     drafts: true,
   },

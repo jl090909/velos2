@@ -56,9 +56,9 @@ export default async function CustomersPage() {
                       ) : null}
                     </p>
                   ) : null}
-                  {customer.caseStudy ? (
+                  {customer.caseStudyPath ? (
                     <Link
-                      href={`/customers/${customer.slug}/`}
+                      href={customer.caseStudyPath}
                       className="mt-auto pt-6 text-sm font-medium text-[#003C64] no-underline hover:text-[#FF612A] transition-colors"
                     >
                       Read the case study

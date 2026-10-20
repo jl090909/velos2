@@ -2,6 +2,7 @@
 // Usage: node scripts/seed.mjs   (server must be running on $NEXT_PUBLIC_SERVER_URL or $CMS_URL)
 
 import { api, bullets, doc, findWhere, firstRegister, heading, login, para, required } from './cms-http.mjs'
+import { AIRPORT_BODY } from './data/airport-bms-body.mjs'
 
 const published = { _status: 'published' }
 
@@ -170,12 +171,14 @@ const main = async () => {
   // --------------------------------------------------------------- resources
   const papers = [
     {
+      body: AIRPORT_BODY,
       keyPoints: [{ point: 'Verified asset inventory' }, { point: 'Risk-scored register' }, { point: 'SOC-integrated NIDS' }],
       kind: 'Case Study',
       pdfPath: '/resources/airport-bms-cybersecurity-case-study.pdf',
       publishedDate: '2026-08-20T09:00:00.000Z',
-      readOnlinePath: '/resources/airport-bms-cybersecurity-case-study',
       readTime: '~18 min read',
+      region: 'United Kingdom',
+      sector: 'Airport Operations - Building Management Systems',
       series: 'Airport Operations - Building Management Systems',
       slug: 'airport-bms-cybersecurity-case-study',
       subtitle: 'Continuous visibility without touching a single controller',

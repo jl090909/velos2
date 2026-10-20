@@ -33,6 +33,7 @@ export type JobOpening = {
 }
 
 export type WhitepaperCard = {
+  body: RichTextData | null
   coverCaption?: string
   coverImage: MediaRef | null
   downloadUrl: string
@@ -40,8 +41,13 @@ export type WhitepaperCard = {
   keyPoints: string[]
   kind: string
   publishedDate: string
+  quote?: string
+  quoteAuthor?: string
+  quoteRole?: string
   readOnlinePath?: string
   readTime: string
+  region: string
+  sector: string
   series: string
   slug: string
   subtitle: string
@@ -191,12 +197,36 @@ const toJob = (raw: unknown): JobOpening => {
   }
 }
 
+/**
+ * In-site links carry the trailing slash the site is configured with, so a redirect lands on the
+ * final URL instead of bouncing through Next's normaliser first.
+ */
+const asSitePath = (value: string): string =>
+  value.startsWith('/') && !value.endsWith('/') ? `${value}/` : value
+
+/**
+ * The public URL of a paper's HTML edition.
+ *
+ * A record with a body is served by /resources/<slug>/, so an editor never has to retype the path;
+ * an explicit readOnlinePath still wins, which keeps the papers whose HTML edition is a hand-built
+ * page working exactly as before.
+ */
+export const whitepaperPath = (raw: unknown): string | undefined => {
+  const doc = isRecord(raw) ? raw : {}
+  const explicit = optional(doc.readOnlinePath)
+  if (explicit) {
+    return asSitePath(explicit)
+  }
+  return richText(doc.body) && str(doc.slug).length > 0 ? `/resources/${str(doc.slug)}/` : undefined
+}
+
 const toWhitepaper = (raw: unknown): WhitepaperCard => {
   const doc = isRecord(raw) ? raw : {}
   const uploaded = mediaRef(doc.pdf)
   const downloadUrl = uploaded?.url ?? str(doc.pdfPath)
-  const readOnlinePath = optional(doc.readOnlinePath)
+  const readOnlinePath = whitepaperPath(doc)
   return {
+    body: richText(doc.body),
     coverCaption: optional(doc.coverImageCaption),
     coverImage: mediaRef(doc.coverImage),
     downloadUrl,
@@ -204,8 +234,13 @@ const toWhitepaper = (raw: unknown): WhitepaperCard => {
     keyPoints: listOf(doc.keyPoints, 'point'),
     kind: str(doc.kind, 'Whitepaper'),
     publishedDate: str(doc.publishedDate),
+    quote: optional(doc.quote),
+    quoteAuthor: optional(doc.quoteAuthor),
+    quoteRole: optional(doc.quoteRole),
     readOnlinePath,
     readTime: str(doc.readTime),
+    region: str(doc.region),
+    sector: str(doc.sector),
     series: str(doc.series),
     slug: str(doc.slug),
     subtitle: str(doc.subtitle),
@@ -304,6 +339,28 @@ export const getWhitepapers = async (): Promise<CmsResult<WhitepaperCard[]>> => 
   }
 }
 
+export const getWhitepaperBySlug = async (slug: string): Promise<CmsResult<WhitepaperCard | null>> => {
+  const problem = configProblem()
+  if (problem) {
+    return { data: null, error: problem }
+  }
+
+  try {
+    const payload = await client()
+    const { docs } = await payload.find({
+      overrideAccess: false,
+      collection: 'whitepapers',
+      depth: 1,
+      limit: 1,
+      where: { ...publishedOnly(), slug: { equals: slug } },
+    })
+    return { data: docs.length > 0 ? toWhitepaper(docs[0] as unknown) : null, error: null }
+  } catch (error) {
+    console.error('[cms] getWhitepaperBySlug failed:', reason(error))
+    return { data: null, error: reason(error) }
+  }
+}
+
 export const getKnowledgeArticles = async (): Promise<CmsResult<KnowledgeArticle[]>> => {
   const problem = configProblem()
   if (problem) {
@@ -352,7 +409,7 @@ export const getKnowledgeArticleBySlug = async (
 }
 
 export type CustomerCard = {
-  caseStudy: RichTextData | null
+  caseStudyPath: string | null
   displayOrder: number
   featured: boolean
   id: number | string
@@ -404,8 +461,14 @@ const num = (value: unknown, fallback = 0): number => (typeof value === "number"
 
 const toCustomer = (raw: unknown): CustomerCard => {
   const doc = isRecord(raw) ? raw : {}
+  const linked = isRecord(doc.caseStudyDoc) ? doc.caseStudyDoc : null
+  const linkedSlug = linked ? str(linked.slug) : ''
+  const linkedPath = linked ? optional(linked.readOnlinePath) : undefined
+  const caseStudyPath = linked
+    ? (linkedPath ? asSitePath(linkedPath) : linkedSlug.length > 0 ? `/resources/${linkedSlug}/` : null)
+    : null
   return {
-    caseStudy: richText(doc.caseStudy),
+    caseStudyPath,
     displayOrder: num(doc.displayOrder, 100),
     featured: doc.featured === true,
     id: str(doc.id, "unknown"),

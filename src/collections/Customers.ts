@@ -14,7 +14,8 @@ export const Customers: CollectionConfig = {
     useAsTitle: 'name',
     group: 'Company',
     defaultColumns: ['name', 'sector', 'region', 'featured', '_status'],
-    description: 'Drives the cards and logo wall at /customers. Publish only what is approved for public use.',
+    description:
+      'The customer wall at /customers. Publish only what is approved for public use. A long-form story lives in Whitepapers & case studies and is linked from the caseStudyDoc field.',
   },
   access: {
     create: hasRole('admin', 'tech'),
@@ -61,11 +62,20 @@ export const Customers: CollectionConfig = {
       admin: { description: 'One or two lines on what the deployment achieved.' },
     },
     {
+      name: 'caseStudyDoc',
+      type: 'relationship',
+      relationTo: 'whitepapers',
+      admin: {
+        description:
+          'The full case study, written in Whitepapers & case studies. Pick it here and the card gains a "Read the case study" link to its /resources/<slug>/ page. The story itself is edited in that collection, not here.',
+      },
+    },
+    {
       name: 'caseStudy',
       type: 'richText',
       admin: {
-        description:
-          'Optional long-form case study. When present, the card links to /customers/<slug>/ which renders this body in full; when empty, the card stays a summary card.',
+        hidden: true,
+        description: 'Legacy field: case studies moved to Whitepapers & case studies (use caseStudyDoc above).',
       },
     },
     {
@@ -104,7 +114,7 @@ export const Customers: CollectionConfig = {
       ],
     },
   ],
-  hooks: revalidateOnChange({ paths: ['/customers'] }),
+  hooks: revalidateOnChange({ paths: ['/customers', '/sitemap.xml'], slugPrefixes: ['/customers/'] }),
   versions: {
     drafts: true,
   },

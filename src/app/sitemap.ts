@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 
 import { getNewsroomArticles } from '@/lib/newsroom'
+import { getWhitepapers } from '@/lib/cms'
 
 /**
  * Sitemap.
@@ -48,9 +49,16 @@ export const dynamic = 'force-dynamic'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const { data: articles } = await getNewsroomArticles({ limit: 500 })
+  const { data: papers } = await getWhitepapers()
 
   return [
     ...STATIC_ROUTES.map((route) => ({ url: `${BASE}${route}` })),
+    ...papers
+      .filter((paper) => paper.body && paper.slug.length > 0)
+      .map((paper) => ({
+        lastModified: paper.publishedDate ? new Date(paper.publishedDate) : undefined,
+        url: `${BASE}/resources/${paper.slug}/`,
+      })),
     ...articles
       .filter((article) => article.slug.length > 0)
       .map((article) => ({

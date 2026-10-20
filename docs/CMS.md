@@ -11,9 +11,9 @@ a whitepaper or a Knowledge Hub article.
 | Collection                 | Slug                      | Who can write          | Appears on                                     |
 | -------------------------- | ------------------------- | ---------------------- | ---------------------------------------------- |
 | Job openings               | `jobs`                    | admin, hr             | `/company/careers`, `/company/careers/<slug>`  |
-| Whitepapers & case studies | `whitepapers`             | admin, tech           | `/resources`                                   |
+| Whitepapers & case studies | `whitepapers`             | admin, tech           | `/resources`, `/resources/<slug>`               |
 | Knowledge Hub articles     | `knowledge-hub-articles`  | admin, tech           | `/resources/knowledge-hub`, `.../<slug>`       |
-| Customers                  | `customers`               | admin, tech           | `/customers`                                   |
+| Customers                  | `customers`               | admin, tech           | `/customers` (stories redirect to the library) |
 | Events                     | `events`                  | admin, tech           | `/company/events`, `/company/events/<slug>`    |
 | Press & media mentions     | `press-mentions`          | admin, tech           | `/company/media`                               |
 | Uploads (images + PDFs)    | `media`                   | admin, hr, tech       | referenced by the collections above            |
@@ -40,6 +40,36 @@ Publishing rules:
   removes it from the site without deleting the record.
 * Editing a record calls `revalidatePath` through `src/hooks/revalidate.ts`, so the prerendered
   pages update on the next request instead of waiting for the 5 minute ISR window.
+
+## Case studies and whitepapers
+
+Every long-form document in the library is one record in **Whitepapers & case studies**
+(`whitepapers`). There is no second place to edit a story:
+
+* `kind` sorts the library into Whitepapers / Case studies / Brochures bands.
+* Filling in **Body** (rich text) gives the record its own page at `/resources/<slug>/`, and the
+  card's "Read online" button points there. A record with no body is a card that links to its PDF.
+* `sector` and `region` feed the "At a glance" box; `quote`, `quoteAuthor` and `quoteRole` add the
+  pull quote beside the body; `coverImage` adds the hero image.
+* The library's featured slot is simply the newest published record, so a newly added case study
+  takes it. Give a record an older `publishedDate` to move it down, or back-date it to restore a
+  previous hero.
+
+Customer stories used to be written inside the `customers` collection and served at
+`/customers/<slug>/`. They now live in the library: `customers.caseStudyDoc` links a customer card to
+its case study, and `/customers/<slug>/` answers a permanent redirect to `/resources/<slug>/`, so old
+links keep working. The old `customers.caseStudy` rich-text field is hidden and kept only so no
+existing draft text is lost.
+
+Real content needs the one-off migration (idempotent, `--force` rewrites the bodies):
+
+```bash
+npm run migrate:case-studies
+```
+
+It copies every `customers.caseStudy` body into a published `whitepapers` record of kind Case Study,
+links the customer back to it, and installs the Airport BMS body on the record that already existed.
+`npm run seed` seeds the same Airport BMS body, so a fresh database needs no migration for that one.
 
 ## Local development
 
