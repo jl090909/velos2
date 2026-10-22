@@ -187,15 +187,15 @@ export default function VelosShieldPage() {
                 Site level or organisation level.
               </h3>
               <p className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed">
-                Velos Shield 1.1 protects a single site. Velos Shield 1.5 connects every site into one consolidated
-                vulnerability posture for the whole organisation.
+                One appliance protects a single site. Connect every site instance to the org instance and the same
+                data becomes one consolidated vulnerability posture for the whole organisation.
               </p>
             </div>
             <Link
               href="/product/org-level"
               className="inline-flex shrink-0 items-center justify-center rounded-full h-12 px-8 text-[14.25px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
             >
-              Explore 1.5 · Org-level
+              Explore the org-level view
             </Link>
           </CardContent>
         </Card>

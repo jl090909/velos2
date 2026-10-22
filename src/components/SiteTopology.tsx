@@ -32,7 +32,7 @@ export function SiteTopology({ networkLabel, deviceGroups }: Props) {
       <svg
         viewBox="0 0 720 320"
         role="img"
-        aria-label="Velos Shield 1.1 site appliance connected to sensors across a plant IT and OT network, with an optional uplink to Velos Shield 1.5"
+        aria-label="Velos Shield site appliance connected to sensors across a plant IT and OT network, with an optional uplink to the org instance"
         className="w-full h-auto"
       >
         {/* site boundary */}
@@ -45,7 +45,7 @@ export function SiteTopology({ networkLabel, deviceGroups }: Props) {
         <path d={`M${BOX.x + BOX.w} ${BOX.y + 31} L592 ${BOX.y + 31}`} stroke="#003C64" strokeWidth={1.4} opacity={0.45} fill="none" />
         <path d={`M592 ${BOX.y + 27} L598 ${BOX.y + 31} L592 ${BOX.y + 35} Z`} fill="#003C64" opacity={0.55} />
         <text x={600} y={BOX.y + 35} fill="#8b97a5" fontSize={10}>
-          → Velos Shield 1.5
+          → Org instance
         </text>
 
         {/* device connections */}
@@ -64,7 +64,7 @@ export function SiteTopology({ networkLabel, deviceGroups }: Props) {
         {/* appliance */}
         <rect x={BOX.x} y={BOX.y} width={BOX.w} height={BOX.h} rx={12} fill="#003C64" />
         <text x={cxBox} y={BOX.y + 27} textAnchor="middle" fill="#fff" fontSize={15} fontWeight={700}>
-          Velos Shield 1.1
+          Velos Shield
         </text>
         <text x={cxBox} y={BOX.y + 46} textAnchor="middle" fill="#FF612A" fontSize={11} fontWeight={600}>
           Site appliance

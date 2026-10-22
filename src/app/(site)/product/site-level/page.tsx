@@ -28,7 +28,7 @@ export default function SiteLevelPage() {
                 Product · Site level
               </p>
               <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl">
-                Velos Shield 1.1
+                Velos Shield at site level
               </h1>
               <p className="text-base md:text-xl text-white/80 max-w-2xl mb-8">
                 The Velos Shield appliance deployed at a site. It talks to sensors across your IT and OT network and
@@ -69,9 +69,9 @@ export default function SiteLevelPage() {
         </h2>
         <SiteTopology networkLabel={SITE_NETWORK_LABEL} deviceGroups={SITE_DEVICE_GROUPS} />
         <p className="mt-5 text-sm text-muted-foreground leading-relaxed max-w-3xl">
-          Sensors observe the plant network passively and report to the Velos Shield 1.1 appliance, which collects the
-          data needed for vulnerability assessment at the site. An optional uplink rolls that site into Velos Shield
-          1.5 for organisation-level reporting.
+          Sensors observe the plant network passively and report to the Velos Shield appliance, which collects the
+          data needed for vulnerability assessment at the site. An optional uplink rolls that site into the org
+          instance for organisation-level reporting.
         </p>
       </section>
 
