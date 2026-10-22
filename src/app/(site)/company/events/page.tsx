@@ -154,7 +154,7 @@ export default async function CompanyEventsPage() {
           {past.length > 0 ? (
             <section className="border-t border-border/60 pt-12">
               <div className="mb-7">
-                <h2 className="text-[24px] font-bold tracking-[-.04em] text-[#003C64] md:text-[30px]">Past events</h2>
+                <h2 className="text-[20.4px] font-bold tracking-[-.04em] text-[#003C64] md:text-[25.5px]">Past events</h2>
               </div>
               <Surface className="overflow-x-auto p-2">
                 <table className="w-full min-w-[640px] border-collapse text-sm">

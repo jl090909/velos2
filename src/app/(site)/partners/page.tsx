@@ -60,7 +60,7 @@ export default function PartnersPage() {
   return (
     <>
       <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Partners</p>
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Partners</p>
         <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl text-[#003C64]">
           Find the OT answer with your clients.
         </h1>
@@ -72,13 +72,13 @@ export default function PartnersPage() {
         <div className="flex flex-wrap gap-3">
           <a
             href="#partner-form"
-            className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
+            className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[14.25px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
           >
             Become a partner
           </a>
           <Link
             href="/resources/airport-bms-cybersecurity-case-study"
-            className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-medium border border-border/70 no-underline text-muted-foreground hover:text-[#003C64] hover:border-[#003C64]/40 transition-colors"
+            className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[14.25px] font-medium border border-border/70 no-underline text-muted-foreground hover:text-[#003C64] hover:border-[#003C64]/40 transition-colors"
           >
             See a delivered engagement
           </Link>
@@ -86,7 +86,7 @@ export default function PartnersPage() {
       </section>
 
       <section className="py-12 max-w-6xl mx-auto px-6">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">For partners</p>
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">For partners</p>
         <h2 className="text-2xl md:text-4xl font-bold tracking-[-.04em] text-[#003C64] mb-4 max-w-3xl">
           A faster route to an answer your client can fund
         </h2>
@@ -101,7 +101,7 @@ export default function PartnersPage() {
               className="border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,23,42,.08)] transition-all duration-300"
             >
               <CardContent className="p-8 md:p-9">
-                <h3 className="text-xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">{b.title}</h3>
+                <h3 className="text-title-xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">{b.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{b.body}</p>
               </CardContent>
             </Card>
@@ -110,7 +110,7 @@ export default function PartnersPage() {
       </section>
 
       <section className="py-12 max-w-6xl mx-auto px-6">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Who qualifies</p>
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Who qualifies</p>
         <h2 className="text-2xl md:text-4xl font-bold tracking-[-.04em] text-[#003C64] mb-4 max-w-3xl">
           Indicative partnership criteria
         </h2>
@@ -119,13 +119,13 @@ export default function PartnersPage() {
         </p>
         <ul className="grid md:grid-cols-2 gap-x-10 gap-y-3 max-w-4xl">
           {criteria.map((c) => (
-            <li key={c} className="flex gap-3 text-sm md:text-[15px] text-muted-foreground leading-relaxed">
+            <li key={c} className="flex gap-3 text-sm md:text-[14.25px] text-muted-foreground leading-relaxed">
               <span aria-hidden className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF612A]" />
               <span>{c}</span>
             </li>
           ))}
         </ul>
-        <p className="mt-8 text-[13px] text-muted-foreground max-w-3xl">
+        <p className="mt-8 text-[12.35px] text-muted-foreground max-w-3xl">
           *Indicative only and subject to review: scope, region and commercial terms are agreed per partner. Contact us
           and we will talk you through the current programme.
         </p>
@@ -134,7 +134,7 @@ export default function PartnersPage() {
       <section className="py-12 max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-6 items-start">
         <Card className="border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)]">
           <CardContent className="p-8 md:p-10">
-            <h3 className="text-xl font-semibold tracking-[-.03em] text-[#003C64] mb-4">Who we partner with</h3>
+            <h3 className="text-title-xl font-semibold tracking-[-.03em] text-[#003C64] mb-4">Who we partner with</h3>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
               We work with organisations that already sit next to industrial operations.
             </p>
@@ -151,8 +151,8 @@ export default function PartnersPage() {
 
         <Card className="border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)]">
           <CardContent className="p-8 md:p-10">
-            <h3 className="text-xl font-semibold tracking-[-.03em] text-[#003C64] mb-4">Why it matters</h3>
-            <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-6">
+            <h3 className="text-title-xl font-semibold tracking-[-.03em] text-[#003C64] mb-4">Why it matters</h3>
+            <p className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed mb-6">
               Most industrial sites can describe their process in detail and their cyber-physical exposure barely at
               all: which assets exist, what they talk to, and which failure stops production. That gap is why OT
               security projects stall before they are scoped.
@@ -176,7 +176,7 @@ export default function PartnersPage() {
       </section>
 
       <section id="partner-form" className="py-12 pb-24 max-w-6xl mx-auto px-6">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Become a partner</p>
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Become a partner</p>
         <div className="grid lg:grid-cols-[1fr_1.1fr] gap-6 items-start">
           <div>
             <h2 className="text-2xl md:text-4xl font-bold tracking-[-.04em] text-[#003C64] mb-4 max-w-xl">
@@ -240,7 +240,7 @@ export default function PartnersPage() {
                   placeholder="What would you like to do: add OT monitoring to an existing practice, co-sell on a live opportunity, integrate with our platform..."
                   className="rounded-[1rem] min-h-[130px] bg-[linear-gradient(180deg,rgba(255,255,255,.95)_0%,rgba(244,245,247,.84)_100%)] border-transparent shadow-[0_1px_0_rgba(255,255,255,.95)_inset,0_10px_24px_rgba(15,23,42,.04)]"
                 />
-                <label className="flex items-start gap-3 text-[13px] text-muted-foreground leading-relaxed cursor-pointer">
+                <label className="flex items-start gap-3 text-[12.35px] text-muted-foreground leading-relaxed cursor-pointer">
                   <input type="checkbox" name="consent" required className="mt-0.5 h-4 w-4 accent-[#FF612A]" />
                   <span>
                     I agree to be contacted about this partnership enquiry. We use your details only to respond to it.
@@ -249,7 +249,7 @@ export default function PartnersPage() {
                 <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
                 <button
                   type="submit"
-                  className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all mt-1 cursor-pointer"
+                  className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[14.25px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all mt-1 cursor-pointer"
                 >
                   Send partnership enquiry
                 </button>

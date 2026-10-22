@@ -11,9 +11,9 @@ function Section({ n, title, children }: { n: string; title: string; children: R
   return (
     <Card className="border-border/70">
       <CardContent className="p-8 md:p-10">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{n}</p>
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{n}</p>
         <h2 className="text-2xl font-semibold tracking-[-.03em] mb-4 text-[#003C64]">{title}</h2>
-        <div className="text-sm md:text-[15px] text-muted-foreground leading-relaxed space-y-4">{children}</div>
+        <div className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed space-y-4">{children}</div>
       </CardContent>
     </Card>
   );
@@ -35,12 +35,12 @@ export default function Paper1Page() {
           <div className="relative min-h-[360px] md:h-[440px] bg-cover bg-center" style={{ backgroundImage: 'url(/shutterstock/hero-ot.jpg)' }}>
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.25)_0%,rgba(0,0,0,.58)_100%)]" />
             <CardContent className="relative flex min-h-[360px] md:h-[440px] flex-col justify-end p-8 md:p-12 text-white">
-              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-white/70 mb-3">POV Whitepaper Series • August 2026</p>
+              <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-white/70 mb-3">POV Whitepaper Series • August 2026</p>
               <h1 className="text-3xl md:text-5xl font-bold tracking-[-.04em] leading-[1.05] mb-4 max-w-3xl">Rethinking OT Cyber Risk Beyond CVSS</h1>
               <p className="text-base md:text-xl text-white/80 max-w-2xl mb-6">The Operational Context Gap — the distance between what cybersecurity tools can describe and what operations needs to know before that data becomes a decision.</p>
               <div className="flex flex-wrap gap-3">
-                <a href="/resources/rethinking-ot-cyber-risk-beyond-cvss.pdf" download className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold bg-white text-[#003C64] hover:bg-white/90 transition-colors no-underline">Download PDF</a>
-                <Link href="/resources" className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold border border-white/30 bg-white/15 text-white hover:bg-white/20 transition-colors no-underline backdrop-blur-sm">← All resources</Link>
+                <a href="/resources/rethinking-ot-cyber-risk-beyond-cvss.pdf" download className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[13.3px] font-semibold bg-white text-[#003C64] hover:bg-white/90 transition-colors no-underline">Download PDF</a>
+                <Link href="/resources" className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[13.3px] font-semibold border border-white/30 bg-white/15 text-white hover:bg-white/20 transition-colors no-underline backdrop-blur-sm">← All resources</Link>
               </div>
             </CardContent>
           </div>
@@ -50,7 +50,7 @@ export default function Paper1Page() {
       <section className="py-6 max-w-6xl mx-auto px-6">
         <Card className="border-border/70">
           <CardContent className="p-8 md:p-10">
-            <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Executive summary</p>
+            <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Executive summary</p>
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-4">
               Industrial organisations can now see more of their operational technology than at any point in the last two decades — yet CISOs and plant leaders still cannot say, with confidence, which cyber conditions actually threaten their operation right now. This is not a visibility failure. CISA has published over 12,000 known OT/ICS vulnerabilities since 2010, and severity keeps climbing. The problem is that severity is not consequence.
             </p>
@@ -139,8 +139,8 @@ export default function Paper1Page() {
           <CardContent className="p-8 flex flex-col md:flex-row gap-4 md:items-center justify-between">
             <p className="text-sm text-muted-foreground">About Velos Shield — OT monitoring designed around trustworthy evidence, operational context and persistent memory.</p>
             <div className="flex gap-3 shrink-0">
-              <a href="/resources/rethinking-ot-cyber-risk-beyond-cvss.pdf" download className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] no-underline">Download PDF</a>
-              <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold border border-border/70 bg-white no-underline text-foreground">Request Demo</Link>
+              <a href="/resources/rethinking-ot-cyber-risk-beyond-cvss.pdf" download className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[13.3px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] no-underline">Download PDF</a>
+              <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[13.3px] font-semibold border border-border/70 bg-white no-underline text-foreground">Request Demo</Link>
             </div>
           </CardContent>
         </Card>

@@ -59,7 +59,7 @@ export function VulnSnapshot({
         </table>
       </div>
 
-      <p className="mt-4 text-[13px] text-muted-foreground">Sample data for illustration only.</p>
+      <p className="mt-4 text-[12.35px] text-muted-foreground">Sample data for illustration only.</p>
     </div>
   );
 }

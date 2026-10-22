@@ -50,10 +50,10 @@ export default function HomePage() {
               </p>
               </div>
               <div className="flex flex-wrap gap-4">
-                <Link href="/product" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold border border-white/30 bg-white/15 text-white shadow-[0_1px_0_rgba(255,255,255,.15)_inset] hover:bg-white/20 transition-colors no-underline backdrop-blur-sm">
+                <Link href="/product" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[14.25px] font-semibold border border-white/30 bg-white/15 text-white shadow-[0_1px_0_rgba(255,255,255,.15)_inset] hover:bg-white/20 transition-colors no-underline backdrop-blur-sm">
                   Explore Platform
                 </Link>
-                <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline">
+                <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[14.25px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline">
                   Request Demo
                 </Link>
               </div>
@@ -71,7 +71,7 @@ export default function HomePage() {
 
       <section className="py-16 max-w-6xl mx-auto px-6">
         <div className="max-w-3xl mb-8">
-          <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Business decisions</p>
+          <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Business decisions</p>
           <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] text-[#003C64]">
             How Velos Shield helps your business
           </h2>
@@ -110,9 +110,9 @@ export default function HomePage() {
                 />
               </div>
               <div className="p-8 md:p-10">
-                <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{item.label}</p>
+                <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{item.label}</p>
                 <h2 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">{item.title}</h2>
-                <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed max-w-lg">{item.body}</p>
+                <p className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed max-w-lg">{item.body}</p>
               </div>
             </div>
           ))}
@@ -125,7 +125,7 @@ export default function HomePage() {
         <DotGrid className="left-6 bottom-8 h-28 w-28" />
         <div className="relative flex items-end justify-between gap-6 mb-10">
           <div>
-            <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Platform pillars</p>
+            <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Platform pillars</p>
             <h2 className="text-3xl md:text-4xl font-semibold tracking-[-.04em] text-[#003C64]">Built for industrial security teams who need clarity.</h2>
           </div>
           <p className="hidden md:block max-w-xl text-muted-foreground text-sm leading-relaxed">
@@ -136,7 +136,7 @@ export default function HomePage() {
           {pillars.map((p) => (
             <Card key={p.title} className="border-border/70 shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,23,42,.08)] transition-all duration-300">
               <CardContent className="p-7">
-                <h3 className="text-lg font-semibold mb-2 text-[#003C64]">{p.title}</h3>
+                <h3 className="text-title-lg font-semibold mb-2 text-[#003C64]">{p.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
               </CardContent>
             </Card>
@@ -148,7 +148,7 @@ export default function HomePage() {
         <Gear className="absolute right-10 top-14 h-16 w-16 opacity-25" />
         <DotGrid className="left-6 bottom-10 h-24 w-24" />
         <div className="relative max-w-6xl mx-auto px-6">
-                  <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Inspired by modern security platforms</p>
+                  <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Inspired by modern security platforms</p>
           <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-5 text-[#003C64]">
             One platform for OT visibility, security operations, and trust.
           </h2>

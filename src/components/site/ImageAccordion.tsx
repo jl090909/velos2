@@ -55,7 +55,7 @@ export function ImageAccordion({ items, defaultOpen = 0 }: { items: AccordionIte
                 onClick={() => setOpen(isOpen ? null : index)}
                 type="button"
               >
-                <span className="text-[22px] font-semibold leading-[1.16] tracking-[-.04em] text-[#0A2231] transition-colors group-hover:text-[#003C64] md:text-[28px]">
+                <span className="text-[18.7px] font-semibold leading-[1.16] tracking-[-.04em] text-[#0A2231] transition-colors group-hover:text-[#003C64] md:text-[23.8px]">
                   {item.title}
                 </span>
                 <span

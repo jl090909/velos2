@@ -37,7 +37,7 @@ export function NewsroomFilters({
     <div className="rounded-[1.35rem] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] p-5 shadow-[0_1px_3px_rgba(15,23,42,.04)]">
       <div className="flex flex-wrap items-center gap-2">
         <Link
-          className={`inline-flex items-center rounded-full px-4 py-2 text-[13px] font-medium no-underline transition-all ${
+          className={`inline-flex items-center rounded-full px-4 py-2 text-[12.35px] font-medium no-underline transition-all ${
             activeCategory
               ? 'border border-border/70 text-muted-foreground hover:border-[#003C64]/40 hover:text-[#003C64]'
               : 'bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] text-[#FF612A]'
@@ -51,7 +51,7 @@ export function NewsroomFilters({
           return (
             <Link
               key={category}
-              className={`inline-flex items-center rounded-full px-4 py-2 text-[13px] font-medium no-underline transition-all ${
+              className={`inline-flex items-center rounded-full px-4 py-2 text-[12.35px] font-medium no-underline transition-all ${
                 active
                   ? 'bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] text-[#FF612A]'
                   : 'border border-border/70 text-muted-foreground hover:border-[#003C64]/40 hover:text-[#003C64]'

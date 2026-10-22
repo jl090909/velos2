@@ -8,7 +8,7 @@ export default function CompanyLeadershipPage() {
     <>
       <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
         <CompanyTabs />
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mt-10 mb-3">Company</p>
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mt-10 mb-3">Company</p>
         <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl text-[#003C64]">
           Leadership.
         </h1>

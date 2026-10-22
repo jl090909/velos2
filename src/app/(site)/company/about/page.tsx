@@ -6,7 +6,7 @@ export default function CompanyAboutPage() {
     <>
       <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
         <CompanyTabs />
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mt-10 mb-3">Company</p>
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mt-10 mb-3">Company</p>
         <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl text-[#003C64]">
           About Velos Shield.
         </h1>
@@ -28,7 +28,7 @@ export default function CompanyAboutPage() {
               key={c.label}
               className="rounded-[1.35rem] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] p-8 shadow-[0_1px_3px_rgba(15,23,42,.04)]"
             >
-              <h2 className="text-lg font-semibold text-[#003C64] mb-2">{c.label}</h2>
+              <h2 className="text-title-lg font-semibold text-[#003C64] mb-2">{c.label}</h2>
               <p className="text-sm text-muted-foreground leading-relaxed">{c.body}</p>
             </div>
           ))}

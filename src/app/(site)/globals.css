@@ -1,5 +1,46 @@
 @import "tailwindcss";
 
+/**
+ * Global type scale.
+ *
+ * Two groups, because the brief is two different numbers:
+ *   - body / UI text (up to text-xl) is 5% smaller than tailwind's stock scale
+ *   - display sizes (text-2xl and up) are the heading sizes on this site - verified: no non-heading
+ *     element uses text-4xl/5xl/6xl - so they land 15% below stock
+ * Declaring it in the theme keeps every responsive variant working: md:text-6xl resolves to the
+ * same (scaled) token as text-6xl, so breakpoints are untouched.
+ */
+@theme {
+  /* body + UI: 0.95 */
+  --text-xs: 0.7125rem;
+  --text-sm: 0.83125rem;
+  --text-base: 0.95rem;
+  --text-lg: 1.06875rem;
+  --text-xl: 1.1875rem;
+  /* display / headings: 0.85 */
+  --text-2xl: 1.275rem;
+  --text-3xl: 1.59375rem;
+  --text-4xl: 1.9125rem;
+  --text-5xl: 2.55rem;
+  --text-6xl: 3.1875rem;
+  --text-7xl: 3.825rem;
+  --text-8xl: 5.1rem;
+  --text-9xl: 6.8rem;
+}
+
+/**
+ * Small headings: the card titles and step labels that sit on h2/h3 but use a body size class.
+ * These utilities give them the heading treatment (0.95 x 0.8947368 = 0.85) without inventing a
+ * new size step, and they work with md:/lg: variants like any other utility.
+ */
+@utility text-title-xs { font-size: calc(var(--text-xs) * 0.8947368); line-height: var(--text-xs--line-height, 1.4); }
+@utility text-title-sm { font-size: calc(var(--text-sm) * 0.8947368); line-height: var(--text-sm--line-height, 1.5); }
+@utility text-title-base { font-size: calc(var(--text-base) * 0.8947368); line-height: var(--text-base--line-height, 1.5); }
+@utility text-title-lg { font-size: calc(var(--text-lg) * 0.8947368); line-height: var(--text-lg--line-height, 1.5); }
+@utility text-title-xl { font-size: calc(var(--text-xl) * 0.8947368); line-height: var(--text-xl--line-height, 1.4); }
+
+
+
 @font-face {
   font-family: 'Comfortaa';
   font-style: normal;
@@ -271,5 +312,6 @@ div[data-slot='card'] {
   0%, 100% { opacity: 0.5; transform: translateX(0); }
   50% { opacity: 1; transform: translateX(3px); }
 }
+
 
 

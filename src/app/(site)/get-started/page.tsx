@@ -87,7 +87,7 @@ export default function GetStartedPage() {
               )}
               <CardContent className="flex flex-1 flex-col p-8 md:p-9">
                 <div className="flex items-start justify-between gap-4 mb-6">
-                  <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A]">{p.name}</p>
+                  <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A]">{p.name}</p>
                 </div>
                 <h3 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-1.5">{p.full}</h3>
                 <p className="text-sm font-medium text-foreground/80 mb-4">{p.tagline}</p>
@@ -106,7 +106,7 @@ export default function GetStartedPage() {
                       <Link
                         key={c.label}
                         href={c.href}
-                        className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.22)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
+                        className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[13.3px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.22)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
                       >
                         {c.label}
                       </Link>
@@ -114,7 +114,7 @@ export default function GetStartedPage() {
                       <Link
                         key={c.label}
                         href={c.href}
-                        className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold bg-[linear-gradient(180deg,rgba(255,255,255,.96)_0%,rgba(242,243,246,.88)_100%)] text-foreground ring-1 ring-white/80 shadow-[0_1px_0_rgba(255,255,255,.95)_inset,0_10px_24px_rgba(15,23,42,.05)] hover:brightness-[1.02] transition-all no-underline"
+                        className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[13.3px] font-semibold bg-[linear-gradient(180deg,rgba(255,255,255,.96)_0%,rgba(242,243,246,.88)_100%)] text-foreground ring-1 ring-white/80 shadow-[0_1px_0_rgba(255,255,255,.95)_inset,0_10px_24px_rgba(15,23,42,.05)] hover:brightness-[1.02] transition-all no-underline"
                       >
                         {c.label}
                       </Link>

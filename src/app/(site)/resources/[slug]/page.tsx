@@ -56,7 +56,7 @@ export default async function WhitepaperPage({ params }: Props) {
     <>
       <section className="mx-auto max-w-6xl px-6 pt-20 pb-10">
         <Link
-          className="text-[12px] font-medium text-muted-foreground no-underline transition-colors hover:text-[#FF612A]"
+          className="text-[11.4px] font-medium text-muted-foreground no-underline transition-colors hover:text-[#FF612A]"
           href="/resources"
         >
           <span aria-hidden>&larr;</span> All resources
@@ -117,11 +117,11 @@ export default async function WhitepaperPage({ params }: Props) {
         <aside className="min-w-0">
           {facts.length > 0 ? (
             <div className="rounded-[1.35rem] border border-border/60 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] p-7">
-              <p className="text-[11px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">At a glance</p>
+              <p className="text-[10.45px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">At a glance</p>
               <dl className="mt-4 space-y-3">
                 {facts.map((fact) => (
                   <div key={fact.label}>
-                    <dt className="text-[11px] uppercase tracking-[.14em] text-muted-foreground">{fact.label}</dt>
+                    <dt className="text-[10.45px] uppercase tracking-[.14em] text-muted-foreground">{fact.label}</dt>
                     <dd className="text-sm font-medium text-[#003C64]">{fact.value}</dd>
                   </div>
                 ))}
@@ -131,9 +131,9 @@ export default async function WhitepaperPage({ params }: Props) {
 
           {paper.quote ? (
             <blockquote className="mt-5 rounded-[1.35rem] border border-border/60 bg-[#003C64] p-7 text-white">
-              <p className="text-[15px] leading-relaxed">&ldquo;{paper.quote}&rdquo;</p>
+              <p className="text-[14.25px] leading-relaxed">&ldquo;{paper.quote}&rdquo;</p>
               {paper.quoteAuthor || paper.quoteRole ? (
-                <footer className="mt-4 text-[11px] uppercase tracking-[.14em] text-white/60">
+                <footer className="mt-4 text-[10.45px] uppercase tracking-[.14em] text-white/60">
                   {paper.quoteAuthor}
                   {paper.quoteAuthor && paper.quoteRole ? ', ' : ''}
                   {paper.quoteRole}

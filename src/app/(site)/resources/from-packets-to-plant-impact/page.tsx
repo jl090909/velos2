@@ -78,12 +78,12 @@ export default function Paper2Page() {
           <div className="relative min-h-[360px] md:h-[440px] bg-cover bg-center" style={{ backgroundImage: 'url(/shutterstock/industries-hero.jpg)' }}>
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.25)_0%,rgba(0,0,0,.58)_100%)]" />
             <CardContent className="relative flex min-h-[360px] md:h-[440px] flex-col justify-end p-8 md:p-12 text-white">
-              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-white/70 mb-3">POV Whitepaper Series • August 2026</p>
+              <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-white/70 mb-3">POV Whitepaper Series • August 2026</p>
               <h1 className="text-3xl md:text-5xl font-bold tracking-[-.04em] leading-[1.05] mb-4 max-w-3xl">From Packets to Plant Impact</h1>
               <p className="text-base md:text-xl text-white/80 max-w-2xl mb-6">Why the next evolution of OT security monitoring isn’t about seeing more — it’s about understanding what matters.</p>
               <div className="flex flex-wrap gap-3">
-                <a href="/resources/from-packets-to-plant-impact.pdf" download className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold bg-white text-[#003C64] hover:bg-white/90 transition-colors no-underline">Download PDF</a>
-                <Link href="/resources" className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold border border-white/30 bg-white/15 text-white hover:bg-white/20 transition-colors no-underline backdrop-blur-sm">← All resources</Link>
+                <a href="/resources/from-packets-to-plant-impact.pdf" download className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[13.3px] font-semibold bg-white text-[#003C64] hover:bg-white/90 transition-colors no-underline">Download PDF</a>
+                <Link href="/resources" className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[13.3px] font-semibold border border-white/30 bg-white/15 text-white hover:bg-white/20 transition-colors no-underline backdrop-blur-sm">← All resources</Link>
               </div>
             </CardContent>
           </div>
@@ -93,7 +93,7 @@ export default function Paper2Page() {
       <section className="py-6 max-w-6xl mx-auto px-6">
         <Card className="border-border/70">
           <CardContent className="p-8 md:p-10">
-            <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Executive summary</p>
+            <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Executive summary</p>
             <p className="text-sm md:text-base text-muted-foreground leading-relaxed mb-6">
               OT monitoring spent a decade learning to see: discover assets, decode protocols, flag suspicious activity. That progress matters — but more dashboards and alerts still don’t answer what actually happened and why it matters.
             </p>
@@ -113,16 +113,16 @@ export default function Paper2Page() {
         {parts.map((p) => (
           <Card key={p.n} className="border-border/70">
             <CardContent className="p-8 md:p-10">
-              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{p.n}</p>
+              <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">{p.n}</p>
               <h2 className="text-2xl font-semibold tracking-[-.03em] mb-4 text-[#003C64]">{p.title}</h2>
               <blockquote className="border-l-2 border-[#FF612A] pl-5 py-1 text-foreground font-medium text-base md:text-lg leading-relaxed mb-5">“{p.quote}”</blockquote>
-              <div className="text-sm md:text-[15px] text-muted-foreground leading-relaxed space-y-4 mb-5">
+              <div className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed space-y-4 mb-5">
                 {p.body.map((b, i) => (
                   <p key={i}>{b}</p>
                 ))}
               </div>
               <div className="rounded-[1.2rem] border border-white/65 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.92)_100%)] p-4 text-sm">
-                <span className="text-[11px] font-semibold uppercase tracking-[.16em] text-[#FF612A] block mb-1">Our position</span>
+                <span className="text-[10.45px] font-semibold uppercase tracking-[.16em] text-[#FF612A] block mb-1">Our position</span>
                 <span className="text-muted-foreground">{p.position}</span>
               </div>
             </CardContent>
@@ -131,12 +131,12 @@ export default function Paper2Page() {
 
         <Card className="border-border/70">
           <CardContent className="p-8 md:p-10">
-            <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Closing</p>
+            <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Closing</p>
             <h2 className="text-2xl font-semibold tracking-[-.03em] mb-4 text-[#003C64]">Where this industry is headed</h2>
-            <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-4">
+            <p className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed mb-4">
               OT monitoring is moving from a visibility problem toward an understanding problem. The winners won’t be the systems with the most detections — they’ll be the systems that preserve trustworthy evidence, understand it in the context of a specific plant, remember what the organization has learned, and help people act on it.
             </p>
-            <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-6">
+            <p className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed mb-6">
               The future may not be defined by how many packets a system can see or alerts it can generate — but by how well it preserves evidence, remembers what the plant taught us, and explains what changed in terms that matter to the operation.
             </p>
             <div className="pt-4 border-t border-border/50">
@@ -152,8 +152,8 @@ export default function Paper2Page() {
           <CardContent className="p-8 flex flex-col md:flex-row gap-4 md:items-center justify-between">
             <p className="text-sm text-muted-foreground">About Velos Shield — OT monitoring designed around trustworthy evidence, operational context and persistent memory.</p>
             <div className="flex gap-3 shrink-0">
-              <a href="/resources/from-packets-to-plant-impact.pdf" download className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] no-underline">Download PDF</a>
-              <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[14px] font-semibold border border-border/70 bg-white no-underline text-foreground">Request Demo</Link>
+              <a href="/resources/from-packets-to-plant-impact.pdf" download className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[13.3px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] no-underline">Download PDF</a>
+              <Link href="/demo" className="inline-flex items-center justify-center rounded-full h-11 px-6 text-[13.3px] font-semibold border border-border/70 bg-white no-underline text-foreground">Request Demo</Link>
             </div>
           </CardContent>
         </Card>

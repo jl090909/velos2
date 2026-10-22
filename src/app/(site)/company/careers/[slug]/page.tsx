@@ -50,7 +50,7 @@ export default async function JobPage({ params }: Props) {
     <>
       <section className="pt-20 pb-10 max-w-6xl mx-auto px-6">
         <CompanyTabs />
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mt-10 mb-3">
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mt-10 mb-3">
           Careers - {job.team}
         </p>
         <h1 className="text-3xl md:text-5xl font-bold tracking-[-.05em] leading-[1.05] mb-5 max-w-3xl text-[#003C64]">
@@ -63,15 +63,15 @@ export default async function JobPage({ params }: Props) {
         <article className="min-w-0">
           {job.description ? (
             <RichText
-              className="text-[15px] leading-relaxed text-muted-foreground [&_a]:text-[#003C64] [&_a]:underline [&_blockquote]:border-l-2 [&_blockquote]:border-[#FF612A]/40 [&_blockquote]:pl-4 [&_blockquote]:italic [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-[-.03em] [&_h2]:text-[#003C64] [&_h2]:mt-9 [&_h2]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-[#003C64] [&_h3]:mt-7 [&_h3]:mb-2 [&_li]:mb-1.5 [&_p]:mb-4 [&_strong]:text-[#003C64] [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-5"
+              className="text-[14.25px] leading-relaxed text-muted-foreground [&_a]:text-[#003C64] [&_a]:underline [&_blockquote]:border-l-2 [&_blockquote]:border-[#FF612A]/40 [&_blockquote]:pl-4 [&_blockquote]:italic [&_h2]:text-2xl [&_h2]:font-semibold [&_h2]:tracking-[-.03em] [&_h2]:text-[#003C64] [&_h2]:mt-9 [&_h2]:mb-3 [&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-[#003C64] [&_h3]:mt-7 [&_h3]:mb-2 [&_li]:mb-1.5 [&_p]:mb-4 [&_strong]:text-[#003C64] [&_ul]:list-disc [&_ul]:pl-5 [&_ul]:mb-5"
               data={job.description}
             />
           ) : null}
 
           {job.responsibilities.length > 0 ? (
             <div className="mt-10">
-              <h2 className="text-xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">Responsibilities</h2>
-              <ul className="list-disc pl-5 space-y-1.5 text-[15px] text-muted-foreground">
+              <h2 className="text-title-xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">Responsibilities</h2>
+              <ul className="list-disc pl-5 space-y-1.5 text-[14.25px] text-muted-foreground">
                 {job.responsibilities.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -81,8 +81,8 @@ export default async function JobPage({ params }: Props) {
 
           {job.requirements.length > 0 ? (
             <div className="mt-10">
-              <h2 className="text-xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">Requirements</h2>
-              <ul className="list-disc pl-5 space-y-1.5 text-[15px] text-muted-foreground">
+              <h2 className="text-title-xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">Requirements</h2>
+              <ul className="list-disc pl-5 space-y-1.5 text-[14.25px] text-muted-foreground">
                 {job.requirements.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -95,7 +95,7 @@ export default async function JobPage({ params }: Props) {
           <dl className="space-y-4">
             {facts.map((fact) => (
               <div key={fact.label}>
-                <dt className="text-[11px] font-semibold tracking-[.16em] uppercase text-muted-foreground">{fact.label}</dt>
+                <dt className="text-[10.45px] font-semibold tracking-[.16em] uppercase text-muted-foreground">{fact.label}</dt>
                 <dd className="text-sm text-[#003C64] mt-1">{fact.value}</dd>
               </div>
             ))}
@@ -103,7 +103,7 @@ export default async function JobPage({ params }: Props) {
           <a
             href={applyHref}
             {...(isExternal ? { rel: 'noreferrer', target: '_blank' } : {})}
-            className="mt-7 w-full inline-flex items-center justify-center rounded-full h-12 px-7 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
+            className="mt-7 w-full inline-flex items-center justify-center rounded-full h-12 px-7 text-[14.25px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
           >
             Apply for this role
           </a>

@@ -105,13 +105,13 @@ export default function IndustriesPage() {
             </div>
           </div>
           <div>
-            <span className="inline-block text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-4">
+            <span className="inline-block text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-4">
               Visualize
             </span>
             <h2 className="text-3xl md:text-4xl font-bold tracking-[-.03em] text-[#003C64] mb-5 leading-[1.1]">
               See every asset, connection, and risk across your OT network
             </h2>
-            <p className="text-[15px] text-muted-foreground leading-relaxed mb-6 max-w-lg">
+            <p className="text-[14.25px] text-muted-foreground leading-relaxed mb-6 max-w-lg">
               Velos Shield&apos;s interactive Network Map renders your entire operational
               topology as a force-directed graph — discover devices, expose hidden
               connections, and highlight high-risk communication paths in real time.
@@ -148,12 +148,12 @@ export default function IndustriesPage() {
               <div className="p-9 md:p-10">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div>
-                    <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Industry</p>
+                    <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Industry</p>
                     <h2 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-2">{ind.title}</h2>
                     <p className="text-sm font-medium text-foreground/80">{ind.lead}</p>
                   </div>
                 </div>
-                <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-8 max-w-xl">{ind.desc}</p>
+                <p className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed mb-8 max-w-xl">{ind.desc}</p>
                 <div className="grid sm:grid-cols-2 gap-4 pt-6 border-t border-border/50">
                   <div className="rounded-none border border-white/65 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.92)_100%)] p-4 shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
                     <b className="text-lg font-semibold block mb-1">{ind.stat1}</b>

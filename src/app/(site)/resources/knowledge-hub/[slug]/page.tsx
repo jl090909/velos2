@@ -29,7 +29,7 @@ type LexicalBody = {
 }
 
 const BODY_CLASS = [
-  'text-[16px] leading-relaxed text-muted-foreground',
+  'text-[15.2px] leading-relaxed text-muted-foreground',
   '[&_a]:text-[#003C64] [&_a]:underline',
   '[&_blockquote]:border-l-2 [&_blockquote]:border-[#FF612A]/40 [&_blockquote]:pl-5 [&_blockquote]:italic',
   '[&_h3]:text-xl [&_h3]:font-semibold [&_h3]:text-[#003C64] [&_h3]:mt-8 [&_h3]:mb-2',
@@ -79,7 +79,7 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
           width={media?.sizes?.hero?.width ?? media?.width}
         />
         {upload.fields?.caption ? (
-          <figcaption className="mt-1.5 text-[13px] leading-relaxed text-[#5A6472]">{upload.fields.caption}</figcaption>
+          <figcaption className="mt-1.5 text-[12.35px] leading-relaxed text-[#5A6472]">{upload.fields.caption}</figcaption>
         ) : null}
       </figure>
     )
@@ -146,7 +146,7 @@ export default async function KnowledgeArticlePage({ params }: Props) {
     <>
       <article className="mx-auto max-w-3xl px-6 pt-20 pb-10">
         <Link
-          className="text-[13px] font-semibold uppercase tracking-[.14em] text-muted-foreground no-underline transition-colors hover:text-[#003C64]"
+          className="text-[12.35px] font-semibold uppercase tracking-[.14em] text-muted-foreground no-underline transition-colors hover:text-[#003C64]"
           href="/resources/knowledge-hub"
         >
           Knowledge Hub
@@ -156,7 +156,7 @@ export default async function KnowledgeArticlePage({ params }: Props) {
         </h1>
         <p className="mb-6 text-base leading-relaxed text-muted-foreground md:text-lg">{article.excerpt}</p>
         <div className="flex flex-wrap items-center gap-3 border-b border-border/50 pb-8">
-          <span className="rounded-full bg-[#FF612A]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.14em] text-[#FF612A]">
+          <span className="rounded-full bg-[#FF612A]/10 px-3 py-1 text-[10.45px] font-semibold uppercase tracking-[.14em] text-[#FF612A]">
             {article.category}
           </span>
           <span className="text-xs text-muted-foreground">
@@ -179,12 +179,12 @@ export default async function KnowledgeArticlePage({ params }: Props) {
         {article.body ? (
           <div className="mt-10">
             {lead.length > 0 ? (
-              <RichText className={`${BODY_CLASS} text-[18px] md:text-[19px]`} converters={converters} data={sectionData(lead)} />
+              <RichText className={`${BODY_CLASS} text-[17.1px] md:text-[18.05px]`} converters={converters} data={sectionData(lead)} />
             ) : null}
 
             {sections.length > 0 ? (
               <div className="mt-10">
-                <p className="mb-4 text-[11px] font-semibold uppercase tracking-[.18em] text-muted-foreground">In this note</p>
+                <p className="mb-4 text-[10.45px] font-semibold uppercase tracking-[.18em] text-muted-foreground">In this note</p>
                 <ImageAccordion
                   items={sections.map((section, index) => ({
                     content: <RichText className={BODY_CLASS} converters={converters} data={sectionData(section.nodes)} />,

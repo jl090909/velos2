@@ -57,7 +57,7 @@ function Section({
   return (
     <section className="border-t border-border/60 pt-12">
       <div className="mb-7 flex flex-wrap items-end justify-between gap-3">
-        <h2 className="text-[24px] font-bold tracking-[-.04em] text-[#003C64] md:text-[30px]">{category}</h2>
+        <h2 className="text-[20.4px] font-bold tracking-[-.04em] text-[#003C64] md:text-[25.5px]">{category}</h2>
         {articles.length > shown.length ? (
           <Link
             className="text-sm font-medium text-[#003C64] no-underline transition-colors hover:text-[#FF612A]"
@@ -100,7 +100,7 @@ export default async function CompanyNewsroomPage({ searchParams }: Props) {
     <>
       <section className="mx-auto max-w-6xl px-6 pt-20 pb-8">
         <CompanyTabs />
-        <p className="mt-10 text-[13px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">Media</p>
+        <p className="mt-10 text-[12.35px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">Media</p>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">
@@ -124,7 +124,7 @@ export default async function CompanyNewsroomPage({ searchParams }: Props) {
         ) : filtered ? (
           <section className="mt-10">
             <div className="mb-7 flex flex-wrap items-baseline justify-between gap-3">
-              <h2 className="text-[24px] font-bold tracking-[-.04em] text-[#003C64] md:text-[30px]">
+              <h2 className="text-[20.4px] font-bold tracking-[-.04em] text-[#003C64] md:text-[25.5px]">
                 {activeCategory ?? 'Search results'}
               </h2>
               <p className="text-sm text-muted-foreground">

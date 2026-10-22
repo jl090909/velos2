@@ -24,7 +24,7 @@ export default function OrgLevelPage() {
           >
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,.22)_0%,rgba(0,0,0,.5)_100%)]" />
             <CardContent className="relative flex min-h-[380px] md:h-[560px] flex-col justify-end p-8 md:p-12 text-white">
-              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">
+              <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">
                 Product · Organisation level
               </p>
               <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl">
@@ -37,13 +37,13 @@ export default function OrgLevelPage() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href="/demo"
-                  className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
+                  className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[14.25px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
                 >
                   Request a demo
                 </Link>
                 <Link
                   href="/product"
-                  className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold border border-white/30 bg-white/15 text-white shadow-[0_1px_0_rgba(255,255,255,.15)_inset] hover:bg-white/20 transition-colors no-underline backdrop-blur-sm"
+                  className="inline-flex items-center justify-center rounded-full h-12 px-8 text-[14.25px] font-semibold border border-white/30 bg-white/15 text-white shadow-[0_1px_0_rgba(255,255,255,.15)_inset] hover:bg-white/20 transition-colors no-underline backdrop-blur-sm"
                 >
                   Explore the platform
                 </Link>
@@ -61,7 +61,7 @@ export default function OrgLevelPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">
           How the org view fits together
         </p>
         <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10 text-[#003C64]">
@@ -75,7 +75,7 @@ export default function OrgLevelPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">
           Org-level vulnerability snapshot
         </p>
         <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10 text-[#003C64]">
@@ -84,7 +84,7 @@ export default function OrgLevelPage() {
         <div className="grid lg:grid-cols-2 gap-5 items-start">
           <Card className="border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)]">
             <CardContent className="p-8 md:p-10">
-              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-2">
+              <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-2">
                 All sites · 4 connected
               </p>
               <h3 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-7">
@@ -96,7 +96,7 @@ export default function OrgLevelPage() {
 
           <Card className="border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)]">
             <CardContent className="p-8 md:p-10">
-              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-2">
+              <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-2">
                 Risk by site
               </p>
               <h3 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-7">
@@ -115,14 +115,14 @@ export default function OrgLevelPage() {
               <h2 className="text-2xl md:text-3xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">
                 Deploy across your organisation.
               </h2>
-              <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed">
+              <p className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed">
                 Start with one site and extend to the whole estate. Velos Shield 1.5 consolidates every 1.1 appliance
                 into one posture, with role-based views for security, operations and leadership.
               </p>
             </div>
             <Link
               href="/demo"
-              className="inline-flex shrink-0 items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
+              className="inline-flex shrink-0 items-center justify-center rounded-full h-12 px-8 text-[14.25px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
             >
               Request a demo
             </Link>

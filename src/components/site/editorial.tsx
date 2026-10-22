@@ -14,7 +14,7 @@ import type { ReactNode } from 'react'
 
 export function Eyebrow({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
-    <p className={`text-[13px] font-semibold uppercase tracking-[.18em] text-[#FF612A]${className ? ` ${className}` : ''}`}>
+    <p className={`text-[12.35px] font-semibold uppercase tracking-[.18em] text-[#FF612A]${className ? ` ${className}` : ''}`}>
       {children}
     </p>
   )
@@ -31,7 +31,7 @@ export function Chip({
 }) {
   return (
     <Link
-      className={`inline-flex items-center rounded-full px-4 py-2 text-[13px] font-medium no-underline transition-all ${
+      className={`inline-flex items-center rounded-full px-4 py-2 text-[12.35px] font-medium no-underline transition-all ${
         active
           ? 'bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] text-[#FF612A]'
           : 'border border-border/70 text-muted-foreground hover:border-[#003C64]/40 hover:text-[#003C64]'
@@ -72,7 +72,7 @@ export function SectionHeader({
 }) {
   return (
     <div className="mb-7 flex flex-wrap items-end justify-between gap-3">
-      <h2 className="text-[24px] font-bold tracking-[-.04em] text-[#003C64] md:text-[30px]">{title}</h2>
+      <h2 className="text-[20.4px] font-bold tracking-[-.04em] text-[#003C64] md:text-[25.5px]">{title}</h2>
       {viewAllHref ? (
         <Link className="text-sm font-medium text-[#003C64] no-underline transition-colors hover:text-[#FF612A]" href={viewAllHref}>
           {viewAllLabel ?? (typeof count === 'number' ? `View all ${count}` : 'View all')}
@@ -111,7 +111,7 @@ function Cover({
   if (!src) {
     return (
       <div className={`${className} flex items-center justify-center bg-[linear-gradient(135deg,#003C64_0%,#0f5c8f_55%,#FF612A_160%)]`}>
-        <span className="text-[11px] font-semibold uppercase tracking-[.22em] text-white/75">{placeholder}</span>
+        <span className="text-[10.45px] font-semibold uppercase tracking-[.22em] text-white/75">{placeholder}</span>
       </div>
     )
   }
@@ -129,11 +129,11 @@ export function DateBlock({ iso }: { iso: string }) {
   }
   return (
     <div className="flex h-full flex-col items-center justify-center rounded-[1.15rem] border border-white/55 bg-[linear-gradient(150deg,#002640_0%,#003C64_100%)] px-4 py-6">
-      <span className="text-[11px] font-semibold uppercase tracking-[.2em] text-white/70">
+      <span className="text-[10.45px] font-semibold uppercase tracking-[.2em] text-white/70">
         {date.toLocaleDateString('en-GB', { month: 'short' })}
       </span>
-      <span className="text-[34px] font-bold leading-none tracking-[-.04em] text-white">{date.toLocaleDateString('en-GB', { day: '2-digit' })}</span>
-      <span className="mt-1 text-[11px] text-white/60">{date.toLocaleDateString('en-GB', { year: 'numeric' })}</span>
+      <span className="text-[28.9px] font-bold leading-none tracking-[-.04em] text-white">{date.toLocaleDateString('en-GB', { day: '2-digit' })}</span>
+      <span className="mt-1 text-[10.45px] text-white/60">{date.toLocaleDateString('en-GB', { year: 'numeric' })}</span>
     </div>
   )
 }
@@ -208,15 +208,15 @@ export function EditorialCard({
         )
       ) : null}
 
-      {caption ? <p className="mt-2 text-[11px] leading-snug text-muted-foreground">{caption}</p> : null}
+      {caption ? <p className="mt-2 text-[10.45px] leading-snug text-muted-foreground">{caption}</p> : null}
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
         {badges}
-        {eyebrow ? <span className="text-[11px] font-semibold uppercase tracking-[.16em] text-[#FF612A]">{eyebrow}</span> : null}
-        {meta ? <span className="text-[11px] text-muted-foreground">{meta}</span> : null}
+        {eyebrow ? <span className="text-[10.45px] font-semibold uppercase tracking-[.16em] text-[#FF612A]">{eyebrow}</span> : null}
+        {meta ? <span className="text-[10.45px] text-muted-foreground">{meta}</span> : null}
       </div>
 
-      <h3 className="mt-2 text-[19px] font-semibold leading-[1.25] tracking-[-.03em] text-[#003C64] transition-colors group-hover:text-[#FF612A]">
+      <h3 className="mt-2 text-[18.05px] font-semibold leading-[1.25] tracking-[-.03em] text-[#003C64] transition-colors group-hover:text-[#FF612A]">
         {heading}
       </h3>
       {summary ? <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{summary}</p> : null}
@@ -248,11 +248,11 @@ export function EditorialRow({
   )
   return (
     <article className="group border-t border-border/60 py-6 first:border-t-0 first:pt-0">
-      <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[.16em] text-[#FF612A]">
+      <div className="flex items-center gap-2 text-[10.45px] font-semibold uppercase tracking-[.16em] text-[#FF612A]">
         {eyebrow ? <span>{eyebrow}</span> : null}
         {meta ? <span className="font-normal normal-case tracking-normal text-muted-foreground">{meta}</span> : null}
       </div>
-      <h3 className="mt-2 text-[21px] font-semibold leading-[1.22] tracking-[-.03em] text-[#003C64] transition-colors group-hover:text-[#FF612A]">
+      <h3 className="mt-2 text-[17.85px] font-semibold leading-[1.22] tracking-[-.03em] text-[#003C64] transition-colors group-hover:text-[#FF612A]">
         {heading}
       </h3>
       {summary ? <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{summary}</p> : null}
@@ -291,15 +291,15 @@ export function EditorialHero({
         <div className="order-2 flex flex-col justify-center p-8 md:p-12 lg:order-1">
           <div className="flex flex-wrap items-center gap-3">
             {badge ? (
-              <span className="inline-flex items-center rounded-full bg-[#FF612A] px-3 py-1 text-[10px] font-bold uppercase tracking-[.2em] text-white">
+              <span className="inline-flex items-center rounded-full bg-[#FF612A] px-3 py-1 text-[9.5px] font-bold uppercase tracking-[.2em] text-white">
                 {badge}
               </span>
             ) : null}
-            {eyebrow ? <span className="text-[11px] font-semibold uppercase tracking-[.2em] text-white/80">{eyebrow}</span> : null}
+            {eyebrow ? <span className="text-[10.45px] font-semibold uppercase tracking-[.2em] text-white/80">{eyebrow}</span> : null}
           </div>
-          <h2 className="mt-5 text-[28px] font-bold leading-[1.08] tracking-[-.04em] text-white md:text-[42px]">{title}</h2>
-          {summary ? <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/75 md:text-base">{summary}</p> : null}
-          {meta ? <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] text-white/60">{meta}</div> : null}
+          <h2 className="mt-5 text-[23.8px] font-bold leading-[1.08] tracking-[-.04em] text-white md:text-[35.7px]">{title}</h2>
+          {summary ? <p className="mt-5 max-w-xl text-[14.25px] leading-relaxed text-white/75 md:text-base">{summary}</p> : null}
+          {meta ? <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11.4px] text-white/60">{meta}</div> : null}
           {cta ? (
             <Link
               className="mt-8 inline-flex w-max items-center justify-center rounded-full bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] px-7 py-3 text-sm font-semibold text-[#002640] no-underline transition-all hover:bg-[linear-gradient(180deg,#ffffff_0%,#f1f5f9_100%)]"
@@ -324,14 +324,14 @@ export function EditorialHero({
                 width={image.width}
               />
               {caption ? (
-                <p className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(0,38,64,0)_0%,rgba(0,38,64,.82)_100%)] px-6 pt-10 pb-4 text-[11px] leading-snug text-white/85">
+                <p className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,rgba(0,38,64,0)_0%,rgba(0,38,64,.82)_100%)] px-6 pt-10 pb-4 text-[10.45px] leading-snug text-white/85">
                   {caption}
                 </p>
               ) : null}
             </div>
           ) : (
             <div className="flex h-full w-full items-end justify-end bg-[linear-gradient(135deg,rgba(255,97,42,.35)_0%,rgba(0,60,100,0)_60%)] p-8">
-              <span className="text-[11px] font-semibold uppercase tracking-[.22em] text-white/50">{image?.alt ?? 'Velos Shield'}</span>
+              <span className="text-[10.45px] font-semibold uppercase tracking-[.22em] text-white/50">{image?.alt ?? 'Velos Shield'}</span>
             </div>
           )}
         </div>
@@ -397,20 +397,20 @@ export function OverlayCard({
             />
           ) : (
             <div className="absolute inset-0 flex items-center justify-center bg-[linear-gradient(135deg,#003C64_0%,#0f5c8f_55%,#FF612A_160%)]">
-              <span className="text-[11px] font-semibold uppercase tracking-[.22em] text-white/70">{placeholder}</span>
+              <span className="text-[10.45px] font-semibold uppercase tracking-[.22em] text-white/70">{placeholder}</span>
             </div>
           )}
 
           <div className="card-scrim" />
 
           <div className="relative flex h-full flex-col justify-end p-6 pt-16 text-white">
-            <div className="flex flex-wrap items-center gap-2 text-[11.5px] font-semibold uppercase tracking-[.14em] text-white/80">
+            <div className="flex flex-wrap items-center gap-2 text-[10.92px] font-semibold uppercase tracking-[.14em] text-white/80">
               {eyebrow ? <span>{eyebrow}</span> : null}
               {meta ? <span className="font-normal normal-case tracking-normal text-white/70">{meta}</span> : null}
             </div>
-            <h3 className="mt-3 text-[21px] font-bold leading-[1.16] tracking-[-.035em] text-white md:text-[24px]">{title}</h3>
-            {summary ? <p className="mt-3 line-clamp-2 text-[13.5px] leading-relaxed text-white/80">{summary}</p> : null}
-            {footer ? <div className="mt-4 truncate text-[11.5px] text-white/75">{footer}</div> : null}
+            <h3 className="mt-3 text-[17.85px] font-bold leading-[1.16] tracking-[-.035em] text-white md:text-[20.4px]">{title}</h3>
+            {summary ? <p className="mt-3 line-clamp-2 text-[12.82px] leading-relaxed text-white/80">{summary}</p> : null}
+            {footer ? <div className="mt-4 truncate text-[10.92px] text-white/75">{footer}</div> : null}
           </div>
 
           <span className="absolute right-6 top-6 z-[2] inline-flex rounded-full bg-[#011546]/25 p-1 backdrop-blur-[2px] transition-transform duration-300 ease-out group-hover:translate-x-1">

@@ -22,7 +22,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-[.18em] text-[#FF612A] mb-3">Resources</p>
+          <p className="text-[10.45px] font-semibold uppercase tracking-[.18em] text-[#FF612A] mb-3">Resources</p>
           <div className="space-y-2">
             <p><Link href="/resources/rethinking-ot-cyber-risk-beyond-cvss" className="hover:text-foreground no-underline">Rethinking OT Cyber Risk</Link></p>
             <p><Link href="/resources/from-packets-to-plant-impact" className="hover:text-foreground no-underline">From Packets to Plant Impact</Link></p>
@@ -33,7 +33,7 @@ export function SiteFooter() {
         <div>
           {/* A vertical list under a heading, matching the Resources column: with the four product
               links gone, the old horizontal wrap left a ragged row and a gap. */}
-          <p className="text-[11px] font-semibold uppercase tracking-[.18em] text-[#FF612A] mb-3">Explore</p>
+          <p className="text-[10.45px] font-semibold uppercase tracking-[.18em] text-[#FF612A] mb-3">Explore</p>
           <div className="space-y-2">
             <p><Link href="/industries" className="hover:text-foreground no-underline">Industries</Link></p>
             <p><Link href="/customers" className="hover:text-foreground no-underline">Customers</Link></p>

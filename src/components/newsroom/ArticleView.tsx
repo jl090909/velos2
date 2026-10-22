@@ -47,7 +47,7 @@ export function ArticleView({
       {mode === 'preview' ? (
         <div className="border-b-2 border-[#C99A2E] bg-[#FFF7E6] px-6 py-3">
           <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-3">
-            <span className="rounded bg-[#830D41] px-2 py-0.5 text-[10px] font-bold uppercase tracking-[.2em] text-white">
+            <span className="rounded bg-[#830D41] px-2 py-0.5 text-[9.5px] font-bold uppercase tracking-[.2em] text-white">
               Preview
             </span>
             <span className="text-sm font-semibold text-[#8A6D1F]">
@@ -61,7 +61,7 @@ export function ArticleView({
 
       <section className="mx-auto max-w-6xl px-6 pt-20 pb-8">
         <CompanyTabs />
-        <div className="mt-10 flex flex-wrap items-center gap-2 text-[11px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">
+        <div className="mt-10 flex flex-wrap items-center gap-2 text-[10.45px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">
           <Link className="no-underline hover:text-[#003C64]" href="/company/media/">
             Newsroom
           </Link>
@@ -70,11 +70,11 @@ export function ArticleView({
             {article.category}
           </Link>
         </div>
-        <h1 className="mt-5 max-w-4xl text-[32px] font-bold leading-[1.06] tracking-[-.045em] text-[#003C64] md:text-[52px]">
+        <h1 className="mt-5 max-w-4xl text-[27.2px] font-bold leading-[1.06] tracking-[-.045em] text-[#003C64] md:text-[44.2px]">
           {article.title}
         </h1>
         <p className="mt-6 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">{article.summary}</p>
-        <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px] text-muted-foreground">
+        <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12.35px] text-muted-foreground">
           <span className="font-medium text-[#003C64]">{article.authorName}</span>
           {article.authorRole ? <span>{article.authorRole}</span> : null}
           {article.publishAt ? (
@@ -112,7 +112,7 @@ export function ArticleView({
               <div className="mt-10 flex flex-wrap gap-2">
                 {article.tags.map((tag) => (
                   <span
-                    className="rounded-full bg-[#003C64]/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[.14em] text-[#003C64]"
+                    className="rounded-full bg-[#003C64]/5 px-3 py-1 text-[10.45px] font-semibold uppercase tracking-[.14em] text-[#003C64]"
                     key={tag}
                   >
                     {tag}
@@ -124,7 +124,7 @@ export function ArticleView({
 
           <aside className="h-max lg:sticky lg:top-28">
             <div className="rounded-[1.35rem] border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] p-7 shadow-[0_1px_3px_rgba(15,23,42,.04)]">
-              <p className="text-[11px] font-semibold uppercase tracking-[.16em] text-muted-foreground">Newsroom</p>
+              <p className="text-[10.45px] font-semibold uppercase tracking-[.16em] text-muted-foreground">Newsroom</p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 This story is written and published from the Velos Shield CMS. Journalists can reach the team for
                 briefings, comment or imagery.
@@ -148,7 +148,7 @@ export function ArticleView({
 
       {related.length > 0 ? (
         <section className="mx-auto max-w-6xl border-t border-border/60 px-6 py-14">
-          <h2 className="mb-7 text-[24px] font-bold tracking-[-.04em] text-[#003C64] md:text-[30px]">More from the Newsroom</h2>
+          <h2 className="mb-7 text-[20.4px] font-bold tracking-[-.04em] text-[#003C64] md:text-[25.5px]">More from the Newsroom</h2>
           <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {related.map((item) => (
               <NewsroomCard key={String(item.id)} article={item} />

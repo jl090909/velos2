@@ -17,7 +17,7 @@ export function SiteRiskBars({ sites }: { sites: SiteRisk[] }) {
           </div>
         );
       })}
-      <p className="mt-5 text-[13px] text-muted-foreground">Sample data for illustration only.</p>
+      <p className="mt-5 text-[12.35px] text-muted-foreground">Sample data for illustration only.</p>
     </div>
   );
 }

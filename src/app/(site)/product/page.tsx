@@ -104,7 +104,7 @@ export default function VelosShieldPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Built for every role</p>
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Built for every role</p>
         <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10 text-[#003C64]">
           The right view for every stakeholder.
         </h2>
@@ -123,7 +123,7 @@ export default function VelosShieldPage() {
             >
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,.75),transparent_58%)] pointer-events-none" />
               <CardContent className="relative p-8 md:p-10">
-                <h3 className="text-xl font-semibold mb-2 relative z-10">{c.title}</h3>
+                <h3 className="text-title-xl font-semibold mb-2 relative z-10">{c.title}</h3>
                 <p className="text-sm text-muted-foreground leading-relaxed relative z-10 whitespace-pre-line">{c.desc}</p>
               </CardContent>
             </Card>
@@ -132,7 +132,7 @@ export default function VelosShieldPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Platform modules</p>
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Platform modules</p>
         <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10 text-[#003C64]">
           One platform. Four modules. Infinite operational clarity.
         </h2>
@@ -142,12 +142,12 @@ export default function VelosShieldPage() {
               <CardContent className="p-9 md:p-10">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div>
-                    <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Module</p>
+                    <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Module</p>
                     <h3 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-2">{m.title}</h3>
                     <p className="text-sm font-medium text-foreground/80">{m.lead}</p>
                   </div>
                 </div>
-                <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed mb-8 max-w-xl">{m.desc}</p>
+                <p className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed mb-8 max-w-xl">{m.desc}</p>
                 <div className="grid sm:grid-cols-2 gap-4 pt-6 border-t border-border/50">
                   <div className="rounded-none border border-white/65 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.92)_100%)] p-4 shadow-[0_1px_0_rgba(255,255,255,.9)_inset]">
                     <b className="text-lg font-semibold block mb-1">{m.stat1}</b>
@@ -165,13 +165,13 @@ export default function VelosShieldPage() {
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-8">Capabilities</p>
+        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-8">Capabilities</p>
         <div className="grid md:grid-cols-4 gap-4">
           {capabilities.map((c) => (
             <Card key={c.title} className="bg-white/88 shadow-[0_1px_3px_rgba(15,23,42,.04)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(15,23,42,.08)] transition-all duration-300">
               <CardContent className="p-6">
-                <h3 className="text-[15px] font-semibold mb-1.5 text-[#003C64]">{c.title}</h3>
-                <p className="text-[13px] text-muted-foreground leading-relaxed">{c.desc}</p>
+                <h3 className="text-[14.25px] font-semibold mb-1.5 text-[#003C64]">{c.title}</h3>
+                <p className="text-[12.35px] text-muted-foreground leading-relaxed">{c.desc}</p>
               </CardContent>
             </Card>
           ))}
@@ -182,18 +182,18 @@ export default function VelosShieldPage() {
         <Card className="border border-white/55 bg-[linear-gradient(180deg,rgba(255,255,255,.98)_0%,rgba(247,247,249,.95)_100%)] shadow-[0_1px_3px_rgba(15,23,42,.04)]">
           <CardContent className="p-9 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div className="max-w-2xl">
-              <p className="text-[13px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Deployment tiers</p>
+              <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Deployment tiers</p>
               <h3 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-3">
                 Site level or organisation level.
               </h3>
-              <p className="text-sm md:text-[15px] text-muted-foreground leading-relaxed">
+              <p className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed">
                 Velos Shield 1.1 protects a single site. Velos Shield 1.5 connects every site into one consolidated
                 vulnerability posture for the whole organisation.
               </p>
             </div>
             <Link
               href="/product/org-level"
-              className="inline-flex shrink-0 items-center justify-center rounded-full h-12 px-8 text-[15px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
+              className="inline-flex shrink-0 items-center justify-center rounded-full h-12 px-8 text-[14.25px] font-semibold bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] text-[#FF612A] shadow-[0_1px_0_rgba(255,255,255,.35)_inset,0_10px_25px_rgba(0,60,100,.3)] hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#003C64] transition-all no-underline"
             >
               Explore 1.5 · Org-level
             </Link>
