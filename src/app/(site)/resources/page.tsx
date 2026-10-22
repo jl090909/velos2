@@ -1,25 +1,17 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 import { SiteFooter } from '@/components/SiteFooter'
-import {
-  Band,
-  buttonPrimary,
-  buttonSecondary,
-  cardGrid,
-  EditorialCard,
-  EditorialHero,
-  Eyebrow,
-  Surface,
-} from '@/components/site/editorial'
-import { getWhitepapers, type WhitepaperCard } from '@/lib/cms'
+import { Eyebrow, Surface } from '@/components/site/editorial'
+import { LineupGallery } from '@/components/site/LineupGallery'
+import { LineupTile } from '@/components/site/LineupTile'
+import { getWhitepapers } from '@/lib/cms'
 
 /**
- * Resources - whitepapers, case studies and brochures.
+ * Resources - the library as a lineup.
  *
- * Rendered with the same editorial kit as the Media page: an eyebrow, a featured hero, then a band of
- * cards per kind. Only the DATA and the buttons differ from Media; the layout, typography and card
- * shell come from src/components/site/editorial.tsx so the two pages cannot drift apart.
+ * One sideways row of tiles. No featured hero and no per-kind bands: the page opens on the shelf
+ * itself. The tiles are the fixed-band LineupTile; the row, the snapping and the paddles come from
+ * LineupGallery, which leaves scrolling to the browser.
  */
 
 export const revalidate = 300
@@ -30,138 +22,43 @@ export const metadata: Metadata = {
   title: 'Resources - Velos Shield POV Whitepaper Series',
 }
 
-/** Band order. Any kind the CMS adds later still gets a band, appended after these. */
-const KIND_ORDER = ['Whitepaper', 'Case Study', 'Brochure']
-
-const link = (paper: WhitepaperCard): null | string => paper.readOnlinePath ?? paper.downloadUrl ?? null
-
-/** The cover the CMS carries, or a titled placeholder when none is set (the kit renders `placeholder`). */
-const paperImage = (paper: WhitepaperCard) =>
-  paper.coverImage
-    ? {
-        alt: paper.coverImage.alt || paper.title,
-        height: paper.coverImage.height,
-        src: paper.coverImage.url,
-        width: paper.coverImage.width,
-      }
-    : { alt: paper.kind }
-
-function PaperActions({ paper }: { paper: WhitepaperCard }) {
-  const external = !paper.readOnlinePath && Boolean(paper.downloadUrl)
-  return (
-    <div className="flex flex-wrap gap-3 border-t border-border/50 pt-6">
-      {paper.readOnlinePath ? (
-        <Link className={buttonPrimary} href={paper.readOnlinePath}>
-          Read online
-        </Link>
-      ) : null}
-      {paper.downloadUrl ? (
-        <a
-          className={paper.readOnlinePath ? buttonSecondary : buttonPrimary}
-          href={paper.downloadUrl}
-          rel="noreferrer"
-          target="_blank"
-        >
-          {external ? 'View PDF' : 'Open PDF'}
-        </a>
-      ) : null}
-      {paper.downloadUrl && paper.readOnlinePath ? (
-        <a className={buttonSecondary} download href={paper.downloadUrl}>
-          Download
-        </a>
-      ) : null}
-    </div>
-  )
-}
-
-function PaperCard({ paper }: { paper: WhitepaperCard }) {
-  return (
-    <EditorialCard
-      caption={paper.coverCaption}
-      eyebrow={paper.kind}
-      footer={
-        <>
-          {paper.keyPoints.length > 0 ? (
-            <div className="mb-5 flex flex-wrap gap-2">
-              {paper.keyPoints.map((point) => (
-                <span className="rounded-full border border-border/60 bg-white px-3 py-1.5 text-xs text-muted-foreground" key={point}>
-                  {point}
-                </span>
-              ))}
-            </div>
-          ) : null}
-          <PaperActions paper={paper} />
-        </>
-      }
-      href={paper.readOnlinePath ?? undefined}
-      image={paperImage(paper)}
-      meta={paper.readTime || undefined}
-      placeholder={paper.kind}
-      summary={paper.subtitle ? `${paper.subtitle}. ${paper.summary}` : paper.summary}
-      title={paper.title}
-    />
-  )
-}
-
 export default async function ResourcesPage() {
   const { data: papers, error } = await getWhitepapers()
 
-  const featured = papers[0] ?? null
-  const rest = featured ? papers.filter((paper) => paper.id !== featured.id) : papers
-  const kinds = [...new Set([...KIND_ORDER, ...rest.map((paper) => paper.kind)])].filter((kind) =>
-    rest.some((paper) => paper.kind === kind),
-  )
+  // Newest first: the collection order is whatever the CMS returns, and a lineup implies curation.
+  const ordered = [...papers].sort((a, b) => (a.publishedDate < b.publishedDate ? 1 : -1))
 
   return (
     <>
-      <section className="mx-auto max-w-6xl px-6 pt-20 pb-8">
-        <Eyebrow>Resources</Eyebrow>
-      </section>
+      <section className="pb-24 pt-16">
+        <div className="mx-auto max-w-6xl px-6 text-center">
+          <Eyebrow>Resources</Eyebrow>
+          <h2
+            className="mx-auto mt-3 max-w-3xl text-3xl font-semibold tracking-[-.04em] text-[#003C64] md:text-5xl"
+            id="library"
+          >
+            The Velos Shield library.
+          </h2>
+        </div>
 
-      <section className="mx-auto max-w-6xl px-6 pb-24">
-        {papers.length === 0 ? (
-          <Surface className="p-8 md:p-10">
-            <p className="font-medium text-[#003C64]">Resources are being updated.</p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              {error
-                ? 'The library feed is temporarily unavailable. Please try again shortly.'
-                : 'New papers and case studies are on the way.'}
-            </p>
-          </Surface>
-        ) : (
-          <div className="space-y-14">
-            {featured ? (
-              <EditorialHero
-                badge={featured.kind}
-                caption={featured.coverCaption}
-                cta={link(featured) ? { href: link(featured) as string, label: 'Read the paper' } : undefined}
-                eyebrow={featured.series || 'Velos Shield library'}
-                image={paperImage(featured).src ? paperImage(featured) : { alt: 'Velos Shield resources', src: '/shutterstock/industries-hero.jpg' }}
-                meta={
-                  <>
-                    {featured.readTime ? <span>{featured.readTime}</span> : null}
-                    <span aria-hidden className="hidden h-1 w-1 rounded-full bg-white/40 sm:block" />
-                    <span>Ungated - free to read</span>
-                  </>
-                }
-                summary={featured.subtitle ? `${featured.subtitle}. ${featured.summary}` : featured.summary}
-                title={featured.title}
-              />
-            ) : null}
-
-            {kinds.map((kind) => (
-              <Band key={kind} count={rest.filter((paper) => paper.kind === kind).length} title={kind === 'Case Study' ? 'Case studies' : `${kind}s`}>
-                <div className={cardGrid}>
-                  {rest
-                    .filter((paper) => paper.kind === kind)
-                    .map((paper) => (
-                      <PaperCard key={paper.id} paper={paper} />
-                    ))}
-                </div>
-              </Band>
-            ))}
-          </div>
-        )}
+        <div className="mx-auto mt-10 max-w-6xl px-6">
+          {ordered.length === 0 ? (
+            <Surface className="p-8 md:p-10">
+              <p className="font-medium text-[#003C64]">Resources are being updated.</p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                {error
+                  ? 'The library feed is temporarily unavailable. Please try again shortly.'
+                  : 'New papers and case studies are on the way.'}
+              </p>
+            </Surface>
+          ) : (
+            <LineupGallery labelId="library">
+              {ordered.map((paper, index) => (
+                <LineupTile index={index} key={paper.id} paper={paper} />
+              ))}
+            </LineupGallery>
+          )}
+        </div>
       </section>
 
       <SiteFooter />
