@@ -66,6 +66,10 @@ export function LineupGallery({ children, labelId }: { children: ReactNode; labe
     if (!running) return
     if (typeof window === 'undefined') return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    // Auto-advance only where the pause control is visible: below sm the paddles and the Pause
+    // button are hidden (the row is a swipe list there), and content that moves with no way to stop
+    // it is exactly what WCAG 2.2.2 forbids.
+    if (!window.matchMedia('(min-width: 640px)').matches) return
 
     const id = window.setInterval(() => {
       const el = scroller.current
