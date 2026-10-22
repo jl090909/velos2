@@ -6,13 +6,16 @@ import type { WhitepaperCard } from '@/lib/cms'
  * One tile in the resources lineup.
  *
  * The bands have fixed heights on purpose: eyebrow, two-line title, image, chips, two-line copy,
- * reading time, then the actions pushed to the bottom with mt-auto. That is what makes four tiles
- * of different copy lengths line up like a product shelf instead of four ragged cards - the same
- * trick the Apple lineup uses. Anything that changes here must keep the bands fixed.
+ * then a footer that always reserves its height. That is what makes tiles of different copy lengths
+ * line up like a product shelf instead of four ragged cards.
  *
- * The image is a plain <img>: CMS media URLs are absolute (they point at the deployment that
- * uploaded them), and next/image only allows the local /api/media/file path, so optimising through
- * it would 400 on every tile. Width/height are set so the band has no layout shift.
+ * Everything actionable lives on the picture or the title: the cover is a link across its whole
+ * area, and the Read pill sits on the cover as a label with pointer-events off - so it is the same
+ * hit target rather than a second tab stop. The footer keeps only the secondary PDF link, and the
+ * reading-time line is gone.
+ *
+ * Plain <img> on purpose: CMS media URLs are absolute to the deployment that uploaded them, and
+ * next/image only allows the local /api/media/file path, so optimising through it would 400.
  */
 export function LineupTile({ index, paper }: { index: number; paper: WhitepaperCard }) {
   const cover = paper.coverImage
@@ -36,12 +39,12 @@ export function LineupTile({ index, paper }: { index: number; paper: WhitepaperC
           )}
         </h3>
 
-        <div className="relative mt-4 aspect-[372/396] w-full overflow-hidden rounded-[14px] bg-[linear-gradient(180deg,#eef2f7_0%,#e2e8f0_100%)]">
+        <div className="group relative mt-4 aspect-[372/396] w-full overflow-hidden rounded-[14px] bg-[linear-gradient(180deg,#eef2f7_0%,#e2e8f0_100%)]">
           {cover ? (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
               alt={cover.alt || paper.title}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
               decoding="async"
               height={cover.height || 792}
               loading={index === 0 ? 'eager' : 'lazy'}
@@ -53,6 +56,20 @@ export function LineupTile({ index, paper }: { index: number; paper: WhitepaperC
               {paper.kind}
             </div>
           )}
+
+          {primaryHref ? (
+            <>
+              <Link aria-label={`${primaryLabel}: ${paper.title}`} className="absolute inset-0" href={primaryHref}>
+                <span className="sr-only">{`${primaryLabel} ${paper.title}`}</span>
+              </Link>
+              <span
+                aria-hidden="true"
+                className="pointer-events-none absolute bottom-3 left-3 inline-flex h-9 items-center justify-center rounded-full bg-[rgba(255,255,255,.94)] px-5 text-[13.3px] font-semibold text-[#003C64] shadow-[0_2px_10px_rgba(15,23,42,.18)] backdrop-blur"
+              >
+                {primaryLabel}
+              </span>
+            </>
+          ) : null}
         </div>
 
         <div className="mt-4 flex min-h-[26px] flex-wrap gap-2 overflow-hidden">
@@ -68,17 +85,7 @@ export function LineupTile({ index, paper }: { index: number; paper: WhitepaperC
 
         <p className="mt-3 line-clamp-2 min-h-[2.9em] text-sm leading-relaxed text-muted-foreground">{paper.subtitle}</p>
 
-        <p className="mt-2 text-[13.3px] font-semibold text-[#003C64]">{paper.readTime || 'Free to read'}</p>
-
-        <div className="mt-auto flex items-center gap-5 border-t border-border/50 pt-5">
-          {primaryHref ? (
-            <Link
-              className="inline-flex h-10 items-center justify-center rounded-full bg-[linear-gradient(180deg,#0f5c8f_0%,#003C64_48%,#002640_100%)] px-6 text-[13.3px] font-semibold text-[#FF612A] no-underline transition-all hover:bg-[linear-gradient(180deg,#ff8a4d_0%,#FF612A_48%,#e04f0a_100%)] hover:text-[#002640]"
-              href={primaryHref}
-            >
-              {primaryLabel}
-            </Link>
-          ) : null}
+        <div className="mt-auto flex min-h-[44px] items-center gap-5 border-t border-border/50 pt-5">
           {readHref && pdfHref ? (
             <a
               className="text-[13.3px] font-medium text-[#003C64] underline-offset-4 no-underline hover:underline"
