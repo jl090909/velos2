@@ -338,5 +338,22 @@ div[data-slot='card'] {
   .lineup-tile { animation: none; }
 }
 
+/**
+ * Knowledge Hub feed rows (src/components/site/FeedRow.tsx): the same reveal, staggered down the
+ * column instead of across a row.
+ */
+.feed-row {
+  animation: lineup-in 420ms cubic-bezier(.22, .61, .36, 1) both;
+}
+.feed-row:nth-child(2) { animation-delay: 60ms; }
+.feed-row:nth-child(3) { animation-delay: 120ms; }
+.feed-row:nth-child(4) { animation-delay: 180ms; }
+.feed-row:nth-child(5) { animation-delay: 240ms; }
+.feed-row:nth-child(6) { animation-delay: 300ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .feed-row { animation: none; }
+}
+
 
 
