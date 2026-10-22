@@ -8,7 +8,12 @@ const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
   images: {
-    localPatterns: [{ pathname: '/api/media/file/**' }],
+    localPatterns: [
+      { pathname: '/api/media/file/**' },
+      // The OT carousel slides ship with the app (public/ot-carousel) rather than through the CMS,
+      // so next/image needs that path allowlisted too.
+      { pathname: '/ot-carousel/**' },
+    ],
   },
   trailingSlash: true,
   turbopack: {

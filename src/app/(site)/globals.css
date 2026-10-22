@@ -355,5 +355,22 @@ div[data-slot='card'] {
   .feed-row { animation: none; }
 }
 
+/**
+ * OT carousel (src/components/site/OtCarousel.tsx): each slide rises in as it replaces the last.
+ * Keyed by slide number, so React remounts the node and the animation restarts.
+ */
+.ot-slide {
+  animation: ot-slide-in 420ms cubic-bezier(.22, .61, .36, 1) both;
+}
+
+@keyframes ot-slide-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ot-slide { animation: none; }
+}
+
 
 

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { DotGrid, Gear, RadarRing, Wordmark } from '@/components/decor';
 import { OtsCardAction } from '@/components/OtsCardAction';
+import { OtCarousel } from '@/components/site/OtCarousel';
 import { SiteFooter } from "@/components/SiteFooter";
 
 const pillars = [
@@ -68,6 +69,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <OtCarousel />
 
       <section className="py-16 max-w-6xl mx-auto px-6">
         <div className="max-w-3xl mb-8">
