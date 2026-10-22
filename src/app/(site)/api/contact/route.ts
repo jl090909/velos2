@@ -115,11 +115,16 @@ export async function POST(req: NextRequest) {
 
   const region = process.env.AWS_REGION || 'eu-west-1';
   const from = process.env.SES_FROM || '';
-  const to = process.env.CONTACT_TO || '';
   const keyId = process.env.AWS_ACCESS_KEY_ID || '';
   const secret = process.env.AWS_SECRET_ACCESS_KEY || '';
-  if (!from || !to || !keyId || !secret) {
-    console.error('contact api: missing SES env config');
+  // CONTACT_TO may list several recipients ("a@x.com, b@y.com"). SES accepts an array of
+  // destinations but rejects a comma-joined single entry, so split and validate here.
+  const recipients = (process.env.CONTACT_TO || '')
+    .split(/[,;\s]+/)
+    .map((entry) => entry.trim())
+    .filter((entry) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(entry));
+  if (!from || recipients.length === 0 || !keyId || !secret) {
+    console.error('contact api: missing SES env config, or CONTACT_TO has no valid recipient');
     return fail();
   }
 
@@ -136,7 +141,7 @@ export async function POST(req: NextRequest) {
     await ses.send(
       new SendEmailCommand({
         Source: from,
-        Destination: { ToAddresses: [to] },
+        Destination: { ToAddresses: recipients },
         ReplyToAddresses: [email],
         Message: {
           Subject: { Data: subject, Charset: 'UTF-8' },
