@@ -28,11 +28,11 @@ export default function OrgLevelPage() {
                 Product · Organisation level
               </p>
               <h1 className="text-3xl md:text-6xl font-bold tracking-[-.05em] leading-[1.02] mb-5 max-w-3xl">
-                Velos Shield 1.5
+                Velos Shield
               </h1>
               <p className="text-base md:text-xl text-white/80 max-w-2xl mb-8">
-                The org-level cyber instance. It connects multiple Velos Shield 1.1 appliances — one per site — and
-                reports a consolidated vulnerability posture across the whole organisation.
+                The org-level cyber instance. It connects the Velos Shield appliance at every site and reports a
+                consolidated vulnerability posture across the whole organisation.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
@@ -69,8 +69,8 @@ export default function OrgLevelPage() {
         </h2>
         <OrgTopology sites={diagramSites} />
         <p className="mt-5 text-sm text-muted-foreground leading-relaxed max-w-3xl">
-          Each Velos Shield 1.1 appliance collects data from its local sensors for vulnerability assessment, then
-          reports to Velos Shield 1.5. The org view rolls every site into a single posture for security leadership.
+          Each site instance collects data from its local sensors for vulnerability assessment, then reports to the
+          org instance. The org view rolls every site into a single posture for security leadership.
         </p>
       </section>
 
@@ -116,7 +116,7 @@ export default function OrgLevelPage() {
                 Deploy across your organisation.
               </h2>
               <p className="text-sm md:text-[14.25px] text-muted-foreground leading-relaxed">
-                Start with one site and extend to the whole estate. Velos Shield 1.5 consolidates every 1.1 appliance
+                Start with one site and extend to the whole estate. The org instance consolidates every site appliance
                 into one posture, with role-based views for security, operations and leadership.
               </p>
             </div>

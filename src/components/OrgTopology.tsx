@@ -34,7 +34,7 @@ export function OrgTopology({ sites }: { sites: SiteNode[] }) {
       <svg
         viewBox="0 0 720 400"
         role="img"
-        aria-label="Velos Shield 1.5 at organisation level connecting to four Velos Shield 1.1 site appliances, each with two sensors"
+        aria-label="Velos Shield org instance connecting to four site instances, each with two sensors"
         className="w-full h-auto"
       >
         {/* uplinks */}
@@ -53,7 +53,7 @@ export function OrgTopology({ sites }: { sites: SiteNode[] }) {
         {/* hub */}
         <rect x={HUB.x} y={HUB.y} width={HUB.w} height={HUB.h} rx={12} fill="#003C64" />
         <text x={hub.x} y={HUB.y + 27} textAnchor="middle" fill="#fff" fontSize={15} fontWeight={700}>
-          Velos Shield 1.5
+          Velos Shield
         </text>
         <text x={hub.x} y={HUB.y + 46} textAnchor="middle" fill="#FF612A" fontSize={11} fontWeight={600}>
           Org-level · consolidated posture
@@ -73,7 +73,7 @@ export function OrgTopology({ sites }: { sites: SiteNode[] }) {
               <rect x={x} y={SITE.y} width={SITE.w} height={SITE.h} rx={10} fill="#fff" stroke="#003C64" strokeWidth={1.4} />
               <circle cx={x + SITE.w - 14} cy={SITE.y + 14} r={5} fill={color} />
               <text x={cx} y={SITE.y + 24} textAnchor="middle" fill="#003C64" fontSize={13} fontWeight={700}>
-                Velos Shield 1.1
+                Site instance
               </text>
               <text x={cx} y={SITE.y + 44} textAnchor="middle" fill="#5a6b7d" fontSize={11}>
                 {s.label} · score {s.score}
