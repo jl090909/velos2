@@ -23,7 +23,7 @@ import { OT_SLIDES, type OtSlideImage } from '@/lib/ot-carousel'
  *    and permanently via the Pause button (WCAG 2.2.2 - it moves on its own, so it needs a stop);
  *  - clicking any artwork opens it full size, Escape or a backdrop click closes it.
  */
-const ADVANCE_MS = 6000
+const ADVANCE_MS = 10000
 
 type ZoomState = { caption: string; image: OtSlideImage } | null
 
