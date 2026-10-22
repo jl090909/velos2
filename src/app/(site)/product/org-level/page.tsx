@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from '@/components/SiteFooter';
-import { OrgTopology } from '@/components/OrgTopology';
 import { VulnSnapshot } from '@/components/VulnSnapshot';
 import { SiteRiskBars } from '@/components/SiteRiskBars';
 import { ORG_FINDINGS, ORG_SEVERITY_COUNTS, SITE_RISK } from '@/lib/sample-data';
@@ -9,11 +8,6 @@ import { ORG_FINDINGS, ORG_SEVERITY_COUNTS, SITE_RISK } from '@/lib/sample-data'
 const tags = ['Org-level', 'Multi-site rollup', 'Consolidated posture', 'Role-based views'];
 
 export default function OrgLevelPage() {
-  const diagramSites = SITE_RISK.map((s) => ({
-    label: s.name.split('·').pop()?.trim() ?? s.name,
-    score: s.score,
-  }));
-
   return (
     <>
       <section className="pt-20 pb-8 max-w-6xl mx-auto px-6">
@@ -58,20 +52,6 @@ export default function OrgLevelPage() {
             </CardContent>
           </div>
         </div>
-      </section>
-
-      <section className="py-16 max-w-6xl mx-auto px-6">
-        <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">
-          How the org view fits together
-        </p>
-        <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] mb-10 text-[#003C64]">
-          Every site, one consolidated picture.
-        </h2>
-        <OrgTopology sites={diagramSites} />
-        <p className="mt-5 text-sm text-muted-foreground leading-relaxed max-w-3xl">
-          Each site instance collects data from its local sensors for vulnerability assessment, then reports to the
-          org instance. The org view rolls every site into a single posture for security leadership.
-        </p>
       </section>
 
       <section className="py-16 max-w-6xl mx-auto px-6">
