@@ -29,6 +29,17 @@ const serverURL =
   process.env.NEXT_PUBLIC_SERVER_URL ||
   'http://localhost:3020'
 
+/**
+ * Every host that serves this app needs to be in the allowlist: Payload rejects admin reads and
+ * writes whose Origin is not listed, so a site reachable at the apex, at www and at its
+ * *.vercel.app alias must list all three or /admin silently 403s on two of them.
+ */
+const allowedOrigins = [
+  serverURL,
+  'https://www.velosshield.com',
+  'https://veloshield-dreamhost.vercel.app',
+]
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -65,8 +76,8 @@ export default buildConfig({
     Events,
     PressMentions,
   ],
-  cors: [serverURL],
-  csrf: [serverURL],
+  cors: allowedOrigins,
+  csrf: allowedOrigins,
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URL || '',
