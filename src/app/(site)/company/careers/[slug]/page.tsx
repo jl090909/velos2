@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
@@ -20,10 +21,11 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   if (!job) {
     return { title: 'Role not found - Velos Shield' }
   }
-  return {
+  return pageMetadata({
+    path: `/company/careers/${slug}/`,
     description: job.summary,
     title: `${job.title} - Careers - Velos Shield`,
-  }
+  })
 }
 
 export default async function JobPage({ params }: Props) {

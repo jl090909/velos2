@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
@@ -20,10 +21,11 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   if (!event) {
     return { title: 'Event not found - Velos Shield' }
   }
-  return {
+  return pageMetadata({
+    path: `/company/events/${slug}/`,
     description: event.summary,
     title: `${event.title} - Events - Velos Shield`,
-  }
+  })
 }
 
 export default async function EventPage({ params }: Props) {

@@ -1,6 +1,14 @@
+import type { Metadata } from 'next'
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from "@/components/SiteFooter";
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/executives/',
+  title: 'For Executives - Velos Shield',
+  description: 'Cyber-physical risk in business terms: lower risk, less downtime, one platform, board-ready evidence, by role.',
+});
 
 const outcomes = [
   { stat: 'Lower risk', detail: 'Fewer cyber-physical incidents, caught before impact.' },

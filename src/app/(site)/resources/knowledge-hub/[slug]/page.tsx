@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { RichText } from '@payloadcms/richtext-lexical/react'
@@ -123,10 +124,11 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
   if (!article) {
     return { title: 'Article not found - Velos Shield' }
   }
-  return {
+  return pageMetadata({
+    path: `/resources/knowledge-hub/${slug}/`,
     description: article.excerpt,
     title: `${article.title} - Knowledge Hub - Velos Shield`,
-  }
+  })
 }
 
 export default async function KnowledgeArticlePage({ params }: Props) {

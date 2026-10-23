@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { pageMetadata } from '@/lib/seo'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
@@ -33,10 +34,11 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     return { title: 'Resource not found - Velos Shield' }
   }
 
-  return {
+  return pageMetadata({
+    path: `/resources/${slug}/`,
     description: paper.subtitle || paper.summary,
     title: `${paper.title} - ${paper.kind} - Velos Shield`,
-  }
+  })
 }
 
 export default async function WhitepaperPage({ params }: Props) {

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { SITE_NAME, SITE_URL } from '@/lib/seo'
 import { notFound } from 'next/navigation'
 
 import { ArticleView } from '@/components/newsroom/ArticleView'
@@ -25,16 +26,25 @@ export const generateMetadata = async ({ params }: Props): Promise<Metadata> => 
     return { title: 'Story not found - Velos Shield' }
   }
   const description = article.seoDescription ?? article.summary
+  const title = `${article.seoTitle ?? article.title} - Newsroom - Velos Shield`
+  const url = `${SITE_URL}/company/media/${slug}/`
   return {
     description,
+    // Without an explicit canonical every article is reachable from the apex, www, the project
+    // alias and velos2.vercel.app - four hosts claiming the same story.
+    alternates: { canonical: url },
     openGraph: {
       description,
       publishedTime: article.publishAt || undefined,
-      title: article.seoTitle ?? article.title,
+      title,
       type: 'article',
+      url,
+      siteName: SITE_NAME,
+      locale: 'en_GB',
     },
+    twitter: { card: 'summary_large_image', title, description },
     robots: { follow: true, index: true },
-    title: `${article.seoTitle ?? article.title} - Newsroom - Velos Shield`,
+    title,
   }
 }
 
