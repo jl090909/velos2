@@ -77,18 +77,14 @@ export default async function CustomersPage() {
               </Card>
             ))}
           </div>
-        ) : (
+        ) : error ? (
           <Card className="border-border/70">
             <CardContent className="p-8 md:p-10">
-              <p className="text-[#003C64] font-medium">Customer stories are being prepared.</p>
-              <p className="mt-2 text-sm text-muted-foreground">
-                {error
-                  ? 'The customer feed is temporarily unavailable. Please try again shortly.'
-                  : 'Approved customer stories and reference marks will appear here as they are cleared for publication.'}
-              </p>
+              <p className="text-[#003C64] font-medium">The customer feed is temporarily unavailable.</p>
+              <p className="mt-2 text-sm text-muted-foreground">Please try again shortly.</p>
             </CardContent>
           </Card>
-        )}
+        ) : null}
       </section>
 
       {withLogo.length > 0 ? (
