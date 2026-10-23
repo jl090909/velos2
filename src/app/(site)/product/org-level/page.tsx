@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from '@/components/SiteFooter';
 import { VulnSnapshot } from '@/components/VulnSnapshot';
@@ -50,6 +51,27 @@ export default function OrgLevelPage() {
                 ))}
               </div>
             </CardContent>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 max-w-6xl mx-auto px-6">
+        <div className="max-w-3xl mb-8">
+          <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-3">Business decisions</p>
+          <h2 className="text-3xl md:text-5xl font-semibold tracking-[-.05em] leading-[1.03] text-[#003C64]">
+            How Velos Shield helps your business
+          </h2>
+        </div>
+        <div className="relative overflow-hidden rounded-[1.35rem] shadow-[0_16px_40px_rgba(15,23,42,.08)]">
+          <div className="relative w-full" style={{ aspectRatio: '1600 / 687' }}>
+            <Image
+              src="/Group7.png"
+              alt="Velos Shield for business"
+              fill
+              unoptimized
+              sizes="(max-width: 768px) 100vw, 896px"
+              className="object-cover"
+            />
           </div>
         </div>
       </section>

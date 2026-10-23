@@ -6,7 +6,7 @@ import type { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react'
 
 import { SiteFooter } from '@/components/SiteFooter'
 import { ImageAccordion } from '@/components/site/ImageAccordion'
-import { getKnowledgeArticleBySlug, type RichTextData } from '@/lib/cms'
+import { getKnowledgeArticleBySlug, mediaUrl, type RichTextData } from '@/lib/cms'
 import { formatDate } from '@/lib/format'
 
 export const revalidate = 300
@@ -66,7 +66,7 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
     if (!url) {
       return null
     }
-    const src = url.startsWith('/') ? url : url.replace(/^https?:\/\/[^/]+/, '')
+    const src = mediaUrl(url)
     return (
       <figure className="my-6">
         {/* eslint-disable-next-line @next/next/no-img-element */}

@@ -1,7 +1,7 @@
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import type { JSXConvertersFunction } from '@payloadcms/richtext-lexical/react'
 
-import type { RichTextData } from '@/lib/cms'
+import { mediaUrl, type RichTextData } from '@/lib/cms'
 
 import { NewsroomVideo } from '@/components/newsroom/NewsroomVideo'
 
@@ -12,11 +12,22 @@ import { NewsroomVideo } from '@/components/newsroom/NewsroomVideo'
  * default converters. The one addition is the `videoEmbed` block, which is rendered through the
  * shared URL validator - an editor can embed YouTube/Vimeo/a video file and nothing else.
  *
+ * Inline uploads are overridden for the same reason mediaRef rewrites covers: the default converter
+ * emits the stored `url`, which Payload builds from serverURL and is therefore absolute to the host
+ * that uploaded the file (http://localhost:3020 here). Read from any other host - the LAN address,
+ * www.velosshield.com, *.vercel.app - that points at the viewer's own machine and the picture never
+ * loads. mediaUrl() keeps the path, which resolves against whichever host served the page.
+ *
  * Named for what it renders rather than where it started: a newsroom article and a customer case
  * study are both just a body, and two copies of this would drift.
  */
 
 type VideoEmbedFields = { caption?: string; title?: string; url?: string }
+
+type UploadNode = {
+  fields?: { caption?: string } | null
+  value?: { alt?: string; height?: number; url?: string; width?: number } | null
+}
 
 const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
   ...defaultConverters,
@@ -25,6 +36,29 @@ const converters: JSXConvertersFunction = ({ defaultConverters }) => ({
       const fields = node?.fields ?? {}
       return <NewsroomVideo caption={fields.caption} title={fields.title} url={fields.url ?? ''} />
     },
+  },
+  upload: ({ node }) => {
+    const upload = node as unknown as UploadNode
+    const media = upload.value
+    if (!media?.url) {
+      return null
+    }
+    return (
+      <figure className="my-8">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt={media.alt ?? ''}
+          className="w-full rounded-[1.15rem]"
+          height={media.height}
+          loading="lazy"
+          src={mediaUrl(media.url)}
+          width={media.width}
+        />
+        {upload.fields?.caption ? (
+          <figcaption className="mt-1.5 text-[12.35px] leading-relaxed text-[#5A6472]">{upload.fields.caption}</figcaption>
+        ) : null}
+      </figure>
+    )
   },
 })
 

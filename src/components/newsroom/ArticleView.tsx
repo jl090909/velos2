@@ -5,7 +5,7 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { RichBody } from '@/components/site/RichBody'
 import { NewsroomCard } from '@/components/newsroom/NewsroomCard'
 import type { NewsroomArticle } from '@/lib/newsroom'
-import { categorySlug, formatNewsroomDate } from '@/lib/newsroom-meta'
+import { formatNewsroomDate } from '@/lib/newsroom-meta'
 
 /**
  * The article layout, used by BOTH the public page and the draft preview.
@@ -66,7 +66,7 @@ export function ArticleView({
             Newsroom
           </Link>
           <span className="text-muted-foreground">/</span>
-          <Link className="no-underline hover:text-[#003C64]" href={`/company/media/?category=${categorySlug(article.category)}`}>
+          <Link className="no-underline hover:text-[#003C64]" href="/company/media/">
             {article.category}
           </Link>
         </div>

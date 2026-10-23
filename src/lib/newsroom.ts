@@ -2,7 +2,7 @@ import config from '@payload-config'
 import { getPayload } from 'payload'
 import type { Payload, Where } from 'payload'
 
-import type { MediaRef, RichTextData } from './cms'
+import { mediaUrl, type MediaRef, type RichTextData } from './cms'
 import { newsroomStatus, type NewsroomCategory, type NewsroomStatus } from './newsroom-meta'
 
 /**
@@ -78,7 +78,9 @@ const mediaRef = (value: unknown): MediaRef | null => {
   return {
     alt: str(value.alt),
     height: typeof (card?.height ?? value.height) === 'number' ? ((card?.height ?? value.height) as number) : undefined,
-    url: card ? str(card.url, url) : url,
+    // mediaUrl keeps the file path so a card cover loads from whichever host the reader is on; see
+    // the note on it in cms.ts (the stored url is absolute to the host that uploaded the file).
+    url: mediaUrl(card ? str(card.url, url) : url),
     width: typeof (card?.width ?? value.width) === 'number' ? ((card?.width ?? value.width) as number) : undefined,
   }
 }

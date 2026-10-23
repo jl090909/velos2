@@ -1,14 +1,12 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 
 import { Card, CardContent } from '@/components/ui/card'
 import { CompanyTabs } from '@/components/CompanyTabs'
 import { SiteFooter } from '@/components/SiteFooter'
 import { NewsroomCard, NewsroomRow } from '@/components/newsroom/NewsroomCard'
-import { NewsroomFilters } from '@/components/newsroom/NewsroomFilters'
 import { NewsroomHero } from '@/components/newsroom/NewsroomHero'
 import { getNewsroomArticles, type NewsroomArticle } from '@/lib/newsroom'
-import { NEWSROOM_CATEGORIES, categoryFromSlug, categorySlug, type NewsroomCategory } from '@/lib/newsroom-meta'
+import { NEWSROOM_CATEGORIES, type NewsroomCategory } from '@/lib/newsroom-meta'
 
 /**
  * The Newsroom - /company/media/.
@@ -30,10 +28,6 @@ export const metadata: Metadata = {
   description:
     'Velos Shield media: product news, research and insights, company announcements, press coverage and events in OT cyber security.',
   title: 'Media - Velos Shield',
-}
-
-type Props = {
-  searchParams: Promise<{ category?: string; q?: string }>
 }
 
 const SECTIONS: NewsroomCategory[] = [...NEWSROOM_CATEGORIES]
@@ -58,14 +52,6 @@ function Section({
     <section className="border-t border-border/60 pt-12">
       <div className="mb-7 flex flex-wrap items-end justify-between gap-3">
         <h2 className="text-[20.4px] font-bold tracking-[-.04em] text-[#003C64] md:text-[25.5px]">{category}</h2>
-        {articles.length > shown.length ? (
-          <Link
-            className="text-sm font-medium text-[#003C64] no-underline transition-colors hover:text-[#FF612A]"
-            href={`/company/media/?category=${categorySlug(category)}`}
-          >
-            View all {articles.length}
-          </Link>
-        ) : null}
       </div>
       {layout === 'rows' ? (
         <div className="grid gap-x-10 gap-y-0 md:grid-cols-2">
@@ -84,13 +70,8 @@ function Section({
   )
 }
 
-export default async function CompanyNewsroomPage({ searchParams }: Props) {
-  const { category: categoryParam, q: queryParam } = await searchParams
-  const activeCategory = categoryFromSlug(categoryParam)
-  const activeQuery = (queryParam ?? '').trim()
-  const filtered = Boolean(activeCategory) || activeQuery.length > 0
-
-  const { data: articles, error } = await getNewsroomArticles({ category: activeCategory, q: activeQuery })
+export default async function CompanyNewsroomPage() {
+  const { data: articles, error } = await getNewsroomArticles()
 
   const hero = articles.find((article) => article.featured) ?? articles[0] ?? null
   const rest = hero ? articles.filter((article) => String(article.id) !== String(hero.id)) : articles
@@ -104,40 +85,17 @@ export default async function CompanyNewsroomPage({ searchParams }: Props) {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">
-        <NewsroomFilters activeCategory={activeCategory} activeQuery={activeQuery} resultCount={articles.length} />
-
         {articles.length === 0 ? (
           <Card className="mt-10 border-border/70">
             <CardContent className="p-8 md:p-10">
-              <p className="font-medium text-[#003C64]">
-                {filtered ? 'No stories match that filter.' : 'No stories are published yet.'}
-              </p>
+              <p className="font-medium text-[#003C64]">No stories are published yet.</p>
               <p className="mt-2 text-sm text-muted-foreground">
                 {error
                   ? 'The media feed is temporarily unavailable. Please try again shortly.'
-                  : filtered
-                    ? 'Try another category, or clear the search to see every story.'
-                    : 'Product news, research and company announcements appear here as they are published.'}
+                  : 'Product news, research and company announcements appear here as they are published.'}
               </p>
             </CardContent>
           </Card>
-        ) : filtered ? (
-          <section className="mt-10">
-            <div className="mb-7 flex flex-wrap items-baseline justify-between gap-3">
-              <h2 className="text-[20.4px] font-bold tracking-[-.04em] text-[#003C64] md:text-[25.5px]">
-                {activeCategory ?? 'Search results'}
-              </h2>
-              <p className="text-sm text-muted-foreground">
-                {articles.length} {articles.length === 1 ? 'story' : 'stories'}
-                {activeQuery ? ` for "${activeQuery}"` : ''}
-              </p>
-            </div>
-            <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-              {articles.map((article) => (
-                <NewsroomCard key={String(article.id)} article={article} />
-              ))}
-            </div>
-          </section>
         ) : (
           <div className="mt-12 space-y-14">
             {hero ? <NewsroomHero article={hero} /> : null}

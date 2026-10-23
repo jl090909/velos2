@@ -33,14 +33,8 @@ export default function CompanyContactPage() {
             <div className="mt-5 space-y-1 text-sm text-muted-foreground">
               <p>
                 Email:{' '}
-                <a href="mailto:contact@rathon.ai" className="no-underline hover:text-foreground">
-                  contact@rathon.ai
-                </a>
-              </p>
-              <p>
-                Phone:{' '}
-                <a href="tel:+917090004700" className="no-underline hover:text-foreground">
-                  +91 70900 04700
+                <a href="mailto:demo@velosshield.com" className="no-underline hover:text-foreground">
+                  demo@velosshield.com
                 </a>
               </p>
             </div>

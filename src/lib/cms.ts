@@ -116,6 +116,31 @@ const listOf = (value: unknown, ...keys: string[]): string[] => {
     .filter((entry) => entry.length > 0)
 }
 
+/**
+ * A CMS upload's URL, reduced to the root-relative path that actually serves it.
+ *
+ * Payload builds every upload URL from the config's serverURL, so on this machine every cover comes
+ * back as http://localhost:3020/api/media/file/<name>/. That is correct for the process that wrote
+ * it and wrong for every other viewer: the site is browsed at the WSL/LAN address
+ * (http://172.24.222.122:3020), at www.velosshield.com and at the *.vercel.app alias, where
+ * "localhost:3020" resolves to the VIEWER's own machine - so every CMS image 404s and the Knowledge
+ * Hub and whitepaper cards render empty. Stripping the origin leaves the path, which the browser
+ * resolves against whichever host served the page, so one document is correct on all of them.
+ *
+ * The trailing slash goes too: Payload's URL has one, /api/media/file/<name>/ 308-redirects to the
+ * real file, and an image element that redirects costs a round trip on every card.
+ */
+export const mediaUrl = (value: string): string => {
+  const path = value.replace(/^https?:\/\/[^/]+/i, '')
+  // Only rewrite URLs that point at this app's own upload route. A cover served straight from a CDN
+  // keeps its absolute URL on purpose - relativising that would ask this host for a file it does not
+  // have. Today every upload is proxied through /api/media/file, so this is the belt to that braces.
+  if (!path.startsWith('/api/media/')) {
+    return value
+  }
+  return path.endsWith('/') ? path.slice(0, -1) : path
+}
+
 const mediaRef = (value: unknown): MediaRef | null => {
   if (!isRecord(value)) {
     return null
@@ -127,7 +152,7 @@ const mediaRef = (value: unknown): MediaRef | null => {
   return {
     alt: str(value.alt),
     height: typeof value.height === 'number' ? value.height : undefined,
-    url,
+    url: mediaUrl(url),
     width: typeof value.width === 'number' ? value.width : undefined,
   }
 }

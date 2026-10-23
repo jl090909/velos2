@@ -31,8 +31,7 @@ export function OtCarousel() {
   const total = OT_SLIDES.length
   const [index, setIndex] = useState(0)
   const [paused, setPaused] = useState(false)
-  const [hovering, setHovering] = useState(false)
-  const [focused, setFocused] = useState(false)
+  const [interacted, setInteracted] = useState(false)
   const [zoom, setZoom] = useState<ZoomState>(null)
   const touchStart = useRef<number | null>(null)
   const section = useRef<HTMLDivElement>(null)
@@ -40,16 +39,23 @@ export function OtCarousel() {
   const slide = OT_SLIDES[index]
   const picLeft = slide.side === 'pic-left'
 
+  /**
+   * Manual interaction wins: the first time someone uses an arrow, the keyboard or the zoom, the
+   * timer stops for good instead of fighting them. Earlier this component paused/resumed on
+   * hover and focus, which meant a state change on every pointer enter - a re-render landing
+   * between mousedown and mouseup, which can swallow the click.
+   */
   const go = useCallback(
     (target: number) => {
+      setInteracted(true)
       setIndex(((target % total) + total) % total)
     },
     [total],
   )
 
-  // Auto-advance.
+  // Auto-advance, until the visitor takes over.
   useEffect(() => {
-    if (paused || hovering || focused) return
+    if (paused || interacted) return
     if (typeof window === 'undefined') return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
@@ -59,7 +65,7 @@ export function OtCarousel() {
     }, ADVANCE_MS)
 
     return () => window.clearInterval(id)
-  }, [paused, hovering, focused, total])
+  }, [paused, interacted, total])
 
   // Arrow keys, only while the carousel itself has focus.
   useEffect(() => {
@@ -93,36 +99,47 @@ export function OtCarousel() {
   const control =
     'inline-flex h-10 w-10 items-center justify-center rounded-full border border-border/70 bg-white/85 text-[#003C64] shadow-[0_1px_2px_rgba(15,23,42,.06)] transition-all hover:border-[#003C64]/40 hover:bg-white'
 
-  const openZoom = (image: OtSlideImage) => setZoom({ caption: `Slide ${slide.num} — ${slide.topic}`, image })
+  const openZoom = (image: OtSlideImage) => {
+    setInteracted(true)
+    setZoom({ caption: `Slide ${slide.num} — ${slide.topic}`, image })
+  }
+
+  /**
+   * The artwork sits in a FIXED box at every breakpoint. The slides are a mix of 800x800 and
+   * 640x800, so sizing them naturally made the stage taller or shorter on every advance and shoved
+   * the rest of the page up and down. Fixed height + object-contain means each slide occupies the
+   * same space, and the only thing that changes is the picture inside it.
+   */
+  const frame = 'relative mx-auto flex h-[300px] w-full max-w-[430px] items-center justify-center sm:h-[380px] lg:h-[430px]'
 
   const artwork = (
-    <div className="relative flex w-full items-center justify-center">
+    <div className={frame}>
       {slide.media.kind === 'single' ? (
         <button
-          className="group relative block w-full max-w-[430px] cursor-zoom-in overflow-hidden rounded-[18px] bg-[#f2f5f9] p-3 shadow-[0_18px_45px_rgba(15,23,42,.12)] transition-transform duration-500 hover:-translate-y-1"
-          onClick={() => openZoom(slide.media.kind === 'single' ? slide.media.images[0] : slide.media.images[0])}
+          className="group relative block h-full w-full cursor-zoom-in overflow-hidden rounded-[18px] bg-[#f2f5f9] p-3 shadow-[0_18px_45px_rgba(15,23,42,.12)] transition-transform duration-500 hover:-translate-y-1"
+          onClick={() => openZoom(slide.media.images[0])}
           type="button"
         >
           <Image
             alt={`${slide.topic} — slide ${slide.num} graphic`}
-            className="h-auto w-full object-contain"
+            className="h-full w-full object-contain"
             height={slide.media.images[0].height}
             src={slide.media.images[0].src}
             width={slide.media.images[0].width}
           />
         </button>
       ) : slide.media.kind === 'dual' ? (
-        <div className="grid w-full max-w-[430px] grid-cols-2 gap-3">
+        <div className="grid h-full w-full grid-cols-2 gap-3">
           {slide.media.images.map((image, i) => (
             <button
-              className="cursor-zoom-in overflow-hidden rounded-[14px] bg-[#f2f5f9] p-2 shadow-[0_12px_30px_rgba(15,23,42,.10)] transition-transform duration-500 hover:-translate-y-1"
+              className="h-full cursor-zoom-in overflow-hidden rounded-[14px] bg-[#f2f5f9] p-2 shadow-[0_12px_30px_rgba(15,23,42,.10)] transition-transform duration-500 hover:-translate-y-1"
               key={image.src}
               onClick={() => openZoom(image)}
               type="button"
             >
               <Image
                 alt={`${slide.topic} — slide ${slide.num} graphic ${i + 1}`}
-                className="h-auto w-full object-contain"
+                className="h-full w-full object-contain"
                 height={image.height}
                 src={image.src}
                 width={image.width}
@@ -131,17 +148,17 @@ export function OtCarousel() {
           ))}
         </div>
       ) : (
-        <div className="grid w-full max-w-[430px] grid-cols-2 gap-3">
+        <div className="grid h-full w-full grid-cols-2 grid-rows-2 gap-3">
           {slide.media.images.map((image, i) => (
             <button
-              className="cursor-zoom-in overflow-hidden rounded-[14px] bg-[#f2f5f9] p-2 shadow-[0_12px_30px_rgba(15,23,42,.10)] transition-transform duration-500 hover:-translate-y-1"
+              className="h-full cursor-zoom-in overflow-hidden rounded-[14px] bg-[#f2f5f9] p-2 shadow-[0_12px_30px_rgba(15,23,42,.10)] transition-transform duration-500 hover:-translate-y-1"
               key={`${image.src}-${i}`}
               onClick={() => openZoom(image)}
               type="button"
             >
               <Image
                 alt={`${slide.topic} — slide ${slide.num} graphic ${i + 1}`}
-                className="h-auto w-full object-contain"
+                className="h-full w-full object-contain"
                 height={image.height}
                 src={image.src}
                 width={image.width}
@@ -158,18 +175,14 @@ export function OtCarousel() {
       <div
         aria-label="OT security carousel"
         aria-roledescription="carousel"
-        onBlurCapture={() => setFocused(false)}
-        onFocusCapture={() => setFocused(true)}
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
         ref={section}
         tabIndex={0}
       >
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
-            <p className="text-[11.4px] font-semibold tracking-[.18em] uppercase text-[#FF612A]">Ten moves, two buyers</p>
+            <p className="text-[11.4px] font-semibold tracking-[.18em] uppercase text-[#FF612A]">Velos Shield OT</p>
             <h2 className="mt-2 text-2xl font-semibold tracking-[-.03em] text-[#003C64] md:text-3xl" id="ot-carousel-heading">
-              One sentence for security. One for operations.
+              Our proposition
             </h2>
           </div>
 
@@ -211,7 +224,7 @@ export function OtCarousel() {
         <div
           aria-label={`Slide ${index + 1} of ${total}`}
           aria-roledescription="slide"
-          className="ot-slide mt-8 grid min-h-[380px] items-center gap-8 md:gap-10 lg:grid-cols-12 lg:gap-14"
+          className="ot-slide mt-8 grid items-center gap-8 md:gap-10 lg:grid-cols-12 lg:gap-14"
           key={slide.num}
           onTouchEnd={(event) => {
             if (touchStart.current === null) return
@@ -226,7 +239,7 @@ export function OtCarousel() {
         >
           <div className={picLeft ? 'lg:order-1 lg:col-span-6' : 'lg:order-2 lg:col-span-6'}>{artwork}</div>
 
-          <div className={picLeft ? 'lg:order-2 lg:col-span-6' : 'lg:order-1 lg:col-span-6'}>
+          <div className={picLeft ? 'lg:order-2 lg:col-span-6 min-h-[310px] lg:min-h-[430px] lg:flex lg:flex-col lg:justify-center' : 'lg:order-1 lg:col-span-6 min-h-[310px] lg:min-h-[430px] lg:flex lg:flex-col lg:justify-center'}>
             <p className="flex items-center gap-2 text-[11.4px] font-semibold tracking-[.18em] uppercase text-muted-foreground">
               <span className="text-[#FF612A]">{slide.num}</span>
               <span aria-hidden="true">/</span>
@@ -247,28 +260,6 @@ export function OtCarousel() {
               </span>
             </p>
           </div>
-        </div>
-
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-border/50 pt-5">
-          <div className="flex flex-wrap items-center gap-2">
-            {OT_SLIDES.map((entry, i) => (
-              <button
-                aria-label={`Go to slide ${entry.num}: ${entry.topic}`}
-                aria-pressed={i === index}
-                className={`inline-flex h-8 min-w-8 items-center justify-center rounded-lg px-2.5 text-[11.4px] font-semibold transition-all ${
-                  i === index
-                    ? 'bg-[#FF612A] text-white'
-                    : 'bg-[#003C64]/6 text-[#003C64]/60 hover:bg-[#003C64]/10 hover:text-[#003C64]'
-                }`}
-                key={entry.num}
-                onClick={() => go(i)}
-                type="button"
-              >
-                {entry.num}
-              </button>
-            ))}
-          </div>
-          <p className="text-[11.4px] text-muted-foreground">Arrow keys or swipe. Click a slide to enlarge it.</p>
         </div>
       </div>
 
