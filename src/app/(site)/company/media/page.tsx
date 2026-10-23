@@ -7,6 +7,7 @@ import { NewsroomCard, NewsroomRow } from '@/components/newsroom/NewsroomCard'
 import { NewsroomHero } from '@/components/newsroom/NewsroomHero'
 import { getNewsroomArticles, type NewsroomArticle } from '@/lib/newsroom'
 import { NEWSROOM_CATEGORIES, type NewsroomCategory } from '@/lib/newsroom-meta'
+import { pageMetadata } from '@/lib/seo'
 
 /**
  * The Newsroom - /company/media/.
@@ -24,11 +25,12 @@ import { NEWSROOM_CATEGORIES, type NewsroomCategory } from '@/lib/newsroom-meta'
 
 export const revalidate = 300
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: '/company/media/',
   description:
     'Velos Shield media: product news, research and insights, company announcements, press coverage and events in OT cyber security.',
   title: 'Media - Velos Shield',
-}
+})
 
 const SECTIONS: NewsroomCategory[] = [...NEWSROOM_CATEGORIES]
 
@@ -81,7 +83,7 @@ export default async function CompanyNewsroomPage() {
     <>
       <section className="mx-auto max-w-6xl px-6 pt-20 pb-8">
         <CompanyTabs />
-        <p className="mt-10 text-[12.35px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">Media</p>
+        <h1 className="mt-10 text-[12.35px] font-semibold uppercase tracking-[.18em] text-[#FF612A]">Media</h1>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">
@@ -109,7 +111,6 @@ export default async function CompanyNewsroomPage() {
                 limit={category === 'Research & Insights' ? 4 : 3}
               />
             ))}
-
 
           </div>
         )}

@@ -1,5 +1,6 @@
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 
+/** /company is a hub with no content of its own; it permanently belongs at /company/about. */
 export default function CompanyPage() {
-  redirect('/company/about');
+  permanentRedirect('/company/about');
 }

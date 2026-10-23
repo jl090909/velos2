@@ -5,6 +5,7 @@ import { Eyebrow, Surface } from '@/components/site/editorial'
 import { LineupGallery } from '@/components/site/LineupGallery'
 import { LineupTile } from '@/components/site/LineupTile'
 import { getWhitepapers } from '@/lib/cms'
+import { pageMetadata } from '@/lib/seo'
 
 /**
  * Resources - the library as a lineup.
@@ -16,11 +17,12 @@ import { getWhitepapers } from '@/lib/cms'
 
 export const revalidate = 300
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: '/resources/',
   description:
     'Point-of-view whitepapers, case studies, and brochures on OT cyber risk, operational context, and the future of OT monitoring.',
   title: 'Resources - Velos Shield POV Whitepaper Series',
-}
+})
 
 export default async function ResourcesPage() {
   const { data: papers, error } = await getWhitepapers()
@@ -33,12 +35,12 @@ export default async function ResourcesPage() {
       <section className="pb-24 pt-16">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <Eyebrow>Resources</Eyebrow>
-          <h2
+          <h1
             className="mx-auto mt-3 max-w-3xl text-3xl font-semibold tracking-[-.04em] text-[#003C64] md:text-5xl"
             id="library"
           >
             The Velos Shield library.
-          </h2>
+          </h1>
         </div>
 
         <div className="mx-auto mt-10 max-w-6xl px-6">

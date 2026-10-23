@@ -3,6 +3,14 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { FormStatus } from '@/components/FormStatus';
 import { SiteFooter } from "@/components/SiteFooter";
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/demo/',
+  title: 'Request a Demo - Velos Shield',
+  description: 'Plan a walkthrough, site visit or POC shaped around your operating environment.',
+});
 
 const agenda = [
   'A guided walkthrough of the product.',
@@ -27,7 +35,7 @@ export default function DemoPage() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,.8),transparent_36%),radial-gradient(circle_at_bottom_right,rgba(148,163,184,.12),transparent_38%)] pointer-events-none" />
             <CardContent className="relative p-8 md:p-10 h-full flex flex-col justify-between">
               <p className="text-[12.35px] font-semibold tracking-[.18em] uppercase text-[#FF612A] mb-4">Let’s talk</p>
-              <h2 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-6">Plan a walkthrough, site visit, or POC.</h2>
+              <h1 className="text-2xl font-semibold tracking-[-.03em] text-[#003C64] mb-6">Plan a walkthrough, site visit, or POC.</h1>
               <p className="text-sm text-muted-foreground leading-relaxed mb-6">
                 Tell us what you want to improve and we’ll shape the conversation around your operating environment, your team, and the outcomes that matter.
               </p>

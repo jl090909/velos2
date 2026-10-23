@@ -1,5 +1,13 @@
 import { SiteFooter } from '@/components/SiteFooter';
 import { CompanyTabs } from '@/components/CompanyTabs';
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/company/leadership/',
+  title: 'Leadership - Velos Shield',
+  description: 'The team building Velos Shield.',
+});
 
 const roles = ['CEO', 'CTO', 'VP Engineering', 'VP Sales', 'CISO'];
 

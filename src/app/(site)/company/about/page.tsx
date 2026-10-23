@@ -1,5 +1,13 @@
 import { SiteFooter } from '@/components/SiteFooter';
 import { CompanyTabs } from '@/components/CompanyTabs';
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/company/about/',
+  title: 'About - Velos Shield',
+  description: 'Who Velos Shield is, and why OT visibility has to be passive-first.',
+});
 
 export default function CompanyAboutPage() {
   return (

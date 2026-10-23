@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { DotGrid, Gear, RadarRing, Wordmark } from '@/components/decor';
@@ -24,6 +26,13 @@ const pillars = [
     desc: 'Package findings into audit-ready evidence and workflows for security leaders, engineers, and executive stakeholders.',
   },
 ];
+
+export const metadata: Metadata = pageMetadata({
+  path: '/',
+  title: 'Velos Shield — Secure Operations. Intelligent Decisions.',
+  description:
+    'Passive-first OT visibility for manufacturing, energy, transport and critical infrastructure. Total visibility, zero downtime.',
+});
 
 export default function HomePage() {
   return (

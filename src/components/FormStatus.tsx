@@ -15,6 +15,9 @@ export function FormStatus() {
 
   return (
     <div
+      // Announced by screen readers: 'status' is polite (success), 'alert' is assertive (failure).
+      role={status === 'success' ? 'status' : 'alert'}
+      aria-live={status === 'success' ? 'polite' : 'assertive'}
       className={`mb-4 rounded-[1rem] px-4 py-3 text-sm ${
         status === 'success'
           ? 'bg-[linear-gradient(180deg,rgba(34,197,94,.12)_0%,rgba(34,197,94,.06)_100%)] text-emerald-700 ring-1 ring-emerald-500/20'

@@ -29,17 +29,32 @@ const itemClass =
   'block px-4 py-3 rounded-2xl text-[14.25px] font-medium no-underline text-[#003C64] hover:bg-[linear-gradient(180deg,#003C64_0%,#002640_100%)] hover:text-[#FF612A] transition-colors';
 
 function NavDropdown({ label, items, active }: { label: string; items: { href: string; label: string }[]; active: boolean }) {
+  // aria-expanded needs state. Visibility stays CSS-driven (group-hover) so the visual behaviour
+  // is untouched; this only reports open/closed to assistive tech, and focus/blur covers keyboard.
+  const [open, setOpen] = useState(false)
+  const panelId = `nav-panel-${label.toLowerCase()}`
+
   return (
-    <div className="relative group">
+    <div
+      className="relative group"
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpen(false)
+      }}
+      onFocus={() => setOpen(true)}
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+    >
       <button
         type="button"
+        aria-controls={panelId}
+        aria-expanded={open}
         aria-haspopup="true"
         className="px-3 py-2 text-[14.25px] font-medium rounded-full cursor-pointer bg-transparent border-0"
         style={{ color: active ? '#FF612A' : '#003C64' }}
       >
         {label} <span aria-hidden className="text-[10.45px] align-middle">▾</span>
       </button>
-      <div className={panelClass}>
+      <div className={panelClass} id={panelId}>
         {items.map((p) => (
           <Link key={p.href} href={p.href} className={itemClass}>
             {p.label}

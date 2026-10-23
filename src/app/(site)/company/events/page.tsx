@@ -16,6 +16,7 @@ import {
 } from '@/components/site/editorial'
 import { getEvents, type EventItem } from '@/lib/cms'
 import { formatDate } from '@/lib/format'
+import { pageMetadata } from '@/lib/seo'
 
 /**
  * Events - the same editorial layout as the Media page.
@@ -27,10 +28,11 @@ import { formatDate } from '@/lib/format'
 
 export const revalidate = 300
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: '/company/events/',
   description: 'Conferences, exhibitions and briefings where the Velos Shield team is presenting or exhibiting.',
   title: 'Events - Velos Shield',
-}
+})
 
 const dateRange = (start: string, end?: string): string => {
   const from = formatDate(start)
@@ -57,7 +59,7 @@ export default async function CompanyEventsPage() {
     <>
       <section className="mx-auto max-w-6xl px-6 pt-20 pb-8">
         <CompanyTabs />
-        <Eyebrow className="mt-10">Events</Eyebrow>
+        <Eyebrow as="h1" className="mt-10">Events</Eyebrow>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">

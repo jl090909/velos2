@@ -1,6 +1,15 @@
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from "@/components/SiteFooter";
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/product/',
+  title: 'Platform - Velos Shield',
+  description:
+    'An industrial shield to get more from your assets: passive visibility, contextual risk and controlled change.',
+});
 
 const storyCards = [
   {

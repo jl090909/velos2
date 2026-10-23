@@ -4,13 +4,15 @@ import Link from 'next/link'
 import { CompanyTabs } from '@/components/CompanyTabs'
 import { SiteFooter } from '@/components/SiteFooter'
 import { getOpenJobs } from '@/lib/cms'
+import { pageMetadata } from '@/lib/seo'
 
 export const revalidate = 300
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: '/company/careers/',
   description: 'Open roles at Velos Shield: cyber-physical security for industrial and critical infrastructure environments.',
   title: 'Careers - Velos Shield',
-}
+})
 
 export default async function CompanyCareersPage() {
   const { data: jobs, error } = await getOpenJobs()

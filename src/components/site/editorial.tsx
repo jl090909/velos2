@@ -12,11 +12,20 @@ import type { ReactNode } from 'react'
 
 /* ------------------------------------------------------------------ small parts */
 
-export function Eyebrow({ children, className = '' }: { children: ReactNode; className?: string }) {
+export function Eyebrow({
+  children,
+  className = '',
+  as: Tag = 'p',
+}: {
+  children: ReactNode
+  className?: string
+  /** Pages whose design has no display heading still need exactly one <h1>; render the eyebrow as it. */
+  as?: 'p' | 'h1'
+}) {
   return (
-    <p className={`text-[12.35px] font-semibold uppercase tracking-[.18em] text-[#FF612A]${className ? ` ${className}` : ''}`}>
+    <Tag className={`text-[12.35px] font-semibold uppercase tracking-[.18em] text-[#FF612A]${className ? ` ${className}` : ''}`}>
       {children}
-    </p>
+    </Tag>
   )
 }
 

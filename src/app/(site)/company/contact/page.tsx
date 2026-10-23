@@ -4,6 +4,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { FormStatus } from '@/components/FormStatus';
 import { SiteFooter } from '@/components/SiteFooter';
 import { CompanyTabs } from '@/components/CompanyTabs';
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/company/contact/',
+  title: 'Contact Us - Velos Shield',
+  description: 'Talk to the Velos Shield team about a walkthrough, site visit or proof of concept.',
+});
 
 const inputClass =
   'h-12 rounded-[1rem] bg-[linear-gradient(180deg,rgba(255,255,255,.95)_0%,rgba(244,245,247,.84)_100%)] border-transparent shadow-[0_1px_0_rgba(255,255,255,.95)_inset,0_10px_24px_rgba(15,23,42,.04)]';

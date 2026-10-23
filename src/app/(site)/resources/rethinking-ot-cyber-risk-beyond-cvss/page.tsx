@@ -2,10 +2,13 @@ import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const metadata = {
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
+  path: '/resources/rethinking-ot-cyber-risk-beyond-cvss/',
   title: 'Rethinking OT Cyber Risk Beyond CVSS — Velos Shield Resources',
   description: 'The Operational Context Gap: why severity is not consequence, and the six-layer Operational Context Stack.',
-};
+});
 
 function Section({ n, title, children }: { n: string; title: string; children: React.ReactNode }) {
   return (

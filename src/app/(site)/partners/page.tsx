@@ -6,11 +6,14 @@ import { Textarea } from '@/components/ui/textarea';
 import { FormStatus } from '@/components/FormStatus';
 import { SiteFooter } from '@/components/SiteFooter';
 
-export const metadata = {
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
+  path: '/partners/',
   description:
     'Partner with Velos Shield: assessment, architecture and continuous OT monitoring your industrial clients can verify. For system integrators, MSSPs, OT consultancies and automation partners.',
   title: 'Partners - Velos Shield',
-};
+});
 
 const inputClass =
   'h-12 rounded-[1rem] bg-[linear-gradient(180deg,rgba(255,255,255,.95)_0%,rgba(244,245,247,.84)_100%)] border-transparent shadow-[0_1px_0_rgba(255,255,255,.95)_inset,0_10px_24px_rgba(15,23,42,.04)]';

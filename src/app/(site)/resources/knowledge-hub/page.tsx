@@ -4,6 +4,7 @@ import { SiteFooter } from '@/components/SiteFooter'
 import { Eyebrow, Surface } from '@/components/site/editorial'
 import { FeedRow } from '@/components/site/FeedRow'
 import { getKnowledgeArticles, type KnowledgeArticle } from '@/lib/cms'
+import { pageMetadata } from '@/lib/seo'
 
 /**
  * Knowledge Hub - the engineering/research feed.
@@ -16,11 +17,12 @@ import { getKnowledgeArticles, type KnowledgeArticle } from '@/lib/cms'
 
 export const revalidate = 300
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: '/resources/knowledge-hub/',
   description:
     'Practical notes from the Velos Shield engineering and research teams on OT security, detection design, deployment evidence and compliance.',
   title: 'Knowledge Hub - Velos Shield',
-}
+})
 
 const href = (article: KnowledgeArticle): string => `/resources/knowledge-hub/${article.slug}/`
 
@@ -35,12 +37,12 @@ export default async function KnowledgeHubPage() {
       <section className="pb-24 pt-16">
         <div className="mx-auto max-w-6xl px-6 text-center">
           <Eyebrow>Knowledge Hub</Eyebrow>
-          <h2
+          <h1
             className="mx-auto mt-3 max-w-3xl text-3xl font-semibold tracking-[-.04em] text-[#003C64] md:text-5xl"
             id="notes"
           >
             Latest notes.
-          </h2>
+          </h1>
         </div>
 
         <div className="mx-auto mt-10 max-w-6xl px-6">

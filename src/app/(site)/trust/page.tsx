@@ -1,5 +1,13 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from "@/components/SiteFooter";
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/trust/',
+  title: 'Trust - Velos Shield',
+  description: 'Built around passive-first visibility and controlled change.',
+});
 
 const trustCards = [
   {

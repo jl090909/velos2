@@ -1,6 +1,14 @@
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from "@/components/SiteFooter";
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/get-started/',
+  title: 'Get Started - Velos Shield',
+  description: 'Choose the Velos Shield path that fits your sites and your team.',
+});
 
 const products = [
   {

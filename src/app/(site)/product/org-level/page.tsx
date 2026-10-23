@@ -1,10 +1,19 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from '@/components/SiteFooter';
 import { VulnSnapshot } from '@/components/VulnSnapshot';
 import { SiteRiskBars } from '@/components/SiteRiskBars';
 import { ORG_FINDINGS, ORG_SEVERITY_COUNTS, SITE_RISK } from '@/lib/sample-data';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/product/org-level/',
+  title: 'Org-Level Protection - Velos Shield',
+  description: 'Organisation-wide OT visibility and risk posture across every site.',
+});
 
 const tags = ['Org-level', 'Multi-site rollup', 'Consolidated posture', 'Role-based views'];
 

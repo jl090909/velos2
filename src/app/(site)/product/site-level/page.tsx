@@ -2,6 +2,9 @@ import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from '@/components/SiteFooter';
 import { SiteTopology } from '@/components/SiteTopology';
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
 import { VulnSnapshot } from '@/components/VulnSnapshot';
 import {
   SITE_DEVICE_GROUPS,
@@ -10,6 +13,12 @@ import {
   SITE_SCOPE_LABEL,
   SITE_SEVERITY_COUNTS,
 } from '@/lib/sample-data';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/product/site-level/',
+  title: 'Site-Level Protection - Velos Shield',
+  description: 'Site-level OT monitoring that observes safely and acts with context.',
+});
 
 const tags = ['Site level', 'Appliance', 'Passive sensors', 'Vulnerability assessment'];
 

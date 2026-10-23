@@ -23,6 +23,26 @@ const nextConfig: NextConfig = {
     ],
   },
   trailingSlash: true,
+  /**
+   * Baseline response hardening. HSTS was already present via the platform; these were not.
+   * Deliberately no CSP here: the CMS admin and Next's inline bootstrap need a nonce/hash
+   * pipeline, and a guessed policy would break /admin rather than protect it. Add CSP as a
+   * separate, tested change.
+   */
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'SAMEORIGIN' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()' },
+          { key: 'Strict-Transport-Security', value: 'max-age=63072000; includeSubDomains' },
+        ],
+      },
+    ]
+  },
   turbopack: {
     root: path.resolve(dirname),
   },

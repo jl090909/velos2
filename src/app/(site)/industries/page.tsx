@@ -1,6 +1,14 @@
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from "@/components/SiteFooter";
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/industries/',
+  title: 'Industries - Velos Shield',
+  description: 'One platform for manufacturing, energy, airports, maritime and smart cities.',
+});
 
 const industries = [
   {

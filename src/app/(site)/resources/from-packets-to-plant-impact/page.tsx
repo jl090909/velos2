@@ -2,10 +2,13 @@ import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from "@/components/SiteFooter";
 
-export const metadata = {
+import { pageMetadata } from '@/lib/seo'
+
+export const metadata = pageMetadata({
+  path: '/resources/from-packets-to-plant-impact/',
   title: 'From Packets to Plant Impact — Velos Shield Resources',
   description: 'Six beliefs on the evolution of OT monitoring: See → Preserve → Interpret → Prepare → Remember → Understand.',
-};
+});
 
 const parts = [
   {

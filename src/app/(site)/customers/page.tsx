@@ -4,13 +4,15 @@ import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
 import { SiteFooter } from '@/components/SiteFooter'
 import { getCustomers } from '@/lib/cms'
+import { pageMetadata } from '@/lib/seo'
 
 export const revalidate = 300
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
+  path: '/customers/',
   description: 'Where Velos Shield is deployed: sectors, regions and the outcomes that mattered.',
   title: 'Customers - Velos Shield',
-}
+})
 
 export default async function CustomersPage() {
   const { data: customers, error } = await getCustomers()

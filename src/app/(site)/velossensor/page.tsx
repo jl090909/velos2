@@ -1,6 +1,14 @@
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
 import { SiteFooter } from "@/components/SiteFooter";
+import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata: Metadata = pageMetadata({
+  path: '/velossensor/',
+  title: 'Velos Sensor - Velos Shield',
+  description: 'Observe safely. Contextualize deeply. Act confidently.',
+});
 
 const sections = [
   {
