@@ -9,7 +9,7 @@ export default function LicensingPage() {
     <p>Medusa Admin — <a className="underline" href="http://localhost:9050/app">localhost:9050/app</a></p>
     <p>VS Core 1.1 — <a className="underline" href="http://localhost:4011">localhost:4011</a></p>
     <p>Core licence verification — <a className="underline" href="http://localhost:9053">localhost:9053</a></p>
-    <p>Health check — <a className="underline" href="/api/poc/health">POC service status (JSON)</a></p>
+    <p>Health check — <Link className="underline" href="/api/poc/health/">POC service status (JSON)</Link></p>
   </div>
   <div className="mt-8"><Link href="/shop" className="underline text-[#003C64]">Back to products</Link></div>
  </section>;
