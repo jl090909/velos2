@@ -71,6 +71,7 @@ export async function POST(request: Request) {
       reference: welcomeRef,
     });
     if (result.accepted) {
+      // SES accepted the message (MessageId). This is not proof of inbox delivery.
       await markNotificationSent(acq.id, result.messageId);
       sesMessageId = result.messageId;
       sesAccepted = true;
