@@ -1,34 +1,20 @@
 import { NextResponse } from 'next/server';
-import { SESClient, SendEmailCommand } from '@aws-sdk/client-ses';
+import { renderWelcome } from '@/lib/email/welcome';
+import { sendTemplatedEmail } from '@/lib/email/ses';
+import { alreadyNotified, recordNotification } from '@/lib/email/notifications';
 
 const MEDUSA = process.env.MEDUSA_BACKEND_URL || 'http://localhost:9050';
 const PK = process.env.MEDUSA_PUBLISHABLE_KEY || 'pk_514423ce34bf1aabb2ab61c13d483cf88a24685f019a8b5f2e5b4cc589ff46e5';
 
-const ses = new SESClient({ region: process.env.AWS_REGION || 'eu-west-1' });
-const FROM = process.env.SES_FROM_EMAIL || 'noreply@rathon.ai';
-
-async function sendWelcomeEmail(to: string, name?: string) {
-  return ses.send(new SendEmailCommand({
-    Source: FROM,
-    Destination: { ToAddresses: [to] },
-    Message: {
-      Subject: { Data: 'Welcome to Velos Shield' },
-      Body: {
-        Text: { Data: `Hello ${name || ''},\n\nYour Velos Shield customer account has been created. You can now sign in, view orders, and manage licences.\n\nRegards,\nVelos Shield` },
-        Html: { Data: `<p>Hello ${name || ''},</p><p>Your Velos Shield customer account has been created. You can now sign in, view orders, and manage licences.</p><p>Regards,<br/>Velos Shield</p>` },
-      },
-    },
-  }));
-}
-
 export async function POST(request: Request) {
   const { email, password, first_name, last_name } = await request.json();
+  const normalizedEmail = String(email || '').trim().toLowerCase();
 
   // 1. Register auth identity
   const regRes = await fetch(`${MEDUSA}/auth/customer/emailpass/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-publishable-api-key': PK },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email: normalizedEmail, password }),
   });
   const regData = await regRes.json().catch(() => ({}));
   if (!regRes.ok) {
@@ -37,19 +23,22 @@ export async function POST(request: Request) {
   const regToken = regData.token;
 
   // 2. Create customer record
+  let customerId: string | null = null;
   try {
-    await fetch(`${MEDUSA}/store/customers`, {
+    const custRes = await fetch(`${MEDUSA}/store/customers`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-publishable-api-key': PK, 'Authorization': `Bearer ${regToken}` },
-      body: JSON.stringify({ email, first_name, last_name }),
+      body: JSON.stringify({ email: normalizedEmail, first_name, last_name }),
     });
+    const custData = await custRes.json().catch(() => ({}));
+    customerId = custData?.customer?.id || custData?.id || null;
   } catch {}
 
   // 3. Login to obtain customer-bound token
   const loginRes = await fetch(`${MEDUSA}/auth/customer/emailpass`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-publishable-api-key': PK },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email: normalizedEmail, password }),
   });
   const loginData = await loginRes.json().catch(() => ({}));
   if (!loginRes.ok) {
@@ -57,17 +46,29 @@ export async function POST(request: Request) {
   }
   const token = typeof loginData === 'string' ? loginData : loginData.token;
 
-  // 4. Send welcome email via AWS SES (best effort)
+  // 4. Send welcome email (once)
+  const welcomeRef = `welcome:${normalizedEmail}`;
   let sesMessageId: string | null = null;
+  let sesAccepted = false;
   let sesError: string | null = null;
-  try {
-    const out = await sendWelcomeEmail(email, first_name);
-    sesMessageId = (out as { MessageId?: string })?.MessageId || null;
-    console.log('SES welcome email accepted, MessageId:', sesMessageId, 'recipient:', email);
-  } catch (e: unknown) {
-    sesError = e instanceof Error ? e.message : String(e);
-    console.error('SES send failed:', sesError);
+  if (!alreadyNotified('welcome', welcomeRef)) {
+    const rendered = renderWelcome({ firstName: first_name });
+    const result = await sendTemplatedEmail({
+      to: normalizedEmail,
+      subject: rendered.subject,
+      html: rendered.html,
+      text: rendered.text,
+      notificationType: 'welcome',
+      reference: welcomeRef,
+    });
+    recordNotification({ type: 'welcome', reference: welcomeRef, messageId: result.messageId, timestamp: result.timestamp });
+    sesMessageId = result.messageId;
+    sesAccepted = result.accepted;
+    sesError = result.error;
+  } else {
+    sesAccepted = true;
+    sesError = 'Already notified';
   }
 
-  return NextResponse.json({ token, verification_required: loginData?.verification_required, sesMessageId, sesError });
+  return NextResponse.json({ token, verification_required: loginData?.verification_required, customerId, sesMessageId, sesAccepted, sesError });
 }
