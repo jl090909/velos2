@@ -13,15 +13,11 @@ function OrderConfirmedInner() {
 
   useEffect(() => {
     if (!orderId) return;
-    fetch('http://localhost:9050/store/orders/' + orderId, {
-      headers: { 'x-publishable-api-key': 'pk_514423ce34bf1aabb2ab61c13d483cf88a24685f019a8b5f2e5b4cc589ff46e5' },
-    }).then(r=>r.json()).then(d=>setOrder(d.order)).catch(()=>{});
     const token = typeof window !== 'undefined' ? localStorage.getItem('medusa_auth_token') : null;
-    fetch('/api/commerce/notifications/order-confirmation', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ orderId, token }),
-    }).catch(()=>{});
+    if (!token) return; // do not fetch order details without auth (avoid leaking order data)
+    fetch('http://localhost:9050/store/orders/' + orderId, {
+      headers: { 'x-publishable-api-key': 'pk_514423ce34bf1aabb2ab61c13d483cf88a24685f019a8b5f2e5b4cc589ff46e5', 'Authorization': `Bearer ${token}` },
+    }).then(r=>r.json()).then(d=>setOrder(d.order)).catch(()=>{});
   }, [orderId]);
 
   return (

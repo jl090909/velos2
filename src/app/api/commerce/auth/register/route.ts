@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { renderWelcome } from '@/lib/email/welcome';
 import { sendTemplatedEmail } from '@/lib/email/ses';
-import { alreadyNotified, recordNotification } from '@/lib/email/notifications';
+import { acquireNotification, markNotificationSent, markNotificationFailed } from '@/lib/email/notification-store';
 
 const MEDUSA = process.env.MEDUSA_BACKEND_URL || 'http://localhost:9050';
 const PK = process.env.MEDUSA_PUBLISHABLE_KEY || 'pk_514423ce34bf1aabb2ab61c13d483cf88a24685f019a8b5f2e5b4cc589ff46e5';
@@ -46,12 +46,21 @@ export async function POST(request: Request) {
   }
   const token = typeof loginData === 'string' ? loginData : loginData.token;
 
-  // 4. Send welcome email (once)
+  // 4. Send welcome email exactly once after genuine successful new customer creation.
   const welcomeRef = `welcome:${normalizedEmail}`;
   let sesMessageId: string | null = null;
   let sesAccepted = false;
   let sesError: string | null = null;
-  if (!alreadyNotified('welcome', welcomeRef)) {
+
+  const acq = await acquireNotification({
+    type: 'welcome',
+    dedupKey: welcomeRef,
+    recipient: normalizedEmail,
+    payload: { firstName: first_name },
+    maxAttempts: 5,
+  });
+
+  if (acq.acquired) {
     const rendered = renderWelcome({ firstName: first_name });
     const result = await sendTemplatedEmail({
       to: normalizedEmail,
@@ -61,13 +70,24 @@ export async function POST(request: Request) {
       notificationType: 'welcome',
       reference: welcomeRef,
     });
-    recordNotification({ type: 'welcome', reference: welcomeRef, messageId: result.messageId, timestamp: result.timestamp });
-    sesMessageId = result.messageId;
-    sesAccepted = result.accepted;
-    sesError = result.error;
-  } else {
+    if (result.accepted) {
+      await markNotificationSent(acq.id, result.messageId);
+      sesMessageId = result.messageId;
+      sesAccepted = true;
+      sesError = null;
+    } else {
+      await markNotificationFailed(acq.id, result.error || 'SES send failed', 60000);
+      sesMessageId = null;
+      sesAccepted = false;
+      sesError = result.error;
+    }
+  } else if (acq.reason === 'already_sent') {
     sesAccepted = true;
     sesError = 'Already notified';
+    sesMessageId = acq.messageId;
+  } else {
+    sesAccepted = false;
+    sesError = `Not sent: ${acq.reason}`;
   }
 
   return NextResponse.json({ token, verification_required: loginData?.verification_required, customerId, sesMessageId, sesAccepted, sesError });
