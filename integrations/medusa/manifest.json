@@ -1,0 +1,39 @@
+{
+  "name": "velosshield-medusa-integration",
+  "description": "VelosShield-owned Medusa integration overlay tracked in jl090909/velos2. Minimal overlay; do not copy upstream Medusa starter, .git, or node_modules.",
+  "upstream": {
+    "repository": "https://github.com/medusajs/dtc-starter.git",
+    "branch": "feature/velosshield-commerce-poc",
+    "commit": "a6f6b866f6f3b08c7d2c557805bf728ccf9ddc9f",
+    "medusa_version": "2.22.3",
+    "node_engine": ">=22.23.4"
+  },
+  "overlay": {
+    "source_root": "integrations/medusa/backend",
+    "target_root": "apps/backend",
+    "files": [
+      {
+        "source": "src/subscribers/order-placed-email.ts",
+        "target": "src/subscribers/order-placed-email.ts",
+        "sha256": "0d234173bcf3c5d233436707d5f126850c88b03667afe5d3e344e52ec896de74"
+      },
+      {
+        "source": "src/subscribers/__tests__/order-placed-email.unit.spec.ts",
+        "target": "src/subscribers/__tests__/order-placed-email.unit.spec.ts",
+        "sha256": "e43499fcad4d829b2b369adae19a6c11b3704eaf1bbad11b88a623c4a1454bb2"
+      }
+    ]
+  },
+  "local_runtime": {
+    "medusa_backend_url": "http://127.0.0.1:9050",
+    "website_url": "http://127.0.0.1:9052",
+    "medusa_container": "velos-commerce-poc-medusa-1",
+    "website_process": "next-server (local)"
+  },
+  "required_env_var_names": [
+    "MEDUSA_BACKEND_URL",
+    "MEDUSA_PUBLISHABLE_KEY",
+    "NEXT_APP_URL",
+    "ORDER_CONFIRMATION_WEBHOOK_SECRET"
+  ]
+}

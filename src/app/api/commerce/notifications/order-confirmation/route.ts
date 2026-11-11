@@ -4,8 +4,8 @@ import { renderOrderConfirmation } from '@/lib/email/order-confirmation';
 import { sendTemplatedEmail } from '@/lib/email/ses';
 import { acquireNotification, markNotificationSent, markNotificationFailed } from '@/lib/email/notification-store';
 
-const MEDUSA = process.env.MEDUSA_BACKEND_URL || 'http://localhost:9050';
-const PK = process.env.MEDUSA_PUBLISHABLE_KEY || 'pk_514423ce34bf1aabb2ab61c13d483cf88a24685f019a8b5f2e5b4cc589ff46e5';
+const MEDUSA = process.env.MEDUSA_BACKEND_URL;
+const PK = process.env.MEDUSA_PUBLISHABLE_KEY;
 const WEBHOOK_SECRET = process.env.ORDER_CONFIRMATION_WEBHOOK_SECRET;
 
 const ALLOWED_PAYMENT_STATUSES = new Set(['captured', 'partially_captured', 'authorized']);
@@ -21,6 +21,9 @@ function isAuthorized(request: Request): boolean {
 }
 
 export async function POST(request: Request) {
+  if (!MEDUSA || !PK) {
+    return NextResponse.json({ error: 'medusa backend not configured' }, { status: 500 });
+  }
   if (!isAuthorized(request)) {
     return NextResponse.json({ error: 'unauthorized' }, { status: 401 });
   }
