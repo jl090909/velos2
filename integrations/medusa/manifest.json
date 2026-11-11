@@ -15,12 +15,12 @@
       {
         "source": "src/subscribers/order-placed-email.ts",
         "target": "src/subscribers/order-placed-email.ts",
-        "sha256": "0d234173bcf3c5d233436707d5f126850c88b03667afe5d3e344e52ec896de74"
+        "sha256": "55bbbbeae6126c66cf47651c4adb876a025d6012909f739279dbe573c88dcef2"
       },
       {
         "source": "src/subscribers/__tests__/order-placed-email.unit.spec.ts",
         "target": "src/subscribers/__tests__/order-placed-email.unit.spec.ts",
-        "sha256": "e43499fcad4d829b2b369adae19a6c11b3704eaf1bbad11b88a623c4a1454bb2"
+        "sha256": "bedabe5f647368b67de3b6107f727bfee349d6d3875715db7ef92a0eded2adf9"
       }
     ]
   },
