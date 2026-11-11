@@ -8,6 +8,10 @@ import { normalizePath } from '@/lib/utils';
 
 const products = [
   { href: '/product/org-level', label: 'Velos Shield' },
+  { href: '/shop', label: 'Shop products' },
+  { href: '/cart', label: 'Cart' },
+  { href: '/account', label: 'Account' },
+  { href: '/licensing', label: 'Licensing' },
 ];
 
 const resources = [

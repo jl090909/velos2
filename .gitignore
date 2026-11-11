@@ -46,3 +46,5 @@ next-env.d.ts
 
 # payload uploads (local disk; production uses object storage)
 /media
+# email notification state (local)
+/data/
