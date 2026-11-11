@@ -6,7 +6,7 @@ export default function LicensingPage() {
   <p className="mt-5 max-w-2xl text-slate-600">Keygen Community Edition issues signed entitlements. The VS Core 1.1 device agent must verify them locally before enforcement is introduced. This page does not represent a licence as issued until the backend integration passes verification.</p>
   <div className="mt-8 space-y-3 rounded-2xl border bg-white p-6 text-slate-700">
     <p>Keygen CE API — local port 9045 (loopback only)</p>
-    <p>Medusa Admin — <a className="underline" href="http://localhost:9050/app">localhost:9050/app</a></p>
+    <p>Shopping cart — <Link className="underline" href="/shop">/shop</Link></p>
     <p>VS Core 1.1 — <a className="underline" href="http://localhost:4011">localhost:4011</a></p>
     <p>Core licence verification — <a className="underline" href="http://localhost:9053">localhost:9053</a></p>
     <p>Health check — <Link className="underline" href="/api/poc/health/">POC service status (JSON)</Link></p>
